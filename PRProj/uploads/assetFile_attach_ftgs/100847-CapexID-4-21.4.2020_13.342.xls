@@ -1,0 +1,96 @@
+<table id="exampletestExport" name="exampletestExport" class="table table-bordered" style="font-size: 12px!important;">
+                <thead>
+					<tr>
+			 
+                  <th>Sr. No.</th>
+				  <th>Business Area</th>
+				  <th>ION NO</th>
+				  <th>Fund No</th>
+				  <th>Project Name</th>
+				  <th>Date of Project Completion</th>
+				  <th>Item Code</th>
+				    <th>Item Descriptions</th>
+				   <th>UOM</th>
+				    <th>Qty.</th>
+					<th>Cost Centre</th>
+					<th>Asset Group </th>
+					<th>Asset Sub Group</th>
+					<th>Asset Code</th>
+					<th>Asset Sr No</th>
+				
+      </tr>
+	
+                </thead>
+		<tbody>
+		
+		
+											
+				<tr> 
+			<td>3</td>
+			<td>1001</td>
+			<td>968</td>
+			<td>942</td>
+			<td>FTGS</td>
+			<td>2020-04-18</td>
+		
+			<td>1</td> 
+			<td>test</td>  
+			<td>Each</td> 
+            <td>3</td>  
+			<td>652</td>  
+			<td>DIES &amp; FIXTURE  </td>  
+			<td></td>
+			<td></td>
+			<td></td>
+			</tr>
+	
+		
+		 				
+				<tr> 
+			<td>3</td>
+			<td>1001</td>
+			<td>968</td>
+			<td>942</td>
+			<td>FTGS</td>
+			<td>2020-04-18</td>
+		
+			<td>1</td> 
+			<td>test</td>  
+			<td>Each</td> 
+            <td>3</td>  
+			<td>652</td>  
+			<td>DIES &amp; FIXTURE  </td>  
+			<td></td>
+			<td></td>
+			<td></td>
+			</tr>
+	
+		
+		 				
+				<tr> 
+			<td>3</td>
+			<td>1001</td>
+			<td>968</td>
+			<td>942</td>
+			<td>FTGS</td>
+			<td>2020-04-18</td>
+		
+			<td>1</td> 
+			<td>test</td>  
+			<td>Each</td> 
+            <td>3</td>  
+			<td>652</td>  
+			<td>DIES &amp; FIXTURE  </td>  
+			<td></td>
+			<td></td>
+			<td></td>
+			</tr>
+	
+		
+		                 
+				
+	
+	
+		 </tbody>
+		
+		 </table>

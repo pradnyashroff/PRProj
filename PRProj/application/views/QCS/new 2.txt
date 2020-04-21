@@ -1,0 +1,29 @@
+SELECT * FROM `pr_master` INNER JOIN pr_items ON pr_master.pr_id = pr_items.pr_id WHERE pr_master.pr_source_id=100171 AND pr_master.pr_state ='sourcing_approved' AND pr_items.qcs_gen = 'null'
+
+
+SELECT pr_master.pr_id , pr_master.pr_date,pr_master.pr_owner_name,pr_master.plant_code,pr_master.procurement_res,pr_master.pr_state FROM `pr_master` INNER JOIN pr_items ON pr_master.pr_id = pr_items.pr_id WHERE pr_master.pr_source_id=100747 AND pr_master.pr_state ='sourcing_approved' AND pr_items.qcs_gen = 'null'
+
+
+SELECT pr_master.pr_id , pr_master.pr_date,pr_master.pr_owner_name,pr_master.plant_code,pr_master.procurement_res,pr_master.pr_state FROM `pr_items` INNER JOIN pr_master ON pr_items.pr_id = pr_master.pr_id WHERE pr_master.pr_source_id=100747 AND pr_master.pr_state ='sourcing_approved' AND pr_items.qcs_gen = 'null'
+
+	=============================================================
+
+	
+	  public function pr_item_list_qcs($emp_code) {
+$condition = "qcs_master.qcs_id =" . " " . $emp_code . " AND pr_items.qcs_gen = 'null' ";
+
+$this->db->select('*');
+
+$this->db->from('pr_items');
+$this->db->where($condition);
+$this->db->  join('qcs_master ', 'pr_items.pr_id = qcs_master.pr_id'); 
+
+//$this->db->limit(1);
+$query = $this->db->get();
+
+if ($query->num_rows() >= 1) {
+return $query;
+} else {
+return false;
+}
+}

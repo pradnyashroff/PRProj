@@ -1,0 +1,14 @@
+[14-May-2018 07:15:20 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/ruchayantra/public_html/portal/application/views/PR/show_pr.php on line 1209
+[16-May-2018 09:47:04 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/ruchayantra/public_html/portal/application/views/PR/styles.php on line 4
+[16-May-2018 09:47:42 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/ruchayantra/public_html/portal/application/views/PR/styles.php on line 4
+[16-May-2018 09:48:04 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/ruchayantra/public_html/portal/application/views/PR/styles.php on line 4
+[16-May-2018 09:48:23 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/ruchayantra/public_html/portal/application/views/PR/styles.php on line 4
+[16-May-2018 09:49:19 UTC] PHP Fatal error:  Call to undefined function base_url() in /home/ruchayantra/public_html/portal/application/views/PR/styles.php on line 4
+[20-May-2018 11:09:05 UTC] PHP Fatal error:  Call to undefined method login_Database::change_pwd() in /home/ruchayantra/public_html/portal/application/controllers/Welcome.php on line 258
+[28-May-2018 18:14:14 Asia/Kolkata] PHP Fatal error:  Call to a member function format() on boolean in /home/ruchayantra/public_html/portal/application/helpers/general_helper.php on line 45
+[18-Jun-2018 11:11:00 Asia/Kolkata] PHP Fatal error:  Call to a member function result() on boolean in /home/ruchayantra/public_html/portal/application/views/Support/show_support.php on line 80
+[18-Jun-2018 12:20:45 Asia/Kolkata] PHP Fatal error:  Call to a member function result() on boolean in /home/ruchayantra/public_html/portal/application/views/Support/show_support.php on line 80
+[25-Jun-2018 10:05:39 Asia/Kolkata] PHP Fatal error:  Call to a member function result() on boolean in /home/ruchayantra/public_html/portal/application/views/Support/show_support.php on line 80
+[25-Jun-2018 10:10:52 Asia/Kolkata] PHP Fatal error:  Call to a member function result() on boolean in /home/ruchayantra/public_html/portal/application/views/Support/show_support.php on line 80
+[12-Jul-2018 15:22:00 Asia/Kolkata] PHP Fatal error:  Call to a member function result() on boolean in /home/ruchayantra/public_html/portal/application/views/Support/show_support.php on line 80
+[24-Oct-2019 07:32:01 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/ruchayantra/public_html/portal/application/controllers/PR/PR.php on line 175

@@ -1,0 +1,144 @@
+ <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ <html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>HR | Job Applications</title>
+     	   <?php include_once 'styles.php'; ?>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+ 
+      	   <?php include_once 'headside.php';
+
+		   
+		   
+		   ?>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Send E-mail
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Send E-mail</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+  <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Compose New Message</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+			            <form method="POST" action="<?php echo site_url('welcome/send_mail_attachment/') ?>" enctype='multipart/form-data'>
+
+             
+              <div class="form-group">
+			  <select name="reciver" class="form-control" required  multiple id="e1">
+			  <option value="">Select</option>
+			  
+
+
+
+			  <option value="krburade@ruchagroup.com.test-google-a.com">Kunal Burade (krburade@ruchagroup.com)</option>
+			  <option value="bdvagadiya@ruchagroup.com.test-google-a.com">Bhavesh Vagadiya (bdvagadiya@ruchagroup.com)</option>
+			  <option value="abrahangdale@ruchagroup.com.test-google-a.com">Amit Rahangdale (abrahangdale@ruchagroup.com)</option>
+			  <option value="armehendale@ruchagroup.com.test-google-a.com">Amit Mehendale (armehendale@ruchagroup.com)</option>
+			  </select><br><br>
+                <input class="form-control"  placeholder="Subject:" name="subject">
+                <input type="hidden" class="form-control" id="test" placeholder="Subject:" name="name="reciver"">
+              </div>
+              <div class="form-group">
+                    <textarea id="editor1" class="form-control" name="message" style="height: 300px">
+                    
+                    </textarea>
+              </div>
+			  
+			  
+			  
+			  
+			  <div class="col-sm-12 ">
+   <label  class="control-label">Upload Files</label><br>
+  
+
+
+ 
+  <div class="form-group uploads"  style="display:none;"> 
+
+ 
+
+
+
+ <div class="">
+                  <i class="fa fa-paperclip"></i> Attachment
+                  <input type="file" class="form-control" multiple name="attachment[]" >
+                </div>
+
+
+
+              
+                  </div>
+                  </div>
+			  
+			  
+			  
+			  
+			  
+           
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <div class="pull-right">
+                <button type="submit" id="button" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+				 </form>
+              </div>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /. box -->
+        </div>
+       
+         </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section><!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+       	   <?php include_once 'scripts.php'; ?>
+
+  <script type='text/javascript'>
+$(function(){
+$("#e1").select2();
+
+
+$("#button").click(function(){
+	
+	var temp=$("#e1").val();
+	$('#test').val(temp);
+       alert($("#e1").val());
+	   
+});
+
+});
+
+</script>
+  </body>
+</html>

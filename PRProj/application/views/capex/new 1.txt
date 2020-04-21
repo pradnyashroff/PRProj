@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+		<!-- ==============================================
+		Title and Meta Tags
+		=============================================== -->
+		<title>Job Application</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Quickdev">
+
+		<!-- ==============================================
+		Favicon
+		=============================================== -->  
+        <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
+		
+		<!-- ==============================================
+		CSS
+		=============================================== -->  
+     <?php include_once 'style.php'; ?>
+       <style>
+	   ul { font-size:14px;}
+	   ol { font-size:14px;}
+	   label { color:#666;}
+	   </style>
+</head>
+
+<body>
+
+                    <?php include_once 'loader.php'; ?>
+
+    <!-- MAIN CONTAINER -->
+    <div class="wrapper">
+        <!-- MAIN HEADER -->
+         <div class="pages-header" style="background-image: url('<?php echo base_url(); ?>assets/img/banner/job_application.jpg');  background-size: contain;">
+                    <!-- MAIN NAVBAR -->
+                    <div class="main-navbar">
+					                    <?php include_once 'navbar.php'; ?>
+
+                    </div><!-- END MAIN NAVBAR -->  
+            
+        </div><!-- END MAIN HEADER  if else logic odd even float left if even -->
+       <?php  
+        foreach ($job_desc->result() as $row)  
+         {  
+            ?>
+        <div class="main">
+            <div class="section">
+			
+			    <div class="row  mb-30">
+                  <div class="col-sm-8 col-md-8 col-lg-8">
+                    <div class="features-item" style="text-align:left;color:#666">
+                      <h4 style="font-size:14px;"><span style="color:#666;font-weight: 900;">Position Title :</span> <?php echo $row->job_name; ?> </h4>
+                      <h4 style="font-size:14px;"><span style="color:#666;font-weight: 900;">Department :</span> <?php echo $row->job_dept; ?></h4>
+                      <h4 style="font-size:14px;"><span style="color:#666;font-weight: 900;">Location :</span> <?php echo $row->job_loc; ?></h4>
+                 <br>
+		
+			            
+					
+                  </div>
+              
+				  <div class="col-sm-4 col-md-4 col-lg-4">
+                     
+                  </div>
+                </div>
+               
+               </div>
+			
+			
+			   <hr class="section-keyline">
+
+					
+				    
+        <div class="container-form"  >
+                <div class="row">
+                
+                  <div class="col-md-12">
+				  
+				  
+				  
+				  
+				  <form  role="form" method="post" action="<?php echo site_url('Welcome/send_job_application') ?>" enctype="multipart/form-data">
+                  <div class="form-group col-md-3">
+                    <label  for="name">First Name <span style="color:red;">*<span></label>
+                    <input class="form-control" type="text" id="name" name="first_name" placeholder="Your First Name" required="required" data-validation-required-message="Please enter your name."/>
+                    <p class="help-block text-danger"></p>
+                  </div>
+				  
+				  <div class="form-group col-md-3">
+                    <label  for="lname">Last Name <span style="color:red;">*<span></label>
+                    <input class="form-control" type="text" id="lname" name="last_name" placeholder="Your Last Name" required="required" data-validation-required-message="Please enter your name."/>
+                    <p class="help-block text-danger"></p>
+                  </div>
+				  
+				  <div class="form-group col-md-6">
+                    <label  for="lname">Where did you here about us <span style="color:red;">*<span></label>
+					<select class="form-control" required name="reference">
+					<option value="">Select Option</option>
+					<option value="Company Website">Company Website</option>
+					<option value="Social Media Sites">Social Media Sites</option>
+					<option value="Other">Other</option>
+					</select>
+                   <p class="help-block text-danger"></p>
+                  </div>
+				  
+                  <div class="form-group col-md-3">
+                    <label  for="email">Email <span style="color:red;">*<span></label>
+                    <input class="form-control" type="email" id="email" name="email" placeholder="Your Email*" required="required" data-validation-required-message="Please enter your email address."/>
+                    <p class="help-block text-danger"></p>
+					
+					
+                  </div>
+
+				  <div class="form-group col-md-3">
+                    <label  for="phone">Phone No <span style="color:red;">*<span></label>
+					                    <input class="form-control phone" type="Text" id="Mobile "  title="Enter 10 Digit mobile no" onkeypress="phoneno()" maxlength='10' pattern="^(\+\d{1,3}[- ]?)?\d{10}$" name="mobile" placeholder="Your Mobile No." required="required" data-validation-required-message="Please enter your email address."/>
+                    <p class="help-block text-danger"></p>
+					
+									
+                  </div>
+				  
+				  
+				  
+				  
+				  
+                  <div class="form-group col-md-6">
+				  					 <label  for="message">Address <span style="color:red;">*<span></label>
+
+                    <textarea class="form-control" rows="4" id="message" name="address" placeholder="Your Address" required="required" data-validation-required-message="Please enter your message."></textarea>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group col-md-12" style="">
+				   <label  for="email">Upload Your Resume <span style="color:red;">*<span></label><br>
+				   <span>*<span><small>NOTE:<br>
+1. Submit PDFs only<br>
+2. Your CV filename should be in following format: Lastname_Firstname.pdf<br>
+3. Please click on the following link for our preferred Sample CV template: <a href="https://www.yantrallp.com/assets/doc/Doe_John.docx">doe_john.docx.</a>  <small>
+  <br> <div class="form-group col-md-3 pl-0">
+                                      <input class="form-control" type="file" id="resume" accept=".pdf,.doc,.docx" name="resume" required placeholder="Your resume"  title="Please provide valid resume." />
+					<p class="help-block text-danger"></p>
+					
+				  </div>
+                  </div>
+				  
+				  
+                  <div class="form-group col-md-6 col-xs-6">
+<input type="reset" class="btn btn-w btn-round" value="Reset" style="background-color:#333; color:#fff; margin-left:20px;" >
+                  </div> 
+				  
+				  <div class="form-group col-md-6  col-xs-6">
+<input type="hidden"  value="<?php echo $row->job_id; ?>" name="job_id" >
+<input type="hidden"  value="<?php echo $row->job_name; ?>" name="job_name" >
+<input type="hidden"  value="<?php echo $row->job_cat; ?>" name="job_cat" >
+
+<input type="submit" class="btn btn-w btn-round" value="Submit" name="submit" style="background-color:#333; color:#fff; margin-left:20px;" >
+                  </div>
+                </form>
+				  
+				  
+				
+                  </div>
+                </div> 
+        </div>
+			
+			 
+            
+				   </div>
+        </div>
+					
+<?php } ?>
+      </div>
+    <!-- END MAIN CONTAINER -->
+    
+        <?php include_once 'footer.php'; ?>
+
+    
+    <a href="#0" class="cd-top">Top</a>
+  
+       <?php include_once 'scripts.php'; ?>
+
+</body>
+
+
+</html>
