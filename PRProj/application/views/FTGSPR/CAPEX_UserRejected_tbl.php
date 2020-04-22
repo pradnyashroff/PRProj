@@ -81,7 +81,7 @@
 									</thead>
 									<tbody>
 										<?php 
-											$capexList= $this->method_call->UserPendingCpxTblData($emp_code);
+											$capexList= $this->method_call->UserRejectedCpxTblData($emp_code);
 											if($capexList!=null)
 											{
 												$sr_no=1;			  
@@ -89,7 +89,7 @@
 												{  
 										?>
 										<tr>
-											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/CAPEX_DraftView/'.$row->ftgs_capex_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_capex_id; ?></a></td>
+											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/CAPEX_View/'.$row->ftgs_capex_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_capex_id; ?></a></td>
 											<td><?php echo $row->ftgs_qcs_id;?></td>
 											<td><?php echo $row->ftgs_pr_id;?></td>
 											<td><?php echo $row->ftgs_capex_date;?></td>
@@ -99,8 +99,8 @@
 												<?php 
 													$st = $row->ftgs_capex_status;;
 													$status= "";
-													if($st == '1')
-													echo 'Pending CAPEX ';
+													if($st == '2')
+													echo 'Rejected  ';
 													?></td>
 												</tr>
 												<?php $sr_no++;
