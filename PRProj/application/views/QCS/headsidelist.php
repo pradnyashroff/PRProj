@@ -356,7 +356,7 @@ else
           </a>
          <ul class="treeview-menu">
 		 	<li>
-          <a href="<?php echo site_url('purchase/QCS/sourcing_head_approve_list') ?>" class="">
+          <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/QCS_AuthorityPending_FTGS_tbl') ?>" class="">
             <i class="glyphicon glyphicon-alert" style="color:#FFFFFF;"></i> <span style="color:#FFFFFF;">  Pending</span>
            
           </a>
@@ -365,7 +365,7 @@ else
         </li>
 		
 			<li>
-          <a href="<?php echo site_url('purchase/QCS/approved1_list') ?>" class="">
+          <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/QCS_AuthApprovalTbl') ?>" class="">
             <i class="fa fa-check-square-o" style="color:#FFFFFF;"></i> <span style="color:#FFFFFF;">Approved </span>
            
           </a>

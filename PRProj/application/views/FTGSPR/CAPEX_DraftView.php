@@ -1179,14 +1179,14 @@ foreach ($view_item->result() as $rowitem)
 				<div class="col-sm-7 pull-right">
                  
                 <input type="file"  name="ftgs_capex_attachment" class="form-control">
-
+  <b><a style="color: #337ab7;" href="<?php echo base_url()."uploads/ftgs_capex_attachment/". $qcs_row->ftgs_capex_attachment ?>"> <?php echo $qcs_row->ftgs_capex_attachment ?></a> </b>
+      
                 </div>
 				
-				   <input type="text" name="capex_attac_flag" value="<?php echo $qcs_row->ftgs_capex_attachment; ?>"   class="form-control" >
-                     
+				   <input type="hidden" name="capex_attac_flag" value="<?php echo $qcs_row->ftgs_capex_attachment; ?>"   class="form-control" >
+                      
                   <div class="col-sm-5">
-        <b><a style="color: #337ab7;" href="<?php echo base_url()."uploads/ftgs_capex_attachment/". $qcs_row->ftgs_capex_attachment ?>"> <?php echo $qcs_row->ftgs_capex_attachment ?></a> </b>
-              </div>
+             </div>
 
                 </div>
 				
@@ -1454,13 +1454,13 @@ foreach ($view_item->result() as $row_asset)
             </div>
 			
 			
-			
+		
 </div>
 <!--end -->
 		
 					<input type="hidden" name="qcs_emp_code" value="<?php echo $qcs_row->ftgs_qcs_emp_code;  ?>" class=" form-control" id="qcs_emp_code"   required>
-				  <input type="text" name="capex_emp_code" value="<?php echo $emp_code; ?>" class=" form-control" id="capex_emp_code"   required>
-				    <input type="text" name="capex_emp_nm" value="<?php echo $emp_name; ?>" class=" form-control" id="capex_emp_nm"   required>
+				  <input type="hidden" name="capex_emp_code" value="<?php echo $emp_code; ?>" class=" form-control" id="capex_emp_code"   required>
+				    <input type="hidden" name="capex_emp_nm" value="<?php echo $emp_name; ?>" class=" form-control" id="capex_emp_nm"   required>
 				  
 	
 
@@ -1471,7 +1471,7 @@ foreach ($view_item->result() as $row_asset)
 								if ($ftgsActionData != null) {
 								foreach ($ftgsActionData->result() as $row1) {
 										?>
-                            <input type="text" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
+                            <input type="hidden" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
                           
                                 <?php }
                         }
@@ -1488,8 +1488,8 @@ foreach ($view_item->result() as $row_asset)
 							{   
 							?>
 						
-                                  <input type="text" value="<?php echo $rowauth ->auth_id; ?>" name="txt_ION_Autho" class="form-control"  required>	
-								 <input type="text " value="<?php echo $rowauth ->emp_email ; ?>" name="txt_authoEmail" class="form-control"  required>	
+                                  <input type="hidden" value="<?php echo $rowauth ->auth_id; ?>" name="txt_ION_Autho" class="form-control"  required>	
+								 <input type="hidden" value="<?php echo $rowauth ->emp_email ; ?>" name="txt_authoEmail" class="form-control"  required>	
 									
 		<?php 
 							}

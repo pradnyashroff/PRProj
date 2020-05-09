@@ -97,7 +97,7 @@
                       <label class="col-sm-1 pull-left control-label">5</label>
                     <label class="col-sm-4 pull-left control-label">PR Type</label>
                   <div class="input-group  col-sm-6">
-                     <?php echo $row4->ftgs_pr_type; ?>
+                     <?php echo 'Interplant FTTS'; ?>
                   </div>
                         </div>
                 <div class="form-group col-sm-4 ">
@@ -261,35 +261,31 @@ foreach ($view_item->result() as $rowitem)
 		  </div>
 						 
 
-				
+			
 				   <div class="form-group col-sm-12">
-			        <table id="example6" class="table table">
+			         <table id="example6" class="table table">
                 <thead>
 
-					<tr style="background-color:#3482AE;color:#FFFFFF;">
-
-					<th colspan="2" style="	border: 1px solid silver;border-top:none;border-bottom:none;border-right:none;"> <center><b> Final Supplier   :&nbsp;&nbsp;   <?php echo $row4->ftgs_sup1_nm; ?></b><center></th>
-			
 				
-				 <th colspan="2" style="	border: 1px solid silver;border-top:none;border-bottom:none;border-right:none;">  Supplier 2  :&nbsp;&nbsp;   <?php echo $row4->ftgs_sup2_nm; ?>  </th>
-				 <th colspan="2" style="	border: 1px solid silver;border-top:none;border-bottom:none;border-right:none;"> Supplier 3  :&nbsp; &nbsp;   <?php echo $row4->ftgs_sup3_nm; ?>  </th> 
-				 
-		 
 				
-					</tr>
-				
-                <tr>
+                <tr style="background-color:#3482AE;color:#FFFFFF;">
                 				
-
-			<th style="border:none;">  Quoted Total Amount (₹) </th>  
-            <th style="border:none;">  Final Total Amount (₹)</th>  
-            
+				<th>  SR.NO </th> 
+				
+				<th>  Item Code </th>  
+			<th>  Item Status </th>  
+            <th>  Qty </th>  
+            <th> UOM	</th>  
 			
-			<th style="	border: 1px solid silver;border-top:none;border-bottom:none;border-right:none;">  Quoted Total Amount (₹) </th>  
-            <th style="border:none;"> Final Total Amount (₹) </th>  
-       
-			<th style="	border: 1px solid silver;border-top:none;border-bottom:none;border-right:none;">  Quoted Total Amount (₹) </th>  
-            <th style="border:none;">  Final Total Amount (₹)</th>  
+			<th>  Quoted Rate </th>  
+			<th>  Quoted Amt </th> 
+			<th> Final Amt	</th> 			
+            <th>  Final Rates </th>  
+            <th> % Add</th>  
+			
+			<th>  Final Amt </th>
+			
+			 			
            
 				  
                 </tr>  
@@ -298,16 +294,80 @@ foreach ($view_item->result() as $rowitem)
                 </thead>
 						
                 <tbody>
-						<td style="border:none;"> <?php echo $final_rate; ?></td>
-						<td style="border:none;"> <?php echo $total_final_ammount1; ?></td>
-						<td style="	border: 1px solid silver;border-top:none;border-bottom:none;border-right:none;"> <?php echo $total_quoted_amount2; ?></td>
-						<td style="border:none;"> <?php echo $total_final_ammount2; ?></td>
-						<td style="	border: 1px solid silver;border-top:none;border-bottom:none;border-right:none;"> <?php echo $total_quoted_amount3; ?></td>
-						<td style="border:none;"> <?php echo $total_final_ammount3; ?></td>	
-				 
+				
+							
+				<!-- Items to be inserted here -->
+
+									
+				  <?php $view_item= $this->method_call->ftgs_view_qcs_items($ftgs_qcs_id);
+				  	$final_rate=0; 
+					$total_final_ammount1=0;
+					$total_quoted_amount2 = 0;
+					$total_final_ammount2=0;
+					$total_quoted_amount3 =0;
+					$total_final_ammount3=0;					
+
+ if($view_item!=null){
+	$sr_no=1;			  
+foreach ($view_item->result() as $rowitem)  
+         {  ?>
+		
+			<tr>
+				<td>  <?php echo $sr_no; ?></td>
+				<td>  <?php echo $rowitem->ftgs_q_item_code; ?></td>
+				<td>  <?php echo $rowitem->ftgs_q_itm_sts; ?></td>
+				<td>  <?php echo $rowitem->ftgs_q_req_quantity	; ?></td>	
+				<td>  <?php echo $rowitem->ftgs_q_uom; ?></td>		
+				
+            <td>  <?php echo $rowitem->ftgs_quot_rate1; ?></td>  
+            <td> <?php echo $rowitem->ftgs_quoted_amt1; ?></td>  
+            <td>  <?php echo $rowitem->ftgs_final_rate1; ?> </td>  
+            <td> <?php echo $rowitem->ftgs_final_amt1; ?> </td>  
+			<td><?php echo $rowitem->amt_per_add; ?> % </td>  
+			<td><?php echo $rowitem->per_final_amt; ?></td>  
+           
+		
+		
+                <?php
+
+				$quoted_ammount1=$rowitem->ftgs_quoted_amt1;
+					$final_rate=$final_rate+$quoted_ammount1;
+					
+					$final_ammount1 = $rowitem->ftgs_final_amt1;
+					$total_final_ammount1 = $total_final_ammount1+$final_ammount1;
+					
+					$final_ammountperadd = $rowitem->per_final_amt;
+					$total_quoted_amount2 = $total_quoted_amount2+$final_ammountperadd;
+					
+					
+					
+				?>
+      </tr>
+		
+	 
+		 <?php  $sr_no++; }
+ } ?>
+                
 				</tbody>
-               		
+				  <tfoot>
+        <tr>
+           <td class="right" colspan="6"></td>
+			<td class="right"><B><?php echo $final_rate; ?></b></td>
+			<td class="right" colspan="1"></td>
+			<td class="right "><B><?php echo $total_final_ammount1; ?></b></td>
+			<td class="right" colspan ="1"></td>
+	
+			<td class="right "><B><?php echo $total_quoted_amount2; ?></b></td>
+			
+
+        </tr>
+    </tfoot>
+
+		 </tbody>
+	
               </table>
+
+				
 			  
 			  <!--button -->
    <div class="form-group col-sm-12">
@@ -345,6 +405,7 @@ foreach ($view_item->result() as $rowitem)
 			
 </div>
 <!--end -->
+
 
 
 
@@ -873,7 +934,7 @@ foreach ($view_item->result() as $rowitem)
 						if($row4->ftgs_outside_budget == 'YES'){
 							?>
 							
-						<span style="color:#3482AE;">( <?php echo $row4->just_draft_outside_budget; ?> ) </span>
+						<span style="color:#3482AE;">( <?php echo $row4->ftgs_just_outside_budget; ?> ) </span>
 							
 						<?php
 						}

@@ -264,114 +264,104 @@ document.getElementById('e').value = new Date().toISOString().substring(0, 10);
          
                 </div>
                 </div>
-				
-			  
-			    <div class="form-group col-sm-12">
-			  
-			  <label class="col-sm-6 pull-left control-label">8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enter Supplier Details in the following Table: </label>
-			  </div>
-			  
-			  		    <div class="form-group col-sm-12">
-			        <table id="example" class="table table-bordered table-striped" style="font-size: 12px!important;">
-          		
-                <tbody>
-				
-				 
-                <tr style="background-color:#3482AE;color:#FFFFFF;width:100%;">
-	  
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="2" style="text-align:right;">Detail</td>
-								 <td style="display:none"> </td>
-				<td colspan="3" ><center>  Name <center> </td>
-				 <td colspan="3" ><center>Contact Number  <center> </td>
-				
-				 <td colspan="3" > <center>Contact Person   <center> </td>
-				
-				  <td colspan="3" > <center> Contact Mail ID<center>    </td>
-				 
-				
-                
-      </tr>
-
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2"  >Final Supplier</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  >  <input type="text"  name="sup1_nm" class="form-control full_width"   required> </td>
-				 <td colspan="3"  >  <input type="text" pattern="[0-9]{10}" placeholder="Enter 10 Digit Number" name="sup1_mno" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"  name="sup1_contactp" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  name="sup1_eid" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-                
-      </tr> 
-
-
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2">Supplier-2</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  >  <input type="text"  name="sup2_nm" value="" class="form-control full_width"   required> </td>
-				 <td colspan="3"  >  <input type="text"  placeholder="Enter 10 Digit Number"   name="sup2_mno" value="" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"  name="sup2_contactp" value="" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="email"   name="sup2_eid" value="" class="form-control full_width"> </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-                
-      </tr> 
-	  
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2" >Supplier-3</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  >  <input type="text"  name="sup3_nm" class="form-control full_width"   required> </td>
-				 <td colspan="3"  >  <input type="text"  placeholder="Enter 10 Digit Number"   name="sup3_mno" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"  name="sup3_contactp" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="email"  name="sup3_eid" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-      </tr> 
-
-				</tbody>
-               		
-              </table>
-			
-			  </div>
+				<div class="form-group col-sm-12">
+					<label class="col-sm-6 pull-left control-label">8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enter Supplier Details in the following Table: </label>
+				</div>
+				<div class="form-group col-sm-12">
+					<table id="example" class="table table-bordered table-striped" style="font-size: 12px!important;">
+						<tbody>
+							<tr style="background-color:#3482AE;color:#FFFFFF;width:100%;">
+								<td colspan="2" style="text-align:center;width:25%;">Detail</td>
+								<td colspan="3" ><center>  Name <center> </td>
+								<td colspan="3" ><center>Contact Number  <center> </td>
+								<td colspan="3" > <center>Contact Person   <center> </td>
+								<td colspan="3" > <center> Contact Mail ID<center>    </td>
+							</tr>
+							<tr>
+								
+								<!--  supplier1  08/03/2020  -->
+								<td><input type="radio" name="rdo_Final_Supplier" value="new_Final_Supplier" onclick="ClearFields()">New Supplier</td>
+								<td><input type="radio" name="rdo_Final_Supplier" value="old_Final_Supplier" checked="check" onclick="ClearFields()">Final Supplier</td>
+								
+									<td colspan="3"  ><div id="new_final_nm" style="display:none;"><input type="text" id="new_sup1_nm" name="sup1_name" class="form-control full_width"   > </div>
+									<div id="old_final_nm" > 
+									<select class="form-control select2" id="old_sup1_nm" name="sup1_nm" onChange="funSupData(this.value);">
+									
+									
+										<?php $dataList= $this->method_call->supplierList(); ?>
+										<?php                                                 
+											foreach($dataList as $ser)
+											{
+												
+										?>
+										
+										<option  value="<?php echo $ser['qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+										
+										
+										<?php }?>
+									</select></div>
+								</td>
+								<td colspan="3"><input type="text" pattern="[0-9]{10}" placeholder="Enter 10 Digit Number" id="old_sup1_mno" name="sup1_mno" class="form-control full_width"   >
+								</td>
+								
+								<td colspan="3"><input type="text" id="old_sup1_contactp" name="sup1_contactp" class="form-control full_width">
+								</td>
+								
+								<td colspan="3"><input type="email" id="old_sup1_eid"name="sup1_eid" class="form-control full_width"   > 
+								</td>
+							</tr> 
+							
+							<!--Supplier 2 08/03/2020 -->
+							<tr>
+								<td><input type="radio" name="rdo_Supplier_2"  value="new_Supplier2" onclick="ClearSupplier2()">New Supplier 2</td>
+								<td><input type="radio" name="rdo_Supplier_2" checked="check" value="old_Supplier2" onclick="ClearSupplier2()">Supplier-2</td>
+								
+								<td colspan="3"><div id="new_sup2nm"  style="display:none;"><input type="text" id="old_sup2_nm" name="sup2_name" value="" class="form-control full_width" ></div>
+								<div id="old_sup2nm"><select class="form-control select2" id="txt_sup2_nm" name="sup2_nm" onChange="funSup2Data(this.value);">
+										<?php $dataList= $this->method_call->supplierList(); ?>
+										<?php                                                 
+											foreach($dataList as $ser)
+											{
+												
+										?>
+										<option  value="<?php echo $ser['qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+										<?php }?>
+									</select></div></td>
+								
+								<td colspan="3"><input type="text"  placeholder="Enter 10 Digit Number"  id="old_sup2_mno" name="sup2_mno" value="" class="form-control full_width"   > </td>
+								
+								<td colspan="3"><input type="text"  name="sup2_contactp" value="" id="old_sup2_contactp" class="form-control full_width"   > </td>
+								
+								<td colspan="3"  ><input type="email" id="old_sup2_eid"  name="sup2_eid" value="" class="form-control full_width"> </td>
+							</tr> 
+							
+							<!--Supplier 3 08/03/2020 -->
+							<tr>
+								<td><input type="radio" name="rdo_supplier3" value="new_Supplier3" onclick="ClearSupplier3()">New Supplier 3 </td>
+								<td><input type="radio" name="rdo_supplier3" checked="check" value="old_Supplier3" onclick="ClearSupplier3()"> Supplier-3</td>
+								
+								<td colspan="3"  ><div id="new_sup3_nm" style="display:none;"> <input type="text" id="old_sup3_nm" name="sup3_name" class="form-control full_width"   > </div>
+								<div id="old_sup3_nms" > <select class="form-control select2" id="txt_sup3_nm" name="sup3_nm" onChange="funSup3Data(this.value);">
+										<?php $dataList= $this->method_call->supplierList(); ?>
+										<?php                                                 
+											foreach($dataList as $ser)
+											{
+											
+										?>
+										<option  value="<?php echo $ser['qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+										<?php }?>
+									</select> </div></td>
+								
+								<td colspan="3" ><input type="text"  placeholder="Enter 10 Digit Number" id="old_sup3_mno" name="sup3_mno" class="form-control full_width"   ></td>
+								
+								<td colspan="3"  ><input type="text" id="old_sup3_contactp" name="sup3_contactp" class="form-control full_width"   > </td>
+								
+								<td colspan="3"  ><input type="email" id="old_sup3_eid" name="sup3_eid" class="form-control full_width"   > </td>
+								
+							</tr> 
+						</tbody>
+					</table>
+				</div>
 			  
 			  	 				  <?php $item= $this->method_call->qcs_last_inserid();
  if($item!=null){
@@ -722,8 +712,64 @@ foreach ($item->result() as $row3)
        	   <?php include_once 'scripts.php'; ?>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-   
-   <script type="text/javascript">
+ <script type="text/javascript">
+	function funSupData(qcs_id){
+		//alert(qcs_id);
+		var supplier1 = qcs_id.split('-')[0];
+		
+		$.ajax(
+        {
+            type: "post",
+            url: "<?php echo base_url(); ?>index.php/purchase/QCS/selectSuplier1",
+            data:{'qcs_id':supplier1},
+            dataType: 'JSON',
+            success:function(data)
+            {
+				
+				
+				$('[id="old_sup1_mno"]').val(data.sup1_contact_no);
+				$('[id="old_sup1_contactp"]').val(data.sup1_contact_person);
+				$('[id="old_sup1_eid"]').val(data.sup1_eid);
+	        }
+        });
+	 }
+	 
+	function funSup2Data(qcs_id){
+		var supplier2 = qcs_id.split('-')[0];
+		
+    $.ajax(
+        {
+			type: "post",
+            url: "<?php echo base_url(); ?>index.php/purchase/QCS/selectSuplier1",
+            data:{'qcs_id':supplier2},
+            dataType: 'JSON',
+            success:function(data)
+            {
+				$('[id="old_sup2_mno"]').val(data.sup1_contact_no);
+				$('[id="old_sup2_contactp"]').val(data.sup1_contact_person);
+				$('[id="old_sup2_eid"]').val(data.sup1_eid);
+            }
+        });
+	}
+       function funSup3Data(qcs_id){
+		   var supplier3 = qcs_id.split('-')[0];
+		
+          $.ajax(
+			{
+				type: "post",
+				url: "<?php echo base_url(); ?>index.php/purchase/QCS/selectSuplier1",
+				data:{'qcs_id':supplier3},
+				dataType: 'JSON',
+				success:function(data)
+				{
+					$('[id="old_sup3_mno"]').val(data.sup1_contact_no);
+					$('[id="old_sup3_contactp"]').val(data.sup1_contact_person);
+					$('[id="old_sup3_eid"]').val(data.sup1_eid);
+	            }
+			});
+		  }
+        
+
 
 $(document).ready(function (){
    var table = $('#example6').DataTable({
@@ -848,6 +894,67 @@ $('#btn-submit').on('click',function(e){
 	}
 	
 });
+//final supplier------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Final_Supplier") {
+        document.getElementById('new_final_nm').style.display = 'block';
+		document.getElementById('old_final_nm').style.display = 'none';
+       
+    } else if($(this).val() == "old_Final_Supplier") {
+		
+		document.getElementById('old_final_nm').style.display = 'block';
+		document.getElementById('new_final_nm').style.display = 'none';
+	}
+});
+function ClearFields() {
+	document.getElementById("old_sup1_nm").value = "";
+	document.getElementById("new_sup1_nm").value = "";
+     document.getElementById("old_sup1_mno").value = "";
+     document.getElementById("old_sup1_contactp").value = "";
+	 document.getElementById("old_sup1_eid").value = "";
+}
+
+//supplier 2 ----------------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Supplier2") {
+        document.getElementById('new_sup2nm').style.display = 'block';
+		document.getElementById('old_sup2nm').style.display = 'none';
+		
+    } else if($(this).val() == "old_Supplier2") {
+		
+       document.getElementById('old_sup2nm').style.display = 'block';
+		document.getElementById('new_sup2nm').style.display = 'none';
+		
+    }
+});
+function ClearSupplier2() {
+	document.getElementById("old_sup2_nm").value = "";
+	document.getElementById("txt_sup2_nm").value = "";
+     document.getElementById("old_sup2_mno").value = "";
+     document.getElementById("old_sup2_contactp").value = "";
+	 document.getElementById("old_sup2_eid").value = "";
+}
+
+//supplier 3 ----------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Supplier3") {
+        document.getElementById('new_sup3_nm').style.display = 'block';
+		document.getElementById('old_sup3_nms').style.display = 'none';
+		
+    } else if($(this).val() == "old_Supplier3"){
+		
+       document.getElementById('old_sup3_nms').style.display = 'block';
+		document.getElementById('new_sup3_nm').style.display = 'none';
+		
+    }
+});
+function ClearSupplier3() {
+	document.getElementById("old_sup3_nm").value = "";
+	document.getElementById("txt_sup3_nm").value = "";
+     document.getElementById("old_sup3_mno").value = "";
+     document.getElementById("old_sup3_contactp").value = "";
+	 document.getElementById("old_sup3_eid").value = "";
+}
 </script>
 
 

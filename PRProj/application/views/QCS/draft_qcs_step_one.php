@@ -252,106 +252,86 @@ echo "</div>";
 			  </div>
 			  
 			  		    <div class="form-group col-sm-12">
-			        <table id="example" class="table table">
-          		
-                <tbody>
-				
-				 <tr style="background-color:#3482AE;color:#FFFFFF;">
-	  
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="2" >Detail</td>
-								 <td style="display:none"> </td>
-				<td colspan="3" style="text-align:center;"><center>  Name <center> </td>
-				 <td colspan="3" style="text-align:center;" ><center>Contact Number  <center> </td>
-				
-				 <td colspan="3" style="text-align:center;" > <center>Contact Person   <center> </td>
-				
-				  <td colspan="3" style="text-align:center;"> <center> Contact Mail ID<center>    </td>
-				 
-				
-                
-      </tr>
-
-	  <tr>
-	  
-			 <td style="display:none"style="text-align:center;" >  </td>
-			  <td  colspan="2" style="text-align:center;"" >Final Supplier </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  style="text-align:center;"">  <input type="text" style="text-align:center;" value="<?php echo $row->sup1_nm; ?>"  name="draft_sup1_nm" class="form-control full_width"   > </td>
-				 
-				 <td colspan="3"  style="text-align:center;"">  <input type="text"  style="text-align:center;" value="<?php echo $row->sup1_contact_no; ?>"   name="draft_sup1_mno" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  style="text-align:center;"">  <input type="text" style="text-align:center;" value="<?php echo $row->sup1_contact_person; ?>"  name="draft_sup1_contactp" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  style="text-align:center;"">  <input type="text" style="text-align:center;" value="<?php echo $row->sup1_eid; ?>"  name="draft_sup1_eid" class="form-control full_width" > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-                
-      </tr> 
-
-
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2">Supplier-2</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3" style="text-align:center;"" >  <input type="text"  style="text-align:center;" value="<?php echo $row->sup2_nm; ?>"  name="draft_sup2_nm" value="" class="form-control full_width"   > </td>
-				 <td colspan="3" style="text-align:center;"" >  <input type="text" style="text-align:center;" value="<?php echo $row->sup2_contact_no; ?>"   name="draft_sup2_mno" value="" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3" style="text-align:center;"" >  <input type="text" style="text-align:center;" value="<?php echo $row->sup2_contact_person; ?>" name="draft_sup2_contactp" value="" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  style="text-align:center;"">  <input type="text"  style="text-align:center;" name="draft_sup2_eid" value="<?php echo $row->sup2_eid; ?>" class="form-control full_width" > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-                
-      </tr> 
-	  
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2" >Supplier-3</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  style="text-align:center;"">  <input type="text" style="text-align:center;" value="<?php echo $row->sup3_nm; ?>"   name="draft_sup3_nm" class="form-control full_width"   > </td>
-				 <td colspan="3"  style="text-align:center;"">  <input type="text" style="text-align:center;" value="<?php echo $row->sup3_contact_no; ?>"   name="draft_sup3_mno" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  style="text-align:center;"">  <input type="text" style="text-align:center;" value="<?php echo $row->sup3_contact_person; ?>"  name="draft_sup3_contactp" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3" style="text-align:center;"" >  <input type="text" style="text-align:center;"  name="draft_sup3_eid" value="<?php echo $row->sup3_eid; ?>" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-      </tr> 
-
-				</tbody>
-               		
-              </table>
-			
-			  </div>
+							<table id="example" class="table table">
+          		                <tbody>
+									<tr style="background-color:#3482AE;color:#FFFFFF;">
+										<td colspan="2" >Detail</td>
+										<td colspan="3" style="text-align:center;"><center>  Name <center> </td>
+										<td colspan="3" style="text-align:center;" ><center>Contact Number  <center> </td>
+										<td colspan="3" style="text-align:center;" > <center>Contact Person   <center> </td>
+										<td colspan="3" style="text-align:center;"> <center> Contact Mail ID<center>    </td>
+									</tr>
+									<tr>
+										<td><input type="radio" name="rdo_Final_Supplier" value="new_Final_Supplier" onclick="ClearFields()">New Supplier</td>
+										<td><input type="radio" name="rdo_Final_Supplier" value="old_Final_Supplier" checked="check" onclick="ClearFields()">Final Supplier</td>
+										
+										<td colspan="3"  style="text-align:center;">  
+											<div id="new_final_nm" style="display:none;"><input type="text" style="text-align:center;" value="<?php echo $row->sup1_nm; ?>" id="draft_sup1_nm" name="draft_sup1_nm" class="form-control full_width"></div> 
+											<div id="old_final_nm" > <select class="form-control select2" id="draft_sup1_name" name="draft_sup1_name" onChange="funSupData(this.value);">
+													<option value="<?php echo $row->sup1_nm; ?>"><?php echo $row->sup1_nm; ?></option>
+														<?php $dataList= $this->method_call->supplierList(); ?>
+														<?php                                                 
+															foreach($dataList as $ser)
+															{
+														?>
+														<option  value="<?php echo $ser['qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+														<?php 
+															}
+														?>
+											</select>
+										</div>
+										</td>
+										<td colspan="3"  style="text-align:center;">  <input type="text"  style="text-align:center;" value="<?php echo $row->sup1_contact_no; ?>"   id="draft_sup1_mno" name="draft_sup1_mno" class="form-control full_width"   > </td>
+										<td colspan="3"  style="text-align:center;">  <input type="text" style="text-align:center;" value="<?php echo $row->sup1_contact_person; ?>" id="draft_sup1_contactp" name="draft_sup1_contactp" class="form-control full_width"   > </td>
+										<td colspan="3"  style="text-align:center;">  <input type="text" style="text-align:center;" value="<?php echo $row->sup1_eid; ?>" id="draft_sup1_eid" name="draft_sup1_eid" class="form-control full_width" > </td>
+									</tr> 
+									<tr>
+										<td><input type="radio" name="rdo_Supplier_2"  value="new_Supplier2" onclick="ClearSupplier2()">New Supplier 2</td>
+										<td><input type="radio" name="rdo_Supplier_2" checked="check" value="old_Supplier2" onclick="ClearSupplier2()">Supplier-2</td>
+										<td colspan="3" style="text-align:center;">
+											<div id="new_sup2nm"  style="display:none;"><input type="text"  style="text-align:center;" value="<?php echo $row->sup2_nm; ?>" id="draft_sup2_nm" name="draft_sup2_nm" value="" class="form-control full_width"   ></div> 
+											<div id="old_sup2nm"><select class="form-control select2" id="draft_sup2_name" name="draft_sup2_name" onChange="funSup2Data(this.value);">
+												<option value="<?php echo $row->sup2_nm; ?>"><?php echo $row->sup2_nm; ?></option>
+												<?php $dataList= $this->method_call->supplierList(); ?>
+												<?php                                                 
+													foreach($dataList as $ser)
+													{
+												?>
+												<option  value="<?php echo $ser['qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+												<?php 
+													}
+												?>
+											</select></div>
+										</td>
+										<td colspan="3" style="text-align:center;">  <input type="text" style="text-align:center;" value="<?php echo $row->sup2_contact_no; ?>"  id="draft_sup2_mno" name="draft_sup2_mno" value="" class="form-control full_width"   > </td>
+										<td colspan="3" style="text-align:center;">  <input type="text" style="text-align:center;" value="<?php echo $row->sup2_contact_person; ?>" id="draft_sup2_contactp" name="draft_sup2_contactp" value="" class="form-control full_width"   > </td>
+										<td colspan="3"  style="text-align:center;">  <input type="text"  style="text-align:center;" id="draft_sup2_eid" name="draft_sup2_eid" value="<?php echo $row->sup2_eid; ?>" class="form-control full_width" > </td>
+									</tr> 
+									<tr>
+										<td><input type="radio" name="rdo_supplier3" value="new_Supplier3" onclick="ClearSupplier3()">New Supplier 3 </td>
+										<td><input type="radio" name="rdo_supplier3" checked="check" value="old_Supplier3" onclick="ClearSupplier3()"> Supplier-3</td>
+										<td colspan="3"  style="text-align:center;">  
+											<div id="new_sup3_nm" style="display:none;"> <input type="text" style="text-align:center;" value="<?php echo $row->sup3_nm; ?>" id="draft_sup3_nm"  name="draft_sup3_nm" class="form-control full_width"   > </div>
+												<div id="old_sup3_nms" > <select class="form-control select2" id="draft_sup3_name" name="draft_sup3_name" onChange="funSup3Data(this.value);">
+														<option value="<?php echo $row->sup3_nm; ?>"><?php echo $row->sup3_nm; ?></option>
+														<?php $dataList= $this->method_call->supplierList(); ?>
+														<?php                                                 
+															foreach($dataList as $ser)
+															{
+														?>
+													<option  value="<?php echo $ser['qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+													<?php 
+															}
+													?>
+												</select></div>
+										</td>
+										<td colspan="3"  style="text-align:center;">  <input type="text" style="text-align:center;" value="<?php echo $row->sup3_contact_no; ?>" id="draft_sup3_mno"  name="draft_sup3_mno" class="form-control full_width"   > </td>
+										<td colspan="3"  style="text-align:center;">  <input type="text" style="text-align:center;" value="<?php echo $row->sup3_contact_person; ?>" id="draft_sup3_contactp" name="draft_sup3_contactp" class="form-control full_width"   > </td>
+										<td colspan="3" style="text-align:center;">  <input type="text" style="text-align:center;" id="draft_sup3_eid" name="draft_sup3_eid" value="<?php echo $row->sup3_eid; ?>" class="form-control full_width"   > </td>
+									</tr> 
+							</tbody>
+						</table>
+					</div>
 			  
 			  	 				  <?php $item= $this->method_call->qcs_last_inserid();
  if($item!=null){
@@ -543,6 +523,121 @@ $('#btn-submit').on('click',function(e){
 	}
 	
 });
+function funSupData(qcs_id){
+		//alert(qcs_id);
+		var supplier1 = qcs_id.split('-')[0];
+		
+		$.ajax(
+        {
+            type: "post",
+            url: "<?php echo base_url(); ?>index.php/purchase/QCS/selectSuplier1",
+            data:{'qcs_id':supplier1},
+            dataType: 'JSON',
+            success:function(data)
+            {
+				
+				
+				$('[id="draft_sup1_mno"]').val(data.sup1_contact_no);
+				$('[id="draft_sup1_contactp"]').val(data.sup1_contact_person);
+				$('[id="draft_sup1_eid"]').val(data.sup1_eid);
+	        }
+        });
+	 }
+	 
+	function funSup2Data(qcs_id){
+		var supplier2 = qcs_id.split('-')[0];
+		
+    $.ajax(
+        {
+			type: "post",
+            url: "<?php echo base_url(); ?>index.php/purchase/QCS/selectSuplier1",
+            data:{'qcs_id':supplier2},
+            dataType: 'JSON',
+            success:function(data)
+            {
+				$('[id="draft_sup2_mno"]').val(data.sup1_contact_no);
+				$('[id="draft_sup2_contactp"]').val(data.sup1_contact_person);
+				$('[id="draft_sup2_eid"]').val(data.sup1_eid);
+            }
+        });
+	}
+       function funSup3Data(qcs_id){
+		   var supplier3 = qcs_id.split('-')[0];
+		
+          $.ajax(
+			{
+				type: "post",
+				url: "<?php echo base_url(); ?>index.php/purchase/QCS/selectSuplier1",
+				data:{'qcs_id':supplier3},
+				dataType: 'JSON',
+				success:function(data)
+				{
+					$('[id="draft_sup3_mno"]').val(data.sup1_contact_no);
+					$('[id="draft_sup3_contactp"]').val(data.sup1_contact_person);
+					$('[id="draft_sup3_eid"]').val(data.sup1_eid);
+	            }
+			});
+		  }
+        
+//final supplier------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Final_Supplier") {
+        document.getElementById('new_final_nm').style.display = 'block';
+		document.getElementById('old_final_nm').style.display = 'none';
+       
+    } else if($(this).val() == "old_Final_Supplier") {
+		
+		document.getElementById('old_final_nm').style.display = 'block';
+		document.getElementById('new_final_nm').style.display = 'none';
+	}
+});
+function ClearFields() {
+	document.getElementById("draft_sup1_name").value = "";
+	document.getElementById("draft_sup1_nm").value = "";
+     document.getElementById("draft_sup1_mno").value = "";
+     document.getElementById("draft_sup1_contactp").value = "";
+	 document.getElementById("draft_sup1_eid").value = "";
+}
+//supplier 2 ----------------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Supplier2") {
+        document.getElementById('new_sup2nm').style.display = 'block';
+		document.getElementById('old_sup2nm').style.display = 'none';
+		
+    } else if($(this).val() == "old_Supplier2") {
+		
+       document.getElementById('old_sup2nm').style.display = 'block';
+		document.getElementById('new_sup2nm').style.display = 'none';
+		
+    }
+});
+function ClearSupplier2() {
+	document.getElementById("draft_sup2_nm").value = "";
+	document.getElementById("draft_sup2_name").value = "";
+     document.getElementById("draft_sup2_mno").value = "";
+     document.getElementById("draft_sup2_contactp").value = "";
+	 document.getElementById("draft_sup2_eid").value = "";
+}
+//supplier 3 ----------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Supplier3") {
+        document.getElementById('new_sup3_nm').style.display = 'block';
+		document.getElementById('old_sup3_nms').style.display = 'none';
+		
+    } else if($(this).val() == "old_Supplier3"){
+		
+       document.getElementById('old_sup3_nms').style.display = 'block';
+		document.getElementById('new_sup3_nm').style.display = 'none';
+		
+    }
+});
+function ClearSupplier3() {
+	document.getElementById("draft_sup3_name").value = "";
+	document.getElementById("draft_sup3_nm").value = "";
+     document.getElementById("draft_sup3_mno").value = "";
+     document.getElementById("draft_sup3_contactp").value = "";
+	 document.getElementById("draft_sup3_eid").value = "";
+}
 </script>
 
 

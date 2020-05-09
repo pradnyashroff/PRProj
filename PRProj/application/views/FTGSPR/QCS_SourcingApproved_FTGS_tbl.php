@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Pendding Table Interplant PR FTGS </title>
+  <title>Approved Table Interplant PR FTGS </title>
     <?php include_once 'styles.php'; ?>
 	<style>
 		   @media (min-width: 992px) {
@@ -53,11 +53,11 @@
 		<?php include_once 'headsidelistFTGS.php'; ?>			
 		<div class="content-wrapper"  style="background-color:#3482AE;text-transform: uppercase;">
 			<section class="content-header">
-				<h1 style="color:#FFFFFF; font-family:'exo';text-transform: uppercase;">Pendding Table Interplant PR FTGS</h1>
+				<h1 style="color:#FFFFFF; font-family:'exo';text-transform: uppercase;">Approved Table Interplant PR FTGS</h1>
 				<ol class="breadcrumb" style="color:#FFFFFF;text-transform: uppercase;">
 					<li><a href="<?php echo site_url('Welcome/index') ?>" style="color:#FFFFFF;text-transform: uppercase;"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li> <a href="<?php echo site_url('Welcome/index') ?>" style="color:#FFFFFF;text-transform: uppercase;">FTGS PR</a></li>
-					<li class="active" style="color:#FFFFFF;text-transform: uppercase;">Pendding Table Interplant PR FTGS</li>
+					<li class="active" style="color:#FFFFFF;text-transform: uppercase;">Approved Table Interplant PR FTGS</li>
 				</ol>
 			</section>
 			<section class="content">
@@ -80,8 +80,8 @@
 										</tr>
 									</thead>
 									<tbody>
-										<!--<?php 
-											$pendingList= $this->method_call->fetchpenddingDetails($emp_code);
+										<?php 
+											$pendingList= $this->method_call->fetchApprovedQcsSourcingUser($emp_code);
 											if($pendingList!=null)
 											{
 												$sr_no=1;			  
@@ -89,23 +89,24 @@
 												{  
 										?>
 										<tr>
-											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/penddingFTGSview/'.$row->ftgs_pr_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_pr_id; ?></a></td>
-											<td><?php echo $row->ftgs_pr_date;?></td>
-											<td><?php echo $row->ftgs_pr_owner_name;?></td>
-											<td><?php echo $row->ftgs_delivary_loc;?></td>
-											<td><?php echo $row->ftgs_procurement_res;?></td>
+											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/QCS_FtgsView/'.$row->ftgs_qcs_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_qcs_id; ?></a></td>
+											<td><?php echo $row->ftgs_pr_id;?></td>
+											<td><?php echo $row->ftgs_qcs_date;?></td>
+											<td><?php echo $row->ftgs_qcs_owner;?></td>
+											<td><?php echo $row->ftgs_sup1_nm;?></td>
+											<td><?php echo $row->ftgs_justification_supplier;?></td>
 											<td>
 												<?php 
-													$st = $row->action;
+													$st = $row->ftgs_qcs_status;
 													$status= "";
-													if($st == '0')
-													echo 'Pendding';
+													if($st == '4')
+													echo 'Approved';
 													?></td>
 												</tr>
 												<?php $sr_no++;
 												}
 											}
-										?>-->
+										?>
 									</tbody>
 								</table>
 								<pre id="example-console-rows" style="display:none!important"></pre>

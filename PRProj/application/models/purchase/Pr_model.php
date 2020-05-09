@@ -1162,7 +1162,42 @@ return false;
 		}
 		
 		
+			//FTGS QCS Count Approved Alll qcs
+		public function approveAllQcs() 
+		{
+			$condition = "ftgs_qcs_status=4";
+			$this->db->select('*');
+			$this->db->from('ftgs_qcs_master');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			}
+			else 
+			{
+				return false;
+			}
+		}
 		
+		
+		//FTGS QCS Count Approved Alll qcs
+		public function approveAllCpx() 
+		{
+			$condition = "ftgs_capex_status=3";
+			$this->db->select('*');
+			$this->db->from('ftgs_capex_master');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			}
+			else 
+			{
+				return false;
+			}
+		}
 
 }
 ?>

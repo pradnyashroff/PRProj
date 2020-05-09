@@ -1892,5 +1892,28 @@ if($this->upload->do_upload('profile_attachment')){
 		$data['approve']=$this->ftgs_model->cpxAuthPenCount($emp_code);    
 		return  $data['approve'];
 	}
+	
+	//Approve all qcs list
+
+	public function approveAllQcs()
+   {
+		$this->load->database();  
+		$this->load->model('PR/pr_model');  
+		$data['approved']=$this->pr_model->approveAllQcs();    
+		return  $data['approved'];
+	}
+	
+	
+	
+	
+		//Approve all capex list
+
+	public function approveAllCpx()
+   {
+		$this->load->database();  
+		$this->load->model('PR/pr_model');  
+		$data['approved']=$this->pr_model->approveAllCpx();    
+		return  $data['approved'];
+	}
    
 }//eof

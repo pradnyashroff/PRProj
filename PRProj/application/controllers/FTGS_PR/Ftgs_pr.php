@@ -1,367 +1,367 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Ftgs_pr extends CI_Controller
-{
-    
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->load->library('session');
-        $this->load->model('login_database');
-        $this->method_call =& get_instance();
-        
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $this->load->model('purchase/qcs_model');
-        $this->load->model('purchase/pr_model');
-        $this->load->model('purchase/Capex_model');
-    }
-    
-    //create ftgs pr
-    public function create_Pr()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/create_FTGS_pr');
-    }
-    //draft tbl ftgs pr
-    public function draftTBL()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/draft_FTGS_pr_tbl');
-    }
-    //draft tbl ftgs pr
-    public function draftFTGSview($ftgs_pr_id)
-    {
-        $data['ftgs_pr_id'] = $ftgs_pr_id;
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/draft_FTGS_pr_view',$data);
-    }
-    //pendding tbl ftgs pr
-    public function penddingTBL()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/pendding_FTGS_pr_tbl');
-    }
-    //pendding view ftgs pr
-    public function penddingFTGSview($ftgs_pr_id)
-    {
-        $data['ftgs_pr_id'] = $ftgs_pr_id;
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/pendding_FTGS_pr_view',$data);
-    }
-    //Reject tbl ftgs pr
-    public function rejectTBL()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/reject_FTGS_pr_tbl');
-    }
-    //Reject view ftgs pr
-    public function rejectFTGSview($ftgs_pr_id)
-    {
-        $data['ftgs_pr_id'] = $ftgs_pr_id;
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/reject_FTGS_pr_view',$data);
-    }
-    //approval tbl ftgs pr
-    public function approvalTBL()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/approval_FTGS_pr_tbl');
-    }
-    //Approved view ftgs pr
-    public function approvalFTGSview($ftgs_pr_id)
-    {
-        $data['ftgs_pr_id'] = $ftgs_pr_id;
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/approval_FTGS_pr_view',$data);
-    }
-    //PH pendding tbl ftgs pr
-    public function ph_penddingTBL()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/PH_pendding_FTGS_pr_tbl');
-    }
-    //PH pendding view ftgs pr
-    public function ph_penddingFTGSview($ftgs_pr_id)
-    {
-        $data['ftgs_pr_id'] = $ftgs_pr_id;
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/PH_pendding_FTGS_pr_view',$data);
-    }
-    //PH Reject tbl ftgs pr
-    public function ph_rejectTBL()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/PH_reject_FTGS_pr_tbl');
-    }
-    //PH Reject view ftgs pr
-    public function ph_rejectFTGSview($ftgs_pr_id)
-    {
-        $data['ftgs_pr_id'] = $ftgs_pr_id;
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/PH_reject_FTGS_pr_view',$data);
-    }
-    //PH approval tbl ftgs pr
-    public function ph_approvalTBL()
-    {
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/PH_approval_FTGS_pr_tbl');
-    }
-    //PH Approved view ftgs pr
-    public function ph_approvalFTGSview($ftgs_pr_id)
-    {
-        $data['ftgs_pr_id'] = $ftgs_pr_id;
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/PH_approval_FTGS_pr_view',$data);
-    }
-    //profile fetch
-    public function profile_pic($emp_code)
-    {
-        
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $data['profile']=$this->ftgs_model->profile_fetch($emp_code);
-        return  $data['profile'];
-    }
-    //pr type
-    public function pr_type()
-    {
-        
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $data['pr_type']=$this->ftgs_model->pr_type();
-        return  $data['pr_type'];
-    }
-    //list plant
-    public function plant()
-    {
-        
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $data['plant']=$this->ftgs_model->plant();
-        return  $data['plant'];
-    }
-    //fetch Department
-    public function department($emp_dept)
-    {
-        
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $data['dept_name']=$this->ftgs_model->department($emp_dept);
-        return  $data;
-    }
-    //fetch ftgs pr items
-    public function ftgs_item($emp_code)
-    {
-        
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $data['item']=$this->ftgs_model->ftgs_item($emp_code);
-        return $data['item'];
-    }
-    //add ftgs items
-    public function add_item_ftgs()
-    {
-        date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-Y');
-        $time = date("h:i A");
-        $data = array(
-            'ftgs_pr_id' => $this->input->post('txt_temp_ftgs_id'),
-            'ftgs_item_code' => $this->input->post('txt_item_code'),
-            'ftgs_item_description' => $this->input->post('txt_description'),
-            'ftgs_req_qty' => $this->input->post('txt_reqr_quntity'),
-            'ftgs_uom' => $this->input->post('txt_uom'),
-            'ftgs_approx_rate' => $this->input->post('txt_approx_rate'),
-            'ftgs_approx_total_amt' => $this->input->post('txt_apporox_amt'),
-            'ftgs_expected_delivery' => $this->input->post('txt_delivary_period'),
-            'ftgs_project_detail' => $this->input->post('txt_project_details'),
-            'ftgs_technical_detail' => $this->input->post('txt_mfg_nm'),
-            'ftgs_cust_code' => $this->input->post('txt_cust_cost'),
-            'ftgs_sales_material' => $this->input->post('txt_sales_meterial'),
-            'ftgs_ecn_new' => $this->input->post('txt_ecn_new'),
-            'ftgs_ecn_newcode' => $this->input->post('txt_ecn_newcode'),
-            'ftgs_reg_date' => $date,
-            'ftgs_reg_time' => $time,
-            'ftgs_reg_by' => $this->input->post('txt_temp_ftgs_id')
-        );
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $this->ftgs_model->add_ftgs_pr($data);
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/create_FTGS_pr');
-        
-    }
-    //update ftgs items
-    public function update_item_ftgs()
-    {
-        date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-Y');
-        $time = date("h:i A");
-        $editId = $this->input->post('edit_item_id');
-        
-        $data = array(
-            'ftgs_item_code' => $this->input->post('edit_item_code'),
-            'ftgs_item_description' => $this->input->post('edit_description'),
-            'ftgs_req_qty' => $this->input->post('edit_reqri_quntity'),
-            'ftgs_uom' => $this->input->post('edit_uom'),
-            'ftgs_approx_rate' => $this->input->post('edit_approx_rate'),
-            'ftgs_approx_total_amt' => $this->input->post('edit_apporox_amt'),
-            'ftgs_expected_delivery' => $this->input->post('edit_delivary_period'),
-            'ftgs_project_detail' => $this->input->post('edit_project_details'),
-            'ftgs_technical_detail' => $this->input->post('edit_mfg_nm'),
-            'ftgs_cust_code' => $this->input->post('edit_cust_cost'),
-            'ftgs_sales_material' => $this->input->post('edit_sales_meterial'),
-            'ftgs_ecn_new' => $this->input->post('edit_ecn_new'),
-            'ftgs_ecn_newcode' => $this->input->post('edit_ecn_newcode'),
-            'ftgs_reg_date' => $date,
-            'ftgs_reg_time' => $time,
-            'ftgs_reg_by' => $this->input->post('edit_ftgs_emp')
-        );
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $this->ftgs_model->update_ftgs_pr($data, $editId);
-        $this->load->helper('url');
-        $this->load->view('FTGSPR/create_FTGS_pr');
-        
-    }
-    //update ftgs items code
-    public function update_itemCode()
-    {
-        date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-Y');
-        $time = date("h:i A");
-        $editId = $this->input->post('edit_item_id');
-        $data = array(
-            'ftgs_item_code' => $this->input->post('edit_item_code'),
-            'ftgs_item_status' => $this->input->post('edit_item_status'),
-        );
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $this->ftgs_model->update_itemCode($data, $editId);
-        $this->load->helper('url');
-        echo '<script>window.history.back();</script>';
-        
-    }
-    //add draft ftgs items
-    public function draft_add_item_ftgs()
-    {
-        date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-Y');
-        $time = date("h:i A");
-        $temp_pr=$this->input->post('draft_temp_ftgs_id');
-        $data = array(
-            'ftgs_pr_id' => $temp_pr,
-            'ftgs_item_code' => $this->input->post('draft_item_code'),
-            'ftgs_item_description' => $this->input->post('draft_description'),
-            'ftgs_req_qty' => $this->input->post('draft_reqr_quntity'),
-            'ftgs_uom' => $this->input->post('draft_uom'),
-            'ftgs_approx_rate' => $this->input->post('draft_approx_rate'),
-            'ftgs_approx_total_amt' => $this->input->post('draft_apporox_amt'),
-            'ftgs_expected_delivery' => $this->input->post('draft_delivary_period'),
-            'ftgs_project_detail' => $this->input->post('draft_project_details'),
-            'ftgs_technical_detail' => $this->input->post('draft_mfg_nm'),
-            'ftgs_cust_code' => $this->input->post('draft_cust_cost'),
-            'ftgs_sales_material' => $this->input->post('draft_sales_meterial'),
-            'ftgs_ecn_new' => $this->input->post('draft_ecn_ne'),
-            'ftgs_ecn_newcode' => $this->input->post('draft_ecn_newcode'),
-            'ftgs_reg_date' => $date,
-            'ftgs_reg_time' => $time,
-            'ftgs_reg_by' => $this->input->post('draft_temp_ftgs_id')
-        );
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $result=$this->ftgs_model->draft_add_ftgs_pr($data);
-        $this->load->helper('url');
-        $data['ftgs_pr_id']=$temp_pr;
-        $this->load->helper('url');
-        echo '<script>window.history.back();</script>';
-        
-    }
-    //update draft ftgs
-    public function drftupdate_item_ftgs()
-    {
-        date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-Y');
-        $time = date("h:i A");
-        $editId = $this->input->post('editdrft_item_id');
-        $data = array(
-            'ftgs_item_code' => $this->input->post('editdrft_item_code'),
-            'ftgs_item_description' => $this->input->post('editdrft_description'),
-            'ftgs_req_qty' => $this->input->post('editdrft_reqri_quntity'),
-            'ftgs_uom' => $this->input->post('editdrft_uom'),
-            'ftgs_approx_rate' => $this->input->post('editdrft_approx_rate'),
-            'ftgs_approx_total_amt' => $this->input->post('editdrft_apporox_amt'),
-            'ftgs_expected_delivery' => $this->input->post('editdrft_delivary_period'),
-            'ftgs_project_detail' => $this->input->post('editdrft_project_details'),
-            'ftgs_technical_detail' => $this->input->post('editdrft_mfg_nm'),
-            'ftgs_cust_code' => $this->input->post('editdrft_cust_cost'),
-            'ftgs_sales_material' => $this->input->post('editdrft_sales_meterial'),
-            'ftgs_ecn_new' => $this->input->post('editdrft_ecn_new'),
-            'ftgs_ecn_newcode' => $this->input->post('editdrft_ecn_newcode'),
-            'ftgs_reg_date' => $date,
-            'ftgs_reg_time' => $time
-            
-            
-        );
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $this->ftgs_model->drftupdate_item_ftgs($data,$editId);
-        $this->load->helper('url');
-        echo '<script>window.history.back();</script>';
-        
-        //$this->load->view('FTGSPR/draft_FTGS_pr_view',$data);
-    }
-    
-    //inser ftgs ftgs items
-    public function insert_ftgs_pr()
-    {
-        date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-Y');
-        $time = date("h:i A");
-        $data = array(
-            'ftgs_plant_code' => $this->input->post('txt_plant'),
-            'ftgs_pr_date' => $date,
-            'ftgs_pr_type' => $this->input->post('txt_pr_type'),
-            'ftgs_pr_owner_code' => $this->input->post('txt_pr_owner_code'),
-            'ftgs_pr_owner_name' => $this->input->post('txt_pr_owner'),
-            'ftgs_dept_id' => $this->input->post('txt_dept_id'),
-            'ftgs_delivary_loc' => $this->input->post('txt_location'),
-            'ftgs_inspection_req' => $this->input->post('txt_supplier'),
-            'ftgs_budget_consider' => $this->input->post('txt_conside_budge'),
-            'ftgs_procurement_res' => $this->input->post('txt_reson'),
-            'ftgs_ion_no' => $this->input->post('txt_ion_no'),
-            'ftgs_cust_cost_upfront' => $this->input->post('txt_cust_cost_upfront'),
-            'ftgs_cust_cost_amortization' => $this->input->post('txt_cust_cost_amort'),
-            'ftgs_own_investment' => $this->input->post('txt_own_inve'),
-            'ftgs_draft_date' => $date,
-            'ftgs_reg_time' => $time,
-            'ftgs_reg_by' => $this->input->post('txt_emp_code')
-            
-        );
-        $this->load->database();
-        $this->load->model('Ftgs_PR/ftgs_model');
-        $this->ftgs_model->insert_ftgs_pr($data);
-        $row = $this->db->query('SELECT MAX(ftgs_pr_id) AS `maxid` FROM `ftgs_pr_master`')->row();
-        if ($row)
-        {
-            $ftgs_pr_id=$row->maxid;
-            
+class Ftgs_pr extends CI_Controller 
+	{
+		
+		public function __construct() 
+		{
+			parent::__construct();
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+			$this->load->library('session');
+			$this->load->model('login_database');
+			$this->method_call =& get_instance();
+			
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model'); 
+			$this->load->model('purchase/qcs_model');  
+			$this->load->model('purchase/pr_model');
+			$this->load->model('purchase/Capex_model');
+		}
+		
+		//create ftgs pr
+		public function create_Pr() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/create_FTGS_pr');
         }
-        $old_id=$this->input->post('txt_emp_code');
-        $new_id = array(
-            'ftgs_pr_id' => $ftgs_pr_id,
-        );
-        $this->ftgs_model->update_item_withftgs($new_id,$old_id);
-        
-        //upload file insert
-        if (!empty($_FILES['upload_file']['name'][0]))
-        {
-            if ($this->upload_files($_FILES['upload_file']['name'], $_FILES['upload_file'], $ftgs_pr_id) === FALSE)
-            {
-                $data['error'] = $this->upload->display_errors('<div class="alert alert-danger">', '</div>');
-                ?>
+		//draft tbl ftgs pr
+		public function draftTBL() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/draft_FTGS_pr_tbl');
+        }
+		//draft tbl ftgs pr
+		public function draftFTGSview($ftgs_pr_id) 
+		{
+			$data['ftgs_pr_id'] = $ftgs_pr_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/draft_FTGS_pr_view',$data);
+        }
+		//pendding tbl ftgs pr
+		public function penddingTBL() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/pendding_FTGS_pr_tbl');
+        }
+		//pendding view ftgs pr
+		public function penddingFTGSview($ftgs_pr_id) 
+		{
+			$data['ftgs_pr_id'] = $ftgs_pr_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/pendding_FTGS_pr_view',$data);
+        }
+		//Reject tbl ftgs pr
+		public function rejectTBL() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/reject_FTGS_pr_tbl');
+        }
+		//Reject view ftgs pr
+		public function rejectFTGSview($ftgs_pr_id) 
+		{
+			$data['ftgs_pr_id'] = $ftgs_pr_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/reject_FTGS_pr_view',$data);
+        }
+		//approval tbl ftgs pr
+		public function approvalTBL() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/approval_FTGS_pr_tbl');
+        }
+		//Approved view ftgs pr
+		public function approvalFTGSview($ftgs_pr_id) 
+		{
+			$data['ftgs_pr_id'] = $ftgs_pr_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/approval_FTGS_pr_view',$data);
+        }
+		//PH pendding tbl ftgs pr
+		public function ph_penddingTBL() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/PH_pendding_FTGS_pr_tbl');
+        }
+		//PH pendding view ftgs pr
+		public function ph_penddingFTGSview($ftgs_pr_id) 
+		{
+			$data['ftgs_pr_id'] = $ftgs_pr_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/PH_pendding_FTGS_pr_view',$data);
+        }
+		//PH Reject tbl ftgs pr
+		public function ph_rejectTBL() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/PH_reject_FTGS_pr_tbl');
+        }
+		//PH Reject view ftgs pr
+		public function ph_rejectFTGSview($ftgs_pr_id) 
+		{
+			$data['ftgs_pr_id'] = $ftgs_pr_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/PH_reject_FTGS_pr_view',$data);
+        }
+		//PH approval tbl ftgs pr
+		public function ph_approvalTBL() 
+		{
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/PH_approval_FTGS_pr_tbl');
+        }
+		//PH Approved view ftgs pr
+		public function ph_approvalFTGSview($ftgs_pr_id) 
+		{
+			$data['ftgs_pr_id'] = $ftgs_pr_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/PH_approval_FTGS_pr_view',$data);
+        }
+		//profile fetch
+		public function profile_pic($emp_code)
+		{
+			
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model');  
+			$data['profile']=$this->ftgs_model->profile_fetch($emp_code);  
+		  	return  $data['profile'];
+		}
+		//pr type 
+		public function pr_type()
+		{
+			
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model');  
+			$data['pr_type']=$this->ftgs_model->pr_type();  
+		  	return  $data['pr_type'];
+		}
+		//list plant
+		public function plant()
+		{
+			
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model');  
+			$data['plant']=$this->ftgs_model->plant();  
+		  	return  $data['plant'];
+		}
+		//fetch Department
+		public function department($emp_dept)
+		{
+			
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model');  
+			$data['dept_name']=$this->ftgs_model->department($emp_dept);  
+		  	return  $data;
+		}
+		//fetch ftgs pr items
+		public function ftgs_item($emp_code)
+		{
+			
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model');  
+			$data['item']=$this->ftgs_model->ftgs_item($emp_code);  
+		  	return $data['item'];
+		}
+		//add ftgs items
+		public function add_item_ftgs()
+		{
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$data = array(
+                'ftgs_pr_id' => $this->input->post('txt_temp_ftgs_id'),
+                'ftgs_item_code' => $this->input->post('txt_item_code'),
+                'ftgs_item_description' => $this->input->post('txt_description'),
+                'ftgs_req_qty' => $this->input->post('txt_reqr_quntity'),
+                'ftgs_uom' => $this->input->post('txt_uom'),
+                'ftgs_approx_rate' => $this->input->post('txt_approx_rate'),
+                'ftgs_approx_total_amt' => $this->input->post('txt_apporox_amt'),
+				'ftgs_expected_delivery' => $this->input->post('txt_delivary_period'),
+				'ftgs_project_detail' => $this->input->post('txt_project_details'),
+				'ftgs_technical_detail' => $this->input->post('txt_mfg_nm'),
+				'ftgs_cust_code' => $this->input->post('txt_cust_cost'),
+				'ftgs_sales_material' => $this->input->post('txt_sales_meterial'),
+				'ftgs_ecn_new' => $this->input->post('txt_ecn_new'),
+				'ftgs_ecn_newcode' => $this->input->post('txt_ecn_newcode'),
+                'ftgs_reg_date' => $date,
+                'ftgs_reg_time' => $time,
+                'ftgs_reg_by' => $this->input->post('txt_temp_ftgs_id')
+            );
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model'); 
+			$this->ftgs_model->add_ftgs_pr($data);
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/create_FTGS_pr');
+		
+		}
+		//update ftgs items
+		public function update_item_ftgs()
+		{
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$editId = $this->input->post('edit_item_id');
+			
+			$data = array(
+                'ftgs_item_code' => $this->input->post('edit_item_code'),
+                'ftgs_item_description' => $this->input->post('edit_description'),
+                'ftgs_req_qty' => $this->input->post('edit_reqri_quntity'),
+                'ftgs_uom' => $this->input->post('edit_uom'),
+                'ftgs_approx_rate' => $this->input->post('edit_approx_rate'),
+                'ftgs_approx_total_amt' => $this->input->post('edit_apporox_amt'),
+				'ftgs_expected_delivery' => $this->input->post('edit_delivary_period'),
+				'ftgs_project_detail' => $this->input->post('edit_project_details'),
+				'ftgs_technical_detail' => $this->input->post('edit_mfg_nm'),
+				'ftgs_cust_code' => $this->input->post('edit_cust_cost'),
+				'ftgs_sales_material' => $this->input->post('edit_sales_meterial'),
+				'ftgs_ecn_new' => $this->input->post('edit_ecn_new'),
+				'ftgs_ecn_newcode' => $this->input->post('edit_ecn_newcode'),
+                'ftgs_reg_date' => $date,
+                'ftgs_reg_time' => $time,
+                'ftgs_reg_by' => $this->input->post('edit_ftgs_emp')
+            );
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model'); 
+			$this->ftgs_model->update_ftgs_pr($data, $editId);
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/create_FTGS_pr');
+		
+		}
+		//update ftgs items code
+		public function update_itemCode()
+		{
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$editId = $this->input->post('edit_item_id');
+			$data = array(
+                'ftgs_item_code' => $this->input->post('edit_item_code'),
+				'ftgs_item_status' => $this->input->post('edit_item_status'),
+            );
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model'); 
+			$this->ftgs_model->update_itemCode($data, $editId);
+			$this->load->helper('url');
+			echo '<script>window.history.back();</script>';
+		
+		}
+		//add draft ftgs items
+		public function draft_add_item_ftgs()
+		{
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			 $temp_pr=$this->input->post('draft_temp_ftgs_id');
+			$data = array(
+                'ftgs_pr_id' => $temp_pr,
+                'ftgs_item_code' => $this->input->post('draft_item_code'),
+                'ftgs_item_description' => $this->input->post('draft_description'),
+                'ftgs_req_qty' => $this->input->post('draft_reqr_quntity'),
+                'ftgs_uom' => $this->input->post('draft_uom'),
+                'ftgs_approx_rate' => $this->input->post('draft_approx_rate'),
+                'ftgs_approx_total_amt' => $this->input->post('draft_apporox_amt'),
+				'ftgs_expected_delivery' => $this->input->post('draft_delivary_period'),
+				'ftgs_project_detail' => $this->input->post('draft_project_details'),
+				'ftgs_technical_detail' => $this->input->post('draft_mfg_nm'),
+				'ftgs_cust_code' => $this->input->post('draft_cust_cost'),
+				'ftgs_sales_material' => $this->input->post('draft_sales_meterial'),
+				'ftgs_ecn_new' => $this->input->post('draft_ecn_ne'),
+				'ftgs_ecn_newcode' => $this->input->post('draft_ecn_newcode'),
+                'ftgs_reg_date' => $date,
+                'ftgs_reg_time' => $time,
+                'ftgs_reg_by' => $this->input->post('draft_temp_ftgs_id')
+            );
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$result=$this->ftgs_model->draft_add_ftgs_pr($data);
+			$this->load->helper('url');
+			$data['ftgs_pr_id']=$temp_pr;
+			$this->load->helper('url');
+			echo '<script>window.history.back();</script>';
+				
+		}
+		//update draft ftgs
+		public function drftupdate_item_ftgs() 
+		{
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$editId = $this->input->post('editdrft_item_id');
+			$data = array(
+				'ftgs_item_code' => $this->input->post('editdrft_item_code'),
+				'ftgs_item_description' => $this->input->post('editdrft_description'),
+				'ftgs_req_qty' => $this->input->post('editdrft_reqri_quntity'),
+				'ftgs_uom' => $this->input->post('editdrft_uom'),
+				'ftgs_approx_rate' => $this->input->post('editdrft_approx_rate'),
+				'ftgs_approx_total_amt' => $this->input->post('editdrft_apporox_amt'),
+				'ftgs_expected_delivery' => $this->input->post('editdrft_delivary_period'),
+				'ftgs_project_detail' => $this->input->post('editdrft_project_details'),
+				'ftgs_technical_detail' => $this->input->post('editdrft_mfg_nm'),
+				'ftgs_cust_code' => $this->input->post('editdrft_cust_cost'),
+				'ftgs_sales_material' => $this->input->post('editdrft_sales_meterial'),
+				'ftgs_ecn_new' => $this->input->post('editdrft_ecn_new'),
+				'ftgs_ecn_newcode' => $this->input->post('editdrft_ecn_newcode'),
+				'ftgs_reg_date' => $date,
+				'ftgs_reg_time' => $time
+				
+				
+            );
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model'); 
+			$this->ftgs_model->drftupdate_item_ftgs($data,$editId);
+			$this->load->helper('url');
+			echo '<script>window.history.back();</script>';
+			
+			//$this->load->view('FTGSPR/draft_FTGS_pr_view',$data);
+		}
+
+		//inser ftgs ftgs items
+		public function insert_ftgs_pr()
+		{
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$data = array(
+               'ftgs_plant_code' => $this->input->post('txt_plant'),
+                'ftgs_pr_date' => $date,
+                'ftgs_pr_type' => $this->input->post('txt_pr_type'),
+                'ftgs_pr_owner_code' => $this->input->post('txt_pr_owner_code'),
+                'ftgs_pr_owner_name' => $this->input->post('txt_pr_owner'),
+                'ftgs_dept_id' => $this->input->post('txt_dept_id'),
+				'ftgs_delivary_loc' => $this->input->post('txt_location'),
+				'ftgs_inspection_req' => $this->input->post('txt_supplier'),
+				'ftgs_budget_consider' => $this->input->post('txt_conside_budge'),
+				'ftgs_procurement_res' => $this->input->post('txt_reson'),
+				'ftgs_ion_no' => $this->input->post('txt_ion_no'),
+				'ftgs_cust_cost_upfront' => $this->input->post('txt_cust_cost_upfront'),
+				'ftgs_cust_cost_amortization' => $this->input->post('txt_cust_cost_amort'),
+				'ftgs_own_investment' => $this->input->post('txt_own_inve'),
+				'ftgs_draft_date' => $date,
+                'ftgs_reg_time' => $time,
+                'ftgs_reg_by' => $this->input->post('txt_emp_code')
+				
+            );
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model'); 
+			$this->ftgs_model->insert_ftgs_pr($data);
+			$row = $this->db->query('SELECT MAX(ftgs_pr_id) AS `maxid` FROM `ftgs_pr_master`')->row();
+			if ($row) 
+			{
+				$ftgs_pr_id=$row->maxid;
+				
+			}
+			$old_id=$this->input->post('txt_emp_code');
+			$new_id = array(
+				'ftgs_pr_id' => $ftgs_pr_id,
+			);
+			 $this->ftgs_model->update_item_withftgs($new_id,$old_id);
+			
+			//upload file insert
+			if (!empty($_FILES['upload_file']['name'][0])) 
+			{
+                if ($this->upload_files($_FILES['upload_file']['name'], $_FILES['upload_file'], $ftgs_pr_id) === FALSE) 
+				{
+                    $data['error'] = $this->upload->display_errors('<div class="alert alert-danger">', '</div>');
+					?>
 					<script type="text/javascript">
 						alert("Your Files Uploaded Successfully");
 					</script>
@@ -2249,6 +2249,48 @@ class Ftgs_pr extends CI_Controller
 			//$action = $this->input->post('ftgs_status');
 			$Ftgs_action_id = $this->input->post('Ftgs_action_id');
 			$qcsName = $this->input->post('txtQcsName');
+			
+			
+			
+  
+//Supplier1................. 08/03/2020
+$sup1_nm = $this->input->post('sup1_nm');
+$sup1_name = $this->input->post('sup1_name');
+if($sup1_nm=="")
+{
+	$paraSup1=$sup1_name;
+}
+elseif($sup1_name==""){
+	$split = explode("-",$sup1_nm);
+	$paraSup1=$split[1];
+}
+
+
+//Supplier2....................08/03/2020
+$sup2_nm = $this->input->post('sup2_nm');
+$sup2_name = $this->input->post('sup2_name');
+if($sup2_nm=="")
+{
+	$paraSup2=$sup2_name;
+}
+elseif($sup2_name==""){
+	$split = explode("-",$sup2_nm);
+	$paraSup2=$split[1];
+}
+
+//Supplier 3................08/03/2020
+$sup3_nm = $this->input->post('sup3_nm');
+$sup3_name = $this->input->post('sup3_name');
+
+if($sup3_nm=="")
+{
+	$paraSup3=$sup3_name;
+}
+elseif($sup3_name==""){
+	$split = explode("-",$sup3_nm);
+	$paraSup3=$split[1];
+}
+
 		
             $data1 = array(
 				'ftgs_pr_id'=>$editId,
@@ -2260,21 +2302,21 @@ class Ftgs_pr extends CI_Controller
 				'ftgs_qcs_owner' => $qcsName,
 				'ftgs_qcs_status' => 0, //Incomplete QCS
 				'ftgs_plant_code'=>$this->input->post('txtPlantCode'),
-				'ftgs_sup1_nm'=>$this->input->post('txt_sup1_nm'),
-				'ftgs_sup1_contact_no'=>$this->input->post('txt_sup1_mno'),
-				'ftgs_sup1_contact_person'=>$this->input->post('txt_sup1_contactp'),
-				'ftgs_sup1_eid'=>$this->input->post('txt_sup1_eid'),
+				'ftgs_sup1_nm'=>$paraSup1,
+				'ftgs_sup1_contact_no'=>$this->input->post('sup1_mno'),
+				'ftgs_sup1_contact_person'=>$this->input->post('sup1_contactp'),
+				'ftgs_sup1_eid'=>$this->input->post('sup1_eid'),
 				
 				
-				'ftgs_sup2_nm'=>$this->input->post('txt_sup2_nm'),
-				'ftgs_sup2_contact_no'=>$this->input->post('txt_sup2_mno'),
-				'ftgs_sup2_contact_person'=>$this->input->post('txt_sup2_contactp'),
-				'ftgs_sup2_eid'=>$this->input->post('txt_sup2_eid'),
+				'ftgs_sup2_nm'=>$paraSup2,
+				'ftgs_sup2_contact_no'=>$this->input->post('sup2_mno'),
+				'ftgs_sup2_contact_person'=>$this->input->post('sup2_contactp'),
+				'ftgs_sup2_eid'=>$this->input->post('sup2_eid'),
 				
-				'ftgs_sup3_nm'=>$this->input->post('txt_sup3_nm'),
-				'ftgs_sup3_contact_no'=>$this->input->post('txt_sup3_mno'),
-				'ftgs_sup3_contact_person'=>$this->input->post('txt_sup3_contactp'),
-				'ftgs_sup3_eid'=>$this->input->post('txt_sup3_eid'),
+				'ftgs_sup3_nm'=>$paraSup3,
+				'ftgs_sup3_contact_no'=>$this->input->post('sup3_mno'),
+				'ftgs_sup3_contact_person'=>$this->input->post('sup3_contactp'),
+				'ftgs_sup3_eid'=>$this->input->post('sup3_eid'),
 				
             );
             
@@ -2655,7 +2697,18 @@ $this->ftgs_model->insertfiles($datanew);//Inserting 6 files
 		  
 		}	
 		
-		
+	
+//view qcs item in step 2 page 
+	   function ftgs_view_pr_items($ftgs_qcs_id)
+		{
+	
+				$this->load->database();  
+				$this->load->model('Ftgs_PR/ftgs_model');  
+				$data['item_view']=$this->ftgs_model->ftgs_view_pr_items($ftgs_qcs_id);  
+				return  $data['item_view'];
+		  
+		}	
+			
 //Edit Delete Item
 public function QCS_editDeleteItem($ftgs_qcs_item_id)
 {
@@ -2812,7 +2865,7 @@ $data['message'] = 'Data Updated Successfully';
         return $data['draftList'];
    }
    
-   //pendding tbl ftgs QCS
+   //pendding tbl ftgs QCS in pr owner section
 		public function penddingQCSTBL() 
 		{
 			$this->load->helper('url');
@@ -2970,6 +3023,8 @@ $data['message'] = 'Data Updated Successfully';
             }else{
                 $picture = '';
             }
+			
+			echo "file name ....".$picture;
                 $data = array(
 				'ftgs_qcs_file_nm'=>$picture
 				);
@@ -2980,7 +3035,7 @@ $data['message'] = 'Data Updated Successfully';
            
                  $this->load->helper('url');
                  //$this->load->view('QCS/home');
-                 echo '<script>window.history.back();</script>';
+            echo '<script>window.history.back();</script>';
            
           
         }
@@ -3444,6 +3499,14 @@ else
 			return $data['pendingList'];
 		}
 		
+		//Approved tbl for qcs user 
+			function fetchApprovedQcsSourcingUser($emp_code) {
+			$this->load->helper('url');
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['pendingList'] = $this->ftgs_model->fetchApprovedQcsSourcingUser($emp_code);
+			return $data['pendingList'];
+		}
 		
 		//QCS View
 		
@@ -3517,9 +3580,9 @@ else
             $this->ftgs_model->ftgsProcessRepAutho($data2);
             
             //email Code
-                    $reciver= 'ppshroff@ruchagroup.com';  //rud mail
+                    $reciver= 'rohit@ruchagroup.com ';  //rud mail
 					
-					$ccuser='kakhadke@ruchagroup.com'; //skshahed 
+					$ccuser='sksyed@ruchagroup.com'; //skshahed 
 					$subject='Interplant FTGS QCS Approved By '.$qcs_emp_nm.' Against  QCS NO.  '.$editId.' ';
 					$message='<ol>
 								<li><b>FTGS QCS No:</b>  '.$editId.'</li>
@@ -3634,7 +3697,7 @@ else
         $this->load->database();
         $this->load->model('Ftgs_PR/ftgs_model');
         $data['autho_code'] = $this->ftgs_model->getApproval3AuthoDetails();
-        return $data;
+        return $data['autho_code'];
     }
 	
 	
@@ -3671,27 +3734,22 @@ else
                 'ftgs_qcs_id' => $this->input->post('txtftgsId'),
 				'ftgs_pr_id' => $this->input->post('txtftgsPRId'),
                 'emp_code' => $this->input->post('txt_emp_code'),
-                'action_autho' => $this->input->post('txt_approval3_Autho'),
+                'action_autho' => $this->input->post('authoID'),
                 'level_of' => 7,
                 'action' => 0,
                 'action_date' => $date,
                 'action_time' => $time
             );
 			
-			$data3 = array(
-				'ftgs_qcs_item_id'=>$this->input->post('qcsItemId'),
-				'amt_per_add'=>$this->input->post('add10per'),
-				'per_final_amt'=>$this->input->post('txt_10_amt'),
-			);
+			
 			
             $this->ftgs_model->updateQCSuserAction($data, $editId, $Ftgs_action_id);
             $this->ftgs_model->ftgsProcessRepAutho($data2);
-            $this->ftgs_model->updateQcsItemData($data3,$editId,$ftgs_qcs_item_id);
+           
 			
             //email Code
-                    $reciver= 'ppshroff@ruchagroup.com';  //MID mail
-					
-					$ccuser='kakhadke@ruchagroup.com'; //skshahed 
+                    $reciver= $this->input->post('authoMail');  //MID mail
+					$ccuser='sksyed@ruchagroup.com'; //skshahed 
 					$subject='Interplant FTGS QCS Approved By '.$qcs_emp_nm.' Against  QCS NO.  '.$editId.' ';
 					$message='<ol>
 								<li><b>FTGS QCS No:</b>  '.$editId.'</li>
@@ -3701,6 +3759,7 @@ else
 								
 								<li><b>FTGS QCS Date:</b>  '.$this->input->post('txtqcsDate'). '</li>
 								<li><b>Total Amount:</b>  '.$this->input->post('txtTotalAmt').'</li>
+								<li><b>Total Final Amount after adding percentage :</b>  '.$this->input->post('txtAmtPer').'</li>
 								<li><b>Approver Comment:</b>  '.$this->input->post('txt_comment').'</li>
 								
 							</ol>
@@ -4436,13 +4495,25 @@ else
 	
 	
 		
-		//fetch pr qcs detail inner join
+		//fetch pr qcs detail inner join 
 	   function pr_qcs_detail_capex($ftgs_qcs_id)
 {
 	
 				$this->load->database();  
 				$this->load->model('Ftgs_PR/ftgs_model');  	
 				$data['qcs_detail']=$this->ftgs_model->pr_qcs_detail_capex($ftgs_qcs_id);  		  		
+				return  $data['qcs_detail'];
+		  
+}
+
+
+		//fetch pr qcs detail inner join prDetails
+	   function prDetails($ftgs_qcs_id)
+{
+	
+				$this->load->database();  
+				$this->load->model('Ftgs_PR/ftgs_model');  	
+				$data['qcs_detail']=$this->ftgs_model->prDetails($ftgs_qcs_id);  		  		
 				return  $data['qcs_detail'];
 		  
 }
@@ -5167,6 +5238,15 @@ else{
 			$this->load->view('FTGSPR/CAPEX_UserApproved_tbl');
 		}
 		
+		
+		public function UserApprovedCpxTblData($emp_code)
+		{
+			 $this->load->helper('url');
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['pendingList'] = $this->ftgs_model->UserApprovedCpxTblData($emp_code);
+			return $data['pendingList'];
+		}
 			//Rejected  Capex at user section 
 		public function CAPEX_UserRejected_tbl()
 		{
@@ -5258,15 +5338,15 @@ else{
 			$user_nm = $this->input->post('user_nm');
 			
 			$dataFile = array(
-				'assetFile_attach_ftgs' =>preg_replace('/\s+/', '_', $_FILES['assetFile_attach_ftgs']['name']),
+				'ftgs_assetFile' =>preg_replace('/\s+/', '_', $_FILES['ftgs_assetFile']['name']),
 			);
 			$capex_upd=$this->ftgs_model->File_update($editId,$dataFile);	
 			
 			
 			//assetFile_attach attachment 	
-			if (!empty($_FILES['assetFile_attach_ftgs']['name'])) {//single file upload 
-                chmod('./uploads/assetFile_attach_ftgs/', 0777);
-				$path   = './uploads/assetFile_attach_ftgs/';
+			if (!empty($_FILES['ftgs_assetFile']['name'])) {//single file upload 
+                chmod('./uploads/ftgs_assetFile/', 0777);
+				$path   = './uploads/ftgs_assetFile/';
 				if (!is_dir($path)) { //create the folder if it's not already exists
 					mkdir($path, 0777, TRUE);
 				}
@@ -5277,7 +5357,7 @@ else{
         );
         $this->load->library('upload', $config);
 		$this->upload->initialize($config);
-		if($this->upload->do_upload('assetFile_attach_ftgs')){
+		if($this->upload->do_upload('ftgs_assetFile')){
 		}else{	?>
                 <script type="text/javascript">
                     alert("file upload error");
@@ -5443,6 +5523,423 @@ else{
 			$this->load->view('FTGSPR/CAPEX_draft_tbl');
 			}
 		}
+		
+		
+	//PO fetch data pendding table
+		function POfetchpenddingDetails($emp_code) {
+			$this->load->helper('url');
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['pendingList'] = $this->ftgs_model->POfetchpenddingDetails($emp_code);
+			return $data['pendingList'];
+		}
+		
+		public function CAPEX_approval3View($ftgs_capex_id){
+			$data['ftgs_capex_id'] = $ftgs_capex_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/CAPEX_approval3View',$data);
+		}
+		
+		//Auth id feth
+				
+				public function getCaxapp4AuthoDetails(){
+					$this->load->database();
+					$this->load->model('Ftgs_PR/ftgs_model');
+					$data['ftgsActionData'] = $this->ftgs_model->getCaxapp4AuthoDetails();
+					return $data['ftgsActionData'];
+				}
+				
+						//fetch action ID
+		 function ftgscpx3IDAction($emp_code,$ftgs_capex_id) 
+		 {
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['ftgsActionData'] = $this->ftgs_model->ftgscpx3IDAction($emp_code,$ftgs_capex_id);
+			return $data['ftgsActionData'];
+		}
+		
+		
+		public function insert_capexApproval3(){
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$editId = $this->input->post('dft_cno');
+			$action = $this->input->post('ftgs_status');
+			$Ftgs_action_id = $this->input->post('Ftgs_action_id');
+			$user_nm = $this->input->post('user_nm');
+			
+		
+			
+			if ($action == "1") {
+            $data = array(
+				'action_autho' => $this->input->post('txt_emp_code'),
+				'action' => 1,
+				'comment' => $this->input->post('txt_comment'),
+				'action_date' => $date,
+                'action_time' => $time
+            );
+			
+			$data1 = array(
+				'ftgs_capex_status' => 1,
+				
+            );
+			 $this->db->where('ftgs_capex_id', $editId);
+			 $this->db->update('ftgs_capex_master', $data1);
+			
+			 $data2 = array(
+				'ftgs_capex_id' => $this->input->post('dft_cno'),
+				'ftgs_qcs_id' => $this->input->post('txtftgsQCSId'),
+                'ftgs_pr_id' => $this->input->post('txtftgsPRId'),
+                'emp_code' => $this->input->post('txt_emp_code'),
+                'action_autho' => $this->input->post('authoID'),
+                'level_of' => 16,
+                'action' => 0,
+                'action_date' => $date,
+                'action_time' => $time
+            );
+			 
+           
+            $this->ftgs_model->ftgsProcessRepAutho($data2);
+            $this->ftgs_model->updateuserActionCapex($data, $editId, $Ftgs_action_id);
+            
+            
+            // Email Code Start-
+					$reciver= $this->input->post('authoMail');  //makrand sir 
+				
+					$subject='Interplant FTGS PR Approved By '.$this->input->post('user_nm').' Against  CAPEX NO.  '.$editId.' ';
+					$message='<ol>
+								<li><b>FTGS CAPEX No:</b>  '.$editId.'</li>
+								<li><b>FTGS CAPEX Owner:</b>  '.$this->input->post('dft_cap_recommender'). '</li>
+								<li><b>Plant:</b>  '.$this->input->post('txtEmpPlant'). '</li>
+								<li><b>Department:</b>  '.$this->input->post('txtEmpDept'). '</li>
+								<li><b>FTGS PR Date:</b>  '.$this->input->post('txtCpxDate'). '</li>
+								
+								<li><b>Approver Comment:</b>  '.$this->input->post('txt_comment').'</li>
+								
+							</ol>
+							Kindly visit your PR Portal(http://rucha.co.in/portal)';
+					$this->load->library('email');
+					$confing =array(
+						'protocol'=>'none',
+						'smtp_host'=>"relay-hosting.secureserver.net",
+						'smtp_port'=>465,
+						'smtp_user'=>"no-reply@rucha.co.in",
+						'smtp_pass'=>'pass@1234',
+						'mailtype'=>'html'  
+					);
+					$this->email->initialize($confing);
+					$this->email->set_newline("\r\n");
+					$this->email->from('no-reply@rucha.co.in');
+					$this->email->to($reciver);
+				
+					$this->email->subject($subject);
+					$this->email->message($message);
+					$this->email->send();
+					// Email Code End
+          }
+		else 
+		{
+            $data = array(
+                'action_autho' => $this->input->post('txt_emp_code'),
+                'action' => 2,
+                'comment' => $this->input->post('txt_comment'),
+                'action_date' => $date,
+                'action_time' => $time,
+            );
+            $data1 = array(
+                'ftgs_capex_status' => 2,
+				
+            );
+          
+           $this->db->where('ftgs_capex_id', $editId);
+            $this->db->update('ftgs_capex_master', $data1);
+            $this->ftgs_model->updateuserActionCapex($data, $editId, $Ftgs_action_id);
+            
+            
+            	// Email Code Start-
+				
+						$reciver= $this->input->post('authoMail');  //makrand sir 
+				
+					$subject='Interplant FTGS PR Approved By '.$this->input->post('user_nm').' Against  CAPEX NO.  '.$editId.' ';
+					$message='<ol>
+								<li><b>FTGS CAPEX No:</b>  '.$editId.'</li>
+								<li><b>FTGS CAPEX Owner:</b>  '.$this->input->post('dft_cap_recommender'). '</li>
+								<li><b>Plant:</b>  '.$this->input->post('txtEmpPlant'). '</li>
+								<li><b>Department:</b>  '.$this->input->post('txtEmpDept'). '</li>
+								<li><b>FTGS PR Date:</b>  '.$this->input->post('txtCpxDate'). '</li>
+								
+								<li><b>Approver Comment:</b>  '.$this->input->post('txt_comment').'</li>
+								
+							</ol>
+							Kindly visit your PR Portal(http://rucha.co.in/portal)';
+					$this->load->library('email');
+					$confing =array(
+						'protocol'=>'none',
+						'smtp_host'=>"relay-hosting.secureserver.net",
+						'smtp_port'=>465,
+						'smtp_user'=>"no-reply@rucha.co.in",
+						'smtp_pass'=>'pass@1234',
+						'mailtype'=>'html'  
+					);
+					$this->email->initialize($confing);
+					$this->email->set_newline("\r\n");
+					$this->email->from('no-reply@rucha.co.in');
+					$this->email->to($reciver);
+				
+					$this->email->subject($subject);
+					$this->email->message($message);
+					$this->email->send();
+					// Email Code End
+         }
+		 $this->load->helper('url');
+		 $this->load->view('FTGSPR/CAPEX_AuthorityPending_FTGS_tbl');
+		}
+			
+			//PO fetch data pendding table
+		function POp4fetchpenddingDetails($emp_code) {
+			$this->load->helper('url');
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['pendingList'] = $this->ftgs_model->POp4fetchpenddingDetails($emp_code);
+			return $data['pendingList'];
+		}
+		
+		
+		//approval 4
+		 public function CAPEX_approval4View($ftgs_capex_id){
+			 $data['ftgs_capex_id'] = $ftgs_capex_id;
+			$this->load->helper('url');
+			$this->load->view('FTGSPR/CAPEX_approval4View',$data);
+		 }
+		
+		//fetch action ID
+		 function ftgscpx4IDAction($emp_code,$ftgs_capex_id) 
+		 {
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['ftgsActionData'] = $this->ftgs_model->ftgscpx4IDAction($emp_code,$ftgs_capex_id);
+			return $data['ftgsActionData'];
+		}
+		
+		//fetch email User Head
+		function fetchUserMailDetailscpxid($ftgs_capex_id)
+		{
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['UserEmail'] = $this->ftgs_model->fetchUserMailDetailscpxid($ftgs_capex_id);
+			return $data;
+		}
+			public function insert_capexApproval4()
+			{
+				date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$editId = $this->input->post('dft_cno');
+			$action = $this->input->post('ftgs_status');
+			$Ftgs_action_id = $this->input->post('Ftgs_action_id');
+			$user_nm = $this->input->post('user_nm');
+			
+		
+			
+			if ($action == "1") {
+            $data = array(
+				'action_autho' => $this->input->post('txt_emp_code'),
+				'action' => 1,
+				'comment' => $this->input->post('txt_comment'),
+				'action_date' => $date,
+                'action_time' => $time
+            );
+			
+			$data1 = array(
+				'ftgs_capex_status' => 3, //complete approved
+				
+            );
+			 $this->db->where('ftgs_capex_id', $editId);
+			 $this->db->update('ftgs_capex_master', $data1);
+			
+			
+            $this->ftgs_model->updateuserActionCapex($data, $editId, $Ftgs_action_id);
+            
+            
+            // Email Code Start-
+					$reciver= $this->input->post('txtUserAuthoEmail');  //user  sir 
+					$ccuser= 'sksyed@ruchagroup.com';
+				
+					$subject='Interplant FTGS PR Approved By '.$this->input->post('user_nm').' Against  CAPEX NO.  '.$editId.' ';
+					$message='<ol>
+								<li><b>FTGS CAPEX No:</b>  '.$editId.'</li>
+								<li><b>FTGS CAPEX Owner:</b>  '.$this->input->post('dft_cap_recommender'). '</li>
+								<li><b>Plant:</b>  '.$this->input->post('txtEmpPlant'). '</li>
+								<li><b>Department:</b>  '.$this->input->post('txtEmpDept'). '</li>
+								<li><b>FTGS PR Date:</b>  '.$this->input->post('txtCpxDate'). '</li>
+								
+								<li><b>Approver Comment:</b>  '.$this->input->post('txt_comment').'</li>
+								
+							</ol>
+							Kindly visit your PR Portal(http://rucha.co.in/portal)';
+					$this->load->library('email');
+					$confing =array(
+						'protocol'=>'none',
+						'smtp_host'=>"relay-hosting.secureserver.net",
+						'smtp_port'=>465,
+						'smtp_user'=>"no-reply@rucha.co.in",
+						'smtp_pass'=>'pass@1234',
+						'mailtype'=>'html'  
+					);
+					$this->email->initialize($confing);
+					$this->email->set_newline("\r\n");
+					$this->email->from('no-reply@rucha.co.in');
+					$this->email->to($reciver);
+					$this->email->cc($ccuser);
+				
+					$this->email->subject($subject);
+					$this->email->message($message);
+					$this->email->send();
+					// Email Code End
+          }
+		else 
+		{
+            $data = array(
+                'action_autho' => $this->input->post('txt_emp_code'),
+                'action' => 2,
+                'comment' => $this->input->post('txt_comment'),
+                'action_date' => $date,
+                'action_time' => $time,
+            );
+            $data1 = array(
+                'ftgs_capex_status' => 2,
+				
+            );
+          
+           $this->db->where('ftgs_capex_id', $editId);
+            $this->db->update('ftgs_capex_master', $data1);
+            $this->ftgs_model->updateuserActionCapex($data, $editId, $Ftgs_action_id);
+            
+            
+            	// Email Code Start-
+				
+						$reciver= $this->input->post('txtUserAuthoEmail');  //user sir 
+				
+					$subject='Interplant FTGS PR Approved By '.$this->input->post('user_nm').' Against  CAPEX NO.  '.$editId.' ';
+					$message='<ol>
+								<li><b>FTGS CAPEX No:</b>  '.$editId.'</li>
+								<li><b>FTGS CAPEX Owner:</b>  '.$this->input->post('dft_cap_recommender'). '</li>
+								<li><b>Plant:</b>  '.$this->input->post('txtEmpPlant'). '</li>
+								<li><b>Department:</b>  '.$this->input->post('txtEmpDept'). '</li>
+								<li><b>FTGS PR Date:</b>  '.$this->input->post('txtCpxDate'). '</li>
+								
+								<li><b>Approver Comment:</b>  '.$this->input->post('txt_comment').'</li>
+								
+							</ol>
+							Kindly visit your PR Portal(http://rucha.co.in/portal)';
+					$this->load->library('email');
+					$confing =array(
+						'protocol'=>'none',
+						'smtp_host'=>"relay-hosting.secureserver.net",
+						'smtp_port'=>465,
+						'smtp_user'=>"no-reply@rucha.co.in",
+						'smtp_pass'=>'pass@1234',
+						'mailtype'=>'html'  
+					);
+					$this->email->initialize($confing);
+					$this->email->set_newline("\r\n");
+					$this->email->from('no-reply@rucha.co.in');
+					$this->email->to($reciver);
+				
+					$this->email->subject($subject);
+					$this->email->message($message);
+					$this->email->send();
+					// Email Code End
+         }
+		 $this->load->helper('url');
+		 $this->load->view('FTGSPR/CAPEX_AuthorityPending_FTGS_tbl');
+			}
+			
+			
+			public function QCS_AuthApprovalTbl(){
+				 $this->load->helper('url');
+				 $this->load->view('FTGSPR/QCS_AuthApprovalTbl');
+			}
+			
+				//QCS fetch approav pr table
+		function qcsapp2fetchFTGSapprovalTbl($emp_code) 
+		{
+			$this->load->helper('url');
+			$this->load->database();
+			$this->load->model('Ftgs_PR/ftgs_model');
+			$data['phapprovedftgs'] = $this->ftgs_model->qcsapp2fetchFTGSapprovalTbl($emp_code);
+			return $data['phapprovedftgs'];
+		}
+		
+		public function PerAddAgaintItem()
+		{
+			echo 'add item'; 
+			
+			date_default_timezone_set('Asia/Kolkata');
+			$date = date('d-m-Y');
+			$time = date("h:i A");
+			$editId = $this->input->post('ftgs_qcs_item_id');
+			$data = array(
+                'amt_per_add' => $this->input->post('add10per'),
+				'per_final_amt' => $this->input->post('txt10op'),
+            );
+			$this->load->database();  
+			$this->load->model('Ftgs_PR/ftgs_model'); 
+			$this->ftgs_model->PerAddAgaintItem($data, $editId);
+			$this->load->helper('url');
+			echo '<script>window.history.back();</script>';
+		}
+		
+		
+		//All qcs approved 
+		public function QCS_AllApprovedTbl(){
+				$this->load->helper('url');
+				 $this->load->view('FTGSPR/QCS_AllApprovedTbl');
+		}
+		
+		public function AllQcsApproveList(){
+			$this->load->database();  
+		$this->load->model('PR/pr_model');  
+		$data['approved']=$this->pr_model->approveAllQcs();    
+		return  $data['approved'];
+			
+		}
+		
+		public function capex_AllApprovedTbl()
+		{
+				 $this->load->helper('url');
+				 $this->load->view('FTGSPR/capex_AllApprovedTbl');
+		}
+		
+		
+		public function AllCpxApproveList(){
+			$this->load->database();  
+				$this->load->model('PR/pr_model');  
+				$data['approved']=$this->pr_model->approveAllCpx();    
+				return  $data['approved'];
+			
+		}
+		
+			  function supplierList() {
+      
+				 $this->load->database();
+				$this->load->model('Ftgs_PR/ftgs_model');
+				$data['ftgs_qcs_id'] = $this->ftgs_model->supplierOne();
+				  //print_r($data);
+				return  $data['ftgs_qcs_id'];
+	
+        
+    }
+    
+    function selectSuplier1(){
+		$this->load->helper('url');
+        $this->load->database();
+		$ftgs_qcs_id = $this->input->post('ftgs_qcs_id');
+		$this->load->model('Ftgs_PR/ftgs_model');
+		$data = $this->ftgs_model->selectSuplier1($ftgs_qcs_id);
+        echo json_encode($data);
+		
+}
 }	
 
 ?>

@@ -1275,7 +1275,7 @@ foreach ($view_item->result() as $row_asset)
 			 <label class="pull-left control-label">5</label>
 			   <label class="col-sm-4 pull-left control-label">ION NO</label>
 				<div class="input-group  col-sm-6">
-                  <input type="Text" name="txtIonNo" class="form-control"> </input>
+                  <input type="Text" name="txtIonNo"  value="<?php echo $qcs_row->ftgs_capex_ion_no;  ?>" class="form-control"> </input>
 
          
                 </div>
@@ -1288,7 +1288,7 @@ foreach ($view_item->result() as $row_asset)
 			 <label class="pull-left control-label">6</label>
 			   <label class="col-sm-4 pull-left control-label">Release NO</label>
 				<div class="input-group  col-sm-6">
-                  <input type="Text" name="txtRelseNo" class="form-control"> </input>
+                  <input type="Text" name="txtRelseNo"   value="<?php echo $qcs_row->ftgs_cpx_release_no;  ?>"class="form-control"> </input>
 
          
                 </div>

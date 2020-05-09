@@ -89,7 +89,7 @@
 												{  
 										?>
 										<tr>
-											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/CAPEX_DraftView/'.$row->ftgs_capex_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_capex_id; ?></a></td>
+											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/CAPEX_View/'.$row->ftgs_capex_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_capex_id; ?></a></td>
 											<td><?php echo $row->ftgs_qcs_id;?></td>
 											<td><?php echo $row->ftgs_pr_id;?></td>
 											<td><?php echo $row->ftgs_capex_date;?></td>

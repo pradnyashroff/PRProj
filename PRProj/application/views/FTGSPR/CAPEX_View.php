@@ -1253,7 +1253,7 @@ foreach ($view_item->result() as $row_asset)
 			   <label class="col-sm-4 pull-left control-label">Asset code Attachment</label>
 				<div class="input-group  col-sm-6">
 				
-				  <b><a style="color: #337ab7;" href="<?php echo base_url()."uploads/assetFile_attach_ftgs/". $qcs_row->assetFile_attach_ftgs ?>"> <?php echo $qcs_row->assetFile_attach_ftgs ?></a> </b>
+				  <b><a style="color: #337ab7;" href="<?php echo base_url()."uploads/ftgs_assetFile/". $qcs_row->ftgs_assetFile ?>"> <?php echo $qcs_row->ftgs_assetFile ?></a> </b>
       
 
                 </div>

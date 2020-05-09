@@ -1,0 +1,152 @@
+/************************************* Table Format ************************************/
+
+ <table id="example" class="table table">
+                <thead>
+                <tr style="background-color:#3482AE;color:#FFFFFF;">
+                  <th style="display:none;"></th>
+                  <th>QCS No</th>
+				 <th>QCS Date</th>
+                 
+				  <th>PR No </th>
+				   <th>PR Owner Name</th>
+                  
+                   <th>Procurement reson </th>
+                 <th>Plant</th>
+                  <th>QCS Status</th>
+                 
+                </tr>
+				
+                </thead>
+		
+                <tbody>
+				
+				  </tbody>
+	   </table>
+	   
+	   
+	   
+	 
+
+
+/**************************************** Scripts ***************************************/	 
+
+<script>
+   
+    $(function () {
+      
+      $('#example').excelTableFilter();
+   
+    });
+  </script>
+  
+  <script type="text/javascript">
+
+$(document).ready(function (){
+   var table = $('#example').DataTable({
+      'columnDefs': [
+         {
+            'targets': 0,
+            'checkboxes': {
+               'selectRow': true
+            }
+         }
+      ],
+      'select': {
+         'style': 'multi'
+      },
+	  "bStateSave": true,
+	  "ordering": false,
+      'order': [[1, 'desc']]
+   });
+
+
+		
+		
+		
+		
+		
+		 $("#status_filter").change(function () {
+			   var num=$(this).val();
+			   $('input[type=search].form-control').val(num);
+	
+    $('input[type=search].form-control').keyup();
+		 });
+		
+		
+   // Handle form submission event
+    $('#frm-example').on('submit', function(e){
+      var form = this;
+      
+      var rows_selected = table.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element 
+         $(form).append(
+             $('<input>')
+                .attr('type', 'text')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+
+      // FOR DEMONSTRATION ONLY
+      // The code below is not needed in production
+      
+      // Output form data to a console     
+      $('#example-console-rows').text(rows_selected.join(","));
+      $('#can_id').val(rows_selected.join(","));
+      
+      // Output form data to a console     
+      $('#example-console-form').text($(form).serialize());
+       
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+       
+      // Prevent actual form submission
+    
+   });   
+});
+</script>
+
+
+
+
+
+/**************************************************  Scripts.php *******************************/
+
+1) In our project script.php in seperate file in which all scripts we have addeed
+
+<script>
+  $(function () {
+    $('#example').DataTable({
+		
+	
+		"order": [[ 0, "desc" ]],
+ "scrollX": true,
+	 rowReorder: {
+           selector: 'td:nth-child(2)'
+        },
+        responsive: true
+    } );
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+	
+
+
+
+
+
+<!-- DataTables -->
+<script src="<?php echo base_url(); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>bower_components/ckeditor/ckeditor.js"></script>
+	

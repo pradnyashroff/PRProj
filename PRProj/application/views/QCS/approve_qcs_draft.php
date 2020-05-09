@@ -378,10 +378,10 @@ foreach ($item->result() as $row3)
 					$total_quoted_amount3 =0;
 					$total_final_ammount3=0;					
 
- if($view_item!=null){
-	$sr_no=1;			  
-foreach ($view_item->result() as $rowitem)  
-         {  ?>
+				if($view_item!=null){
+					$sr_no=1;			  
+			foreach ($view_item->result() as $rowitem)  
+				{  ?>
 		 <!-- item code -->
 		   <div class="form-group col-sm-4 hidden ">
 			  <div class="input-group  col-sm-6">
@@ -1890,18 +1890,16 @@ foreach ($show_tech_spe->result() as $rowtech)
 		 <input type="hidden" readonly name="qcs_emp_nm" value="<?php echo $emp_name; ?>" class="form-control"  required>
 				
 			  <div class="form-group col-sm-12">
-			  <div class="col-sm-4">
-				</div>
+			 <div class="col-sm-3"></div>
 				
-<div class="col-sm-2"><button type="submit" id="" class="btn" style="width: 60%;background-color:#3482AE;color:white;box-shadow: 0 0 3px 1px rgba(0,0,0,.35);font-family:'exo';text-transform: uppercase;">Proceed</button></div>
+<div class="col-sm-2"><button type="submit" id="" class="btn" style="background-color:#3482AE;color:white;box-shadow: 0 0 3px 1px rgba(0,0,0,.35);font-family:'exo';text-transform: uppercase;">Proceed</button></div>
+<div class="col-sm-2"> <a  href="<?php echo site_url('purchase/QCS/viewQCSDraftPrint/'.$qcs_id);?>">
+<button type="button"  class="btn" style="background-color:#3482AE;color:white;box-shadow: 0 0 3px 1px rgba(0,0,0,.35);font-family:'exo';text-transform: uppercase;">Print</button>
+ </a> </div>
 
-<div class="col-sm-2"> <a href="<?php echo site_url('purchase/QCS/Qcs_master_draft') ?>" class="btn" style="width: 60%;background-color:#3482AE;color:white;box-shadow: 0 0 3px 1px rgba(0,0,0,.35);font-family:'exo';text-transform: uppercase;">Cancel</a></div>
-				
-				
-				<div class="col-sm-4">
-				</div>
-				
-                </div>
+<div class="col-sm-2"> <a href="<?php echo site_url('purchase/QCS/Qcs_master_draft') ?>" class="btn" style="background-color:#3482AE;color:white;box-shadow: 0 0 3px 1px rgba(0,0,0,.35);font-family:'exo';text-transform: uppercase;">Cancel</a></div>
+ <div class="col-sm-3"></div>
+</div>
 				
 				
 						<!-- Sourcing mgr EID-->

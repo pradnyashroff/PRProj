@@ -143,6 +143,70 @@
 											}
 										?>
 										
+										
+										
+										<!-- approval 3 capex-->
+										<?php 
+											$pendingList= $this->method_call->POfetchpenddingDetails($emp_code);
+											if($pendingList!=null)
+											{
+												$sr_no=1;			  
+												foreach ($pendingList->result() as $row)  
+												{  
+										?>
+										<tr>
+											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/CAPEX_approval3View/'.$row->ftgs_capex_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_capex_id; ?></a></td>
+											<td><?php echo $row->ftgs_qcs_id;?></td>
+											<td><?php echo $row->ftgs_pr_id;?></td>
+											<td><?php echo $row->ftgs_capex_date;?></td>
+											<td><?php echo $row->ftgs_cap_recommender;?></td>
+											<td><?php echo $row->ftgs_radio_val;?></td>
+											<td><?php echo $row->ftgs_cap_sel_supplier;?></td>
+											<td>
+												<?php 
+													$st = $row->ftgs_capex_status;
+													$status= "";
+													if($st == '1')
+													echo 'Pendding';
+													?></td>
+												</tr>
+												<?php $sr_no++;
+												}
+											}
+										?>
+										
+										
+											
+										<!-- approval 4 capex-->
+										<?php 
+											$pendingList= $this->method_call->POp4fetchpenddingDetails($emp_code);
+											if($pendingList!=null)
+											{
+												$sr_no=1;			  
+												foreach ($pendingList->result() as $row)  
+												{  
+										?>
+										<tr>
+											<td> <a href="<?php echo site_url('FTGS_PR/Ftgs_pr/CAPEX_approval4View/'.$row->ftgs_capex_id);?>" style="color:red;" class="glyphicon glyphicon-edit"><?php echo $row->ftgs_capex_id; ?></a></td>
+											<td><?php echo $row->ftgs_qcs_id;?></td>
+											<td><?php echo $row->ftgs_pr_id;?></td>
+											<td><?php echo $row->ftgs_capex_date;?></td>
+											<td><?php echo $row->ftgs_cap_recommender;?></td>
+											<td><?php echo $row->ftgs_radio_val;?></td>
+											<td><?php echo $row->ftgs_cap_sel_supplier;?></td>
+											<td>
+												<?php 
+													$st = $row->ftgs_capex_status;
+													$status= "";
+													if($st == '1')
+													echo 'Pendding';
+													?></td>
+												</tr>
+												<?php $sr_no++;
+												}
+											}
+										?>
+										
 									</tbody>
 								</table>
 								<pre id="example-console-rows" style="display:none!important"></pre>

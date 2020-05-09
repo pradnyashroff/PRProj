@@ -1957,5 +1957,7 @@ public function capexViewUrl($passID){
 		$this->load->model('purchase/Capex_model'); 
         $data['POCreation'] = $this->Capex_model->POCreationAuthNavBarStatus($emp_code);
         return $data;
-    }			 
+    }
+
+
 }//eof

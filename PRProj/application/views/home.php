@@ -265,12 +265,22 @@ else{
 			</div>
 			</a>
 		</div>
-		<div class="col-lg-3">
+		<!--<div class="col-lg-3">
 			<div class="single_service_part dropdown">
 				<i class="flaticon-chip"></i>
 				<i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
 				<h5 style="font-family:'exo';">Leave Management</h5>
 			</div>
+		</div>
+		-->
+		<div class="col-lg-3">
+			<a href="<?php echo site_url('AllDocs/AllDocCtrl/DocsList') ?>" style="color:#FFFFFF;" >
+			<div class="single_service_part dropdown">
+				<i class="flaticon-chip"></i>
+				<i class='fa fa-book' style='font-size:24px'></i>
+				<h5 style="font-family:'exo';">Documents</h5>
+			</div>
+			</a>
 		</div>
 		<div class="col-lg-1"></div>
 	</div>			  
@@ -302,11 +312,13 @@ else{
 						</div>
 			</div>
 			   <div class="col-lg-3">
+			   	<a href="<?php echo site_url('LMS/LMS_cntr/User_DashBoard') ?>" style="color:#FFFFFF;" >
 						  <div class="single_service_part dropdown">
 								<i class="flaticon-chip"></i>
 								<i class='fas fa-address-card' style='font-size:24px'></i>
-								 <h5 style="font-family:'exo';">Meterial Gate Pass</h5>
+								 <h5 style="font-family:'exo';">Leave Management</h5>
 							</div>
+							</a>
 				</div>
 					<div class="col-lg-1">
 					</div>

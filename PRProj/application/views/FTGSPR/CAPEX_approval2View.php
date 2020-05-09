@@ -1402,8 +1402,8 @@ foreach ($view_item->result() as $row_asset1)
 								if ($ftgsActionData != null) {
 								foreach ($ftgsActionData->result() as $row1) {
 										?>
-                            <input type="text" name="authoID" class="form-control" value="<?php echo $row1->auth_id;?>">
-							 <input type="text" name="authoMail" class="form-control" value="<?php echo $row1->emp_email;?>">
+                            <input type="hidden" name="authoID" class="form-control" value="<?php echo $row1->auth_id;?>">
+							 <input type="hidden" name="authoMail" class="form-control" value="<?php echo $row1->emp_email;?>">
                           
                                 <?php }
                         }
@@ -1418,7 +1418,7 @@ foreach ($view_item->result() as $row_asset1)
 								if ($ftgsActionData != null) {
 								foreach ($ftgsActionData->result() as $row1) {
 										?>
-                            <input type="text" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
+                            <input type="hidden" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
                           
                                 <?php }
                         }
@@ -1433,7 +1433,7 @@ foreach ($view_item->result() as $row_asset1)
 			   <label class="col-sm-4 pull-left control-label">Asset code Attachment</label>
 				<div class="input-group  col-sm-6">
 				
-				<input type ="file" class ="form-control" name ="assetFile_attach_ftgs"/>
+				<input type ="file" class ="form-control" name ="ftgs_assetFile"/>
                 </div>
                 </div> 	
 

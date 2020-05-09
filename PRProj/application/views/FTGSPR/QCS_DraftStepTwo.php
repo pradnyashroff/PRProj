@@ -77,7 +77,9 @@
                               <label class="col-sm-1 pull-left control-label">2</label>
                               <label class="col-sm-4 pull-left control-label">PR NO </label>
                               <div class="input-group  col-sm-6">
-                                 <?php echo $row4->ftgs_pr_id; ?>
+                               <p style="color:#ff0000;font-size:15px;">  
+			<span class="glyphicon glyphicon-edit"  data-toggle="modal" data-target="#pr_view_Modal"href="#pr_view_Modal<?php echo $row4->ftgs_pr_id?>">&nbsp;<?php echo $row4->ftgs_pr_id; ?></span>
+				</p>
                               </div>
                           </div>
                           <div class="form-group col-sm-4 ">
@@ -1386,7 +1388,291 @@ foreach ($view_item->result() as $rowitem)
 	
 	
 	
+		
+	  <!-- pr view modal -->
+  
+  <div class="modal fade displaycontent" id="pr_view_Modal">
+
+<div class="modal-dialog" role="document" style="width:980px;">
+    <div class="modal-content">
+     <div class="modal-header" style="background-color:#3482AE">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+        </button>
+         <h4 class="modal-title"style="color:#FFFFFF; font-family:'exo';text-transform: uppercase;">View PR</h4>
+      </div>
+      <div class="modal-body">
+     <section class="module pt-10" id="contact" >
+          <div class="container" style="width: auto;">
+          <div class="container" style="width: auto;">
+            <br>
+
+            <div class="row">
+						
+	  <?php $qcs_detail= $this->method_call->prDetails($ftgs_qcs_id);
+ if($qcs_detail!=null){
+	 foreach ($qcs_detail->result() as $row_pr)  
+         {  ?>
+		   <div class="form-group col-md-6">
+				<label class="col-sm-1 pull-left control-label">1</label>
+                  <label class="col-sm-5 pull-left control-label">PR No </label>
+	<div class="input-group  col-sm-6">
 	
+	<input type="Text" name="pr_plant" class="form-control" style="background-color:#E6F2FF;" readonly value="<?php echo $row_pr->ftgs_pr_id; ?>" required>     
+					  
+	   </div>
+				</div>
+		
+		 
+			  <div class="form-group col-sm-6">
+			  
+			  <label class="col-sm-1 pull-left control-label">2</label>
+			   <label class="col-sm-5 pull-left control-label">PR Owner nm</label>
+				<div class="input-group  col-sm-6">
+				<input type="Text" name="pr_owner_name" class="form-control" style="background-color:#E6F2FF;" readonly value="<?php echo $row_pr->ftgs_pr_owner_name; ?>" required>  
+						
+                </div>
+                </div>
+		
+			  <div class="form-group col-sm-6">
+			  
+			  <label class="col-sm-1 pull-left control-label">3</label>
+			   <label class="col-sm-5 pull-left control-label">Plant</label>
+				<div class="input-group  col-sm-6">
+				<input type="Text" name="pr_plant" class="form-control" style="background-color:#E6F2FF;"  readonly value="<?php echo $row_pr->ftgs_plant_code; ?>" required>  
+						
+                </div>
+                </div>
+				
+				
+				
+				
+				
+				  <div class="form-group col-sm-6">
+			  
+			  <label class="col-sm-1 pull-left control-label">5</label>
+			   <label class="col-sm-5 pull-left control-label">PR Type</label>
+				<div class="input-group  col-sm-6">
+			
+						   <input type="Text" name="pr_dept" class=" form-control" id="pr_dept" style="background-color:#E6F2FF;" readonly value="Interplant FTGS PR"  required>
+                </div>
+                </div>
+		
+		
+					
+	  <div class="form-group col-sm-6">
+			  
+			  <label class="col-sm-1 pull-left control-label">6</label>
+			   <label class="col-sm-5 pull-left control-label">PR Date</label>
+				<div class="input-group  col-sm-6">
+			  <input type="Text" name="pr_dept" class=" form-control" id="pr_dept" style="background-color:#E6F2FF;" readonly value="<?php echo $row_pr->ftgs_pr_date; ?>"  required>
+                </div>
+                </div>
+				
+				
+		   <div class="form-group col-sm-12">
+			  
+			  <label class="col-sm-6 pull-left control-label">7  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Requirement Details</label>
+				<div class="input-group  col-sm-5 pull-right">
+
+                </div>
+			  </div>	
+
+
+	    <div class="form-group col-sm-12">
+			        <table id="exam" class="table table">
+                <thead>
+            <tr style="background-color:#3482AE;color:#FFFFFF;width:100%;">
+                  <th ></th>
+                  
+                  <th >Sr. No.</th>
+				   <th>Item Code</th>
+				   <th>Item Descriptions</th>
+				   <th>Req Qty.</th>
+				   <th>UOM</th>
+				   <th>Approx. Rate</th>
+				   <th>Approx. Total Amount</th>
+				   <th style="display:none;">ION No.</th>
+				   <th>Expected Delivery Period	</th>
+				   <th>Project Details</th>
+				   <th>Technical Details/Mfg Name</th>
+                  
+                </tr>
+                </thead>
+		
+                         <tbody>
+				
+	 
+
+				
+				  <?php $item= $this->method_call->ftgs_view_pr_items($ftgs_qcs_id);
+				  $final_rate=0;
+ if($item!=null){
+	 	   				
+	$sr_no=1;			  
+foreach ($item->result() as $row3)  
+         {  ?>
+			<tr>
+				<td></td>
+				 <td  ><?php echo $sr_no; ?> </td>
+				 <td  ><?php echo $row3->ftgs_item_code; ?></td>  
+            <td>  <?php echo $row3->ftgs_item_description; ?></td>  
+            <td> <?php echo $row3->ftgs_req_qty; ?></td>  
+            <td> <?php echo $row3->ftgs_uom; ?></td>  
+            <td> <?php echo $row3->ftgs_approx_rate; ?></td>  
+            <td>  <?php echo $row3->ftgs_approx_total_amt; ?></td>  
+            <td style="display:none;"> <?php echo $row3->ftgs_ion_no; ?></td>  
+            <td>  <?php echo $row3->ftgs_expected_delivery; ?> </td>  
+            <td> <?php echo $row3->ftgs_project_detail; ?> </td>  
+            <td> <?php echo $row3->ftgs_technical_detail; ?> </td>  
+                <?php
+
+				$approx_rate=$row3->ftgs_approx_total_amt;
+					$final_rate=$final_rate+$approx_rate;
+				?>
+      </tr>
+	 
+		 <?php  $sr_no++; }
+ } ?>
+                
+				</tbody>
+               		
+              </table>
+			
+			  </div>			  
+		
+		 <div class="form-group col-sm-12">
+			  
+			  <label class="col-sm-2 pull-left control-label"></label>
+			   <label class="col-sm-5 pull-left control-label">Cumulative Total Amount of PR <?php echo $row_pr->ftgs_pr_id; ?> : <span class="fa fa-inr"> </span> <?php echo $final_rate; ?> </label>
+				<div class="input-group  col-sm-5 pull-right">
+
+                </div>
+			  </div>	 	 
+			  <div class="form-group col-sm-6">
+			  
+			  <label class="col-sm-1 pull-left control-label">8</label>
+			   <label class="col-sm-5 pull-left control-label">Delivery Location</label>
+				<div class="input-group  col-sm-6">
+				
+				
+				<?php echo $row_pr->ftgs_delivary_loc; ?>
+							
+						
+							
+                </div>
+                </div>
+				
+				
+				  <div class="form-group col-sm-6">
+			  
+			 <label class="col-sm-1 pull-left control-label">9</label>
+			   <label class="col-sm-5 pull-left control-label">Inspection Required At Supplier End</label>
+				<div class="input-group  col-sm-6">
+                                                
+			<?php echo $row_pr->ftgs_inspection_req;  ?>
+				
+				 </select>          
+               
+         
+                </div>
+                </div>
+				
+				
+				  <div class="form-group col-sm-6">
+			  
+			 <label class="col-sm-1 pull-left control-label">10</label>
+			   <label class="col-sm-5 pull-left control-label">Considered in Budget</label>
+				<div class="input-group  col-sm-6">
+             
+				<?php echo $row_pr->ftgs_budget_consider;  ?>
+
+         
+                </div>
+                </div>
+				
+				   <div class="form-group col-sm-6">
+			  
+			 <label class="col-sm-1 pull-left control-label">11</label>
+			   <label class="col-sm-5 pull-left control-label">Ion No</label>
+				<div class="input-group  col-sm-6">
+             
+				<?php echo $row_pr->ftgs_ion_no;  ?>
+
+         
+                </div>
+                </div>
+				
+				 <div class="form-group col-sm-6">
+			  
+			 <label class="col-sm-1 pull-left control-label">12</label>
+			   <label class="col-sm-5 pull-left control-label">Customer Cost Upfront</label>
+				<div class="input-group  col-sm-6">
+             
+				<?php echo $row_pr->ftgs_cust_cost_upfront;  ?>
+
+         
+                </div>
+                </div>
+				
+				
+				 <div class="form-group col-sm-6">
+			  
+			 <label class="col-sm-1 pull-left control-label">13</label>
+			   <label class="col-sm-5 pull-left control-label">Customer Cost Amortization</label>
+				<div class="input-group  col-sm-6">
+             
+				<?php echo $row_pr->ftgs_cust_cost_amortization;  ?>
+
+         
+                </div>
+                </div>
+				
+				
+			<div class="form-group col-sm-6">
+			  
+			 <label class="col-sm-1 pull-left control-label">14</label>
+			   <label class="col-sm-5 pull-left control-label">Own Investment</label>
+				<div class="input-group  col-sm-6">
+             
+				<?php echo $row_pr->ftgs_own_investment;  ?>
+
+         
+                </div>
+                </div>
+				
+				  <div class="form-group col-sm-6">
+			  
+			 <label class="col-sm-1 pull-left control-label">15</label>
+			   <label class="col-sm-5 pull-left control-label">Reason Of Procurement</label>
+				<div class="input-group  col-sm-6">
+                   <?php echo $row_pr->ftgs_procurement_res;  ?>
+
+         
+                </div>
+                </div>
+		
+ 
+		
+	</div>
+				
+				
+				
+				</div>
+		
+        </section>
+	  
+	 </div>
+    </div>
+  </div>
+  </div>
+  </div>
+ <?php 
+		 }
+ }
+ ?>
+  <!-- end --->
+
 	
   
   <div class="modal fade displaycontent" id="myModal">
@@ -2195,7 +2481,7 @@ foreach ($view_item->result() as $rowitem)
           <div class="container" style="width: auto;">
             <br>
 		
-  <form method="post" id="" action="" >
+
             <div class="row">
 			  <input type="hidden" name="view_qcs_id" placeholder="" value="<?php echo $row4->ftgs_qcs_id; ?>" readonly class="form-control"  required></td>
            <table id="exampletest" class="table table">
@@ -2404,8 +2690,8 @@ foreach ($view_item->result() as $rowitem)
 <td><?php echo $rowfile->ftgs_fQcs_id; ?></td>	
 <td>  <form method="post" role="form" enctype="multipart/form-data"  action="<?php echo site_url('FTGS_PR/Ftgs_pr/updateFtgsFile'); ?>">
  
- <input type="text" name="qcs_file_id" id="qcs_item_id" class="form-control" value=" <?php echo $rowfile->ftgs_fQcs_id; ?>">
-<input type="text" name="qcs_folder_Name"  class="form-control" value=" <?php echo $rowfile->ftgs_qcs_id; ?>">
+ <input type="hidden" name="qcs_file_id" id="qcs_item_id" class="form-control" value=" <?php echo $rowfile->ftgs_fQcs_id; ?>">
+<input type="hidden" name="qcs_folder_Name"  class="form-control" value=" <?php echo $rowfile->ftgs_qcs_id; ?>">
  <input class="form-control" type="file" name="picture" /> <?php echo $rowfile->ftgs_qcs_file_nm;?></td>
  <td><button type="submit" name="save"  class="btn btn-success" style="border: 1px solid orange;margin-left:10%"><i class="fa fa-pencil-square-o"></i></button></td>
   </form>

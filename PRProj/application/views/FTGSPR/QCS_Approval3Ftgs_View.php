@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+	<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <html>
 	<head>
   		<meta charset="utf-8">
@@ -265,6 +265,9 @@ foreach ($view_item->result() as $rowitem)
 						 
 
 				
+			  
+				
+				
 				   <div class="form-group col-sm-12">
 			         <table id="example6" class="table table">
                 <thead>
@@ -274,7 +277,7 @@ foreach ($view_item->result() as $rowitem)
                 <tr style="background-color:#3482AE;color:#FFFFFF;">
                 				
 				<th>  SR.NO </th> 
-				
+				<th>  Item ID </th>  
 				<th>  Item Code </th>  
 			<th>  Item Status </th>  
             <th>  Qty </th>  
@@ -316,7 +319,10 @@ foreach ($view_item->result() as $rowitem)
          {  ?>
 		
 			<tr>
-				<td>  <?php echo $sr_no; ?></td>
+				
+				<td><a href="#" class="glyphicon glyphicon-edit" style="color:red;" data-toggle="modal" data-target="#edititemcode" onclick="itemCodeUpdate_data('<?php echo $rowitem->ftgs_qcs_item_id;?>','<?php echo $rowitem->ftgs_q_item_code;?>','<?php echo $rowitem->ftgs_final_amt1;?>','<?php echo $rowitem->ftgs_q_req_quantity;?>')" ><?php echo $rowitem->ftgs_qcs_item_id; ?></a></p></td>
+											
+				<td>  <?php echo $rowitem->ftgs_qcs_item_id; ?> </td>
 				<td>  <?php echo $rowitem->ftgs_q_item_code; ?></td>
 				<td>  <?php echo $rowitem->ftgs_q_itm_sts; ?></td>
 				<td>  <?php echo $rowitem->ftgs_q_req_quantity	; ?></td>	
@@ -326,8 +332,10 @@ foreach ($view_item->result() as $rowitem)
             <td> <?php echo $rowitem->ftgs_quoted_amt1; ?></td>  
             <td>  <?php echo $rowitem->ftgs_final_rate1; ?> </td>  
             <td> <?php echo $rowitem->ftgs_final_amt1; ?> </td>  
-			<td><?php echo $rowitem->amt_per_add; ?> % </td>  
-			<td><?php echo $rowitem->per_final_amt; ?></td>  
+		
+			
+			<td> <?php echo $rowitem->amt_per_add; ?> %</td>  
+			<td> <?php echo $rowitem->per_final_amt; ?></td>  
            
 		
 		
@@ -339,10 +347,9 @@ foreach ($view_item->result() as $rowitem)
 					$final_ammount1 = $rowitem->ftgs_final_amt1;
 					$total_final_ammount1 = $total_final_ammount1+$final_ammount1;
 					
-					$final_ammountperadd = $rowitem->per_final_amt;
-					$total_quoted_amount2 = $total_quoted_amount2+$final_ammountperadd;
-					
-					
+				
+					$final_ammount3 = $rowitem->per_final_amt;
+					$total_final_ammount3 = $total_final_ammount3+$final_ammount3;
 					
 				?>
       </tr>
@@ -352,21 +359,7 @@ foreach ($view_item->result() as $rowitem)
  } ?>
                 
 				</tbody>
-				  <tfoot>
-        <tr>
-           <td class="right" colspan="6"></td>
-			<td class="right"><B><?php echo $final_rate; ?></b></td>
-			<td class="right" colspan="1"></td>
-			<td class="right "><B><?php echo $total_final_ammount1; ?></b></td>
-			<td class="right" colspan ="1"></td>
-	
-			<td class="right "><B><?php echo $total_quoted_amount2; ?></b></td>
-			
-
-        </tr>
-    </tfoot>
-
-		 </tbody>
+				
 	
               </table>
 
@@ -407,8 +400,8 @@ foreach ($view_item->result() as $rowitem)
 			
 			
 </div>
-<!--end -->
-
+<!--end -->		
+			  
 
 
 <div class="box-header with-border">
@@ -1437,7 +1430,7 @@ foreach ($view_item->result() as $rowitem)
 								if ($ftgsActionData != null) {
 								foreach ($ftgsActionData->result() as $row1) {
 										?>
-                            <input type="text" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
+                            <input type="hidden" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
                           
                                 <?php }
                         }
@@ -1467,10 +1460,10 @@ foreach ($view_item->result() as $rowitem)
 												{   
 						?>
 						
-													  <input type="text" value="<?php echo $rowauth ->auth_id; ?>" name="txt_approval5_Autho" class="form-control"  required>	
-													 <input type="text" value="<?php echo $rowauth ->emp_email ; ?>" name="txt_authoEmail" class="form-control"  required>	
+													  <input type="hidden" value="<?php echo $rowauth ->auth_id; ?>" name="txt_approval5_Autho" class="form-control"  required>	
+													 <input type="hidden" value="<?php echo $rowauth ->emp_email ; ?>" name="txt_authoEmail" class="form-control"  required>	
 													<?php $owner_eid= $this->method_call->fetchemp_email($row4->ftgs_qcs_emp_code); ?>
-												<input type="text" name="txt_QCSUseremail" value="<?php print_r($owner_eid['emp_email']); ?>" readonly  class="form-control"  required>
+												<input type="hidden" name="txt_QCSUseremail" value="<?php print_r($owner_eid['emp_email']); ?>" readonly  class="form-control"  required>
   						
 								<?php 
 							}
@@ -1480,9 +1473,9 @@ foreach ($view_item->result() as $rowitem)
 										else 
 										{
 											?>
-											<input type="text" value="<?php echo $row4 ->ftgs_pr_owner_empcode ; ?>" name="txt_prOwnerEmpCode" class="form-control"  required>	
+											<input type="hidden" value="<?php echo $row4 ->ftgs_pr_owner_empcode ; ?>" name="txt_prOwnerEmpCode" class="form-control"  required>	
 											<?php $owner_eid= $this->method_call->fetchemp_email($row4->ftgs_pr_owner_empcode); ?>
-												<input type="text" name="txt_PRUseremail" value="<?php print_r($owner_eid['emp_email']); ?>" readonly  class="form-control"  required>
+												<input type="hidden" name="txt_PRUseremail" value="<?php print_r($owner_eid['emp_email']); ?>" readonly  class="form-control"  required>
   									
 										<?php
 										}

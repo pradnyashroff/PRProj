@@ -421,6 +421,29 @@ if($appove_noti_qcs != null){
 					?>
 					<?php echo  '0' ;}?> </h4>
 			</div>
+			
+			<?php
+					if($emp_code== 100662  || $emp_code == 100171)
+					{
+						?>
+						
+						<div class="col-lg-4">
+				<h4 style="font-family:'exo';" ><a href = "<?php echo site_url('FTGS_PR/Ftgs_pr/CAPEX_AuthorityPending_FTGS_tbl'); ?>" style="color: #FFFFFF;">Pending FTGS PO </a></h4>
+				<h4 class="card-block text-center">
+					<?php $appove_noti_qcs = $this->method_call->pendingFtgsPRLevel5($emp_code);
+						if($appove_noti_qcs != null){
+					?>
+					<h5><?php echo count($appove_noti_qcs->result()); ?></h5>
+					<?php
+						}
+						else{
+					?>
+					<?php echo  '0' ;}?> </h4>
+					</div>
+						
+				<?php 
+				}
+			?>
 		</div>
  
  

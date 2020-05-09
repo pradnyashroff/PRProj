@@ -651,7 +651,11 @@ foreach ($pr_submited_ph->result() as $row)
 				</h4>
 			</div>
 			
+			
+			
 		</div>
+		
+		
 		<?php
 			}
 			elseif($levelEmp==3)
@@ -667,8 +671,8 @@ foreach ($pr_submited_ph->result() as $row)
 			</div>
 			<div class="col-lg-1"></div>
 		</div>
-		<div class="row" style="margin-left:0%;margin-right:0%;">
-			<div class="col-lg-4">
+		<div class="row">
+			<div class="col-lg-3">
 				<h4 style="font-family:'exo';" ><a href = "<?php echo site_url('FTGS_PR/Ftgs_pr/IC_penddingTBL'); ?>"  style="color: #FFFFFF;">Pending FTGS PR </a></h4>
 				<h4 class="card-block text-center">
 					<?php $pending = $this->method_call->pendItemFtgsPRCount($emp_code);
@@ -682,7 +686,7 @@ foreach ($pr_submited_ph->result() as $row)
 					<?php echo  '0' ;}?> 
 				</h4>
 			</div>
-			<div class="col-lg-4">
+			<!--<div class="col-lg-4">
 				<h4 style="font-family:'exo';" ><a href = "<?php echo site_url('FTGS_PR/Ftgs_pr/ICrejectTBL'); ?>"  style="color: #FFFFFF;">Rejected FTGS PR</a></h4>
 				<h4 class="card-block text-center">
 					<?php $reject = $this->method_call->rejectItemFtgsPRCount($emp_code);
@@ -695,8 +699,8 @@ foreach ($pr_submited_ph->result() as $row)
 					?>
 					<?php echo  '0' ;}?> 
 				</h4>
-			</div>
-			<div class="col-lg-4">
+			</div>-->
+			<div class="col-lg-3">
 				<h4 style="font-family:'exo';" ><a href = "<?php echo site_url('FTGS_PR/Ftgs_pr/ICapproveTBL'); ?>" style="color: #FFFFFF;">Approved FTGS PR </a></h4>
 				<h4 class="card-block text-center">
 					<?php $approved = $this->method_call->approveItemFtgsPRCount($emp_code);
@@ -710,6 +714,39 @@ foreach ($pr_submited_ph->result() as $row)
 					<?php echo  '0' ;}?> 
 				</h4>
 			</div>
+			
+			<div class="col-lg-3">
+				<h4 style="font-family:'exo';" ><a href = "<?php echo site_url('FTGS_PR/Ftgs_pr/QCS_AllApprovedTbl'); ?>" style="color: #FFFFFF;">Approved FTGS QCS </a></h4>
+				<h4 class="card-block text-center">
+					<?php $approved = $this->method_call->approveAllQcs();
+						if($approved != null){
+					?>
+					<h5><?php echo count($approved->result()); ?></h5>
+					<?php
+						}
+						else{
+					?>
+					<?php echo  '0' ;}?> 
+				</h4>
+			</div>
+			
+			<div class="col-lg-3">
+				<h4 style="font-family:'exo';" ><a href = "<?php echo site_url('FTGS_PR/Ftgs_pr/capex_AllApprovedTbl'); ?>" style="color: #FFFFFF;">Approved FTGS CAPEX </a></h4>
+				<h4 class="card-block text-center">
+					<?php $approved = $this->method_call->approveAllCpx();
+						if($approved != null){
+					?>
+					<h5><?php echo count($approved->result()); ?></h5>
+					<?php
+						}
+						else{
+					?>
+					<?php echo  '0' ;}?> 
+				</h4>
+			</div>
+			
+			
+			
 		</div>
 		<?php
 			}
@@ -987,7 +1024,12 @@ foreach ($pr_submited_ph->result() as $row)
 				<?php } ?>
 			</div>
 	     </div>
-		 
+	
+<?php 
+			if($levelEmp !=2 && $levelEmp !=3 )
+			{
+?>
+	
 		  <div class="col-lg-3">
           <!-- small box -->
 		  
@@ -1012,6 +1054,13 @@ foreach ($pr_submited_ph->result() as $row)
 		 
 		 
 		<?php 
+			}
+			
+			else{
+				//echo 'naiii';
+			}
+			
+			
 				if($emp_code == '100006' || $emp_code == '100012' )
 				{
 			?>		
@@ -1046,7 +1095,7 @@ foreach ($pr_submited_ph->result() as $row)
 		 
 		 	
 		 
-		 	 
+		
 
 	        <div class="row">
         <div class="col-sm-12">

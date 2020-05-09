@@ -280,74 +280,90 @@ document.getElementById('e').value = new Date().toISOString().substring(0, 10);
                 
       </tr>
 
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2"  >Final Supplier</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  >  <input type="text"  name="txt_sup1_nm" class="form-control full_width"   required> </td>
-				 <td colspan="3"  >  <input type="text"  placeholder="Enter 10 Digit Number" name="txt_sup1_mno" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"  name="txt_sup1_contactp" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"   name="txt_sup1_eid" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-                
-      </tr> 
-
-
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2">Supplier-2</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  >  <input type="text"  name="txt_sup2_nm" value="" class="form-control full_width"   required> </td>
-				 <td colspan="3"  >  <input type="text"  placeholder="Enter 10 Digit Number"   name="txt_sup2_mno" value="" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"  name="txt_sup2_contactp" value="" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"   name="txt_sup2_eid" value="" class="form-control full_width"> </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-                
-      </tr> 
-	  
-	  <tr>
-	  
-			 <td style="display:none" >  </td>
-			  <td  colspan="2" >Supplier-3</td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-			 <td style="display:none" >  </td>
-				 <td colspan="3"  >  <input type="text"  name="txt_sup3_nm" class="form-control full_width"   required> </td>
-				 <td colspan="3"  >  <input type="text"  placeholder="Enter 10 Digit Number"   name="txt_sup3_mno" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"  name="txt_sup3_contactp" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				  <td colspan="3"  >  <input type="text"  name="txt_sup3_eid" class="form-control full_width"   > </td>
-				 <td style="display:none" >  </td>
-				 <td style="display:none"> </td>
-				 
-				
-      </tr> 
+	  	<tr>
+								
+								<!--  supplier1  08/03/2020  -->
+								<td><input type="radio" name="rdo_Final_Supplier" value="new_Final_Supplier" onclick="ClearFields()">New Supplier</td>
+								<td><input type="radio" name="rdo_Final_Supplier" value="old_Final_Supplier" checked="check" onclick="ClearFields()">Final Supplier</td>
+								
+									<td colspan="3"  ><div id="new_final_nm" style="display:none;"><input type="text" id="new_sup1_nm" name="sup1_name" class="form-control full_width"   > </div>
+									<div id="old_final_nm" > 
+									<select class="form-control select2" id="old_sup1_nm" name="sup1_nm" onChange="funSupData(this.value);">
+									
+									
+										<?php $dataList= $this->method_call->supplierList(); ?>
+										<?php                                                 
+											foreach($dataList as $ser)
+											{
+												
+										?>
+										
+										<option  value="<?php echo $ser['ftgs_qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+										
+										
+										<?php }?>
+									</select></div>
+								</td>
+								<td colspan="3"><input type="text" pattern="[0-9]{10}" placeholder="Enter 10 Digit Number" id="old_sup1_mno" name="sup1_mno" class="form-control full_width"   >
+								</td>
+								
+								<td colspan="3"><input type="text" id="old_sup1_contactp" name="sup1_contactp" class="form-control full_width">
+								</td>
+								
+								<td colspan="3"><input type="email" id="old_sup1_eid"name="sup1_eid" class="form-control full_width"   > 
+								</td>
+							</tr> 
+							
+									
+							<!--Supplier 2 08/03/2020 -->
+							<tr>
+								<td><input type="radio" name="rdo_Supplier_2"  value="new_Supplier2" onclick="ClearSupplier2()">New Supplier 2</td>
+								<td><input type="radio" name="rdo_Supplier_2" checked="check" value="old_Supplier2" onclick="ClearSupplier2()">Supplier-2</td>
+								
+								<td colspan="3"><div id="new_sup2nm"  style="display:none;"><input type="text" id="old_sup2_nm" name="sup2_name" value="" class="form-control full_width" ></div>
+								<div id="old_sup2nm"><select class="form-control select2" id="txt_sup2_nm" name="sup2_nm" onChange="funSup2Data(this.value);">
+										<?php $dataList= $this->method_call->supplierList(); ?>
+										<?php                                                 
+											foreach($dataList as $ser)
+											{
+												
+										?>
+										<option  value="<?php echo $ser['ftgs_qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+										<?php }?>
+									</select></div></td>
+								
+								<td colspan="3"><input type="text"  placeholder="Enter 10 Digit Number"  id="old_sup2_mno" name="sup2_mno" value="" class="form-control full_width"   > </td>
+								
+								<td colspan="3"><input type="text"  name="sup2_contactp" value="" id="old_sup2_contactp" class="form-control full_width"   > </td>
+								
+								<td colspan="3"  ><input type="email" id="old_sup2_eid"  name="sup2_eid" value="" class="form-control full_width"> </td>
+							</tr> 
+							
+								<!--Supplier 3 08/03/2020 -->
+							<tr>
+								<td><input type="radio" name="rdo_supplier3" value="new_Supplier3" onclick="ClearSupplier3()">New Supplier 3 </td>
+								<td><input type="radio" name="rdo_supplier3" checked="check" value="old_Supplier3" onclick="ClearSupplier3()"> Supplier-3</td>
+								
+								<td colspan="3"  ><div id="new_sup3_nm" style="display:none;"> <input type="text" id="old_sup3_nm" name="sup3_name" class="form-control full_width"   > </div>
+								<div id="old_sup3_nms" > <select class="form-control select2" id="txt_sup3_nm" name="sup3_nm" onChange="funSup3Data(this.value);">
+										<?php $dataList= $this->method_call->supplierList(); ?>
+										<?php                                                 
+											foreach($dataList as $ser)
+											{
+											
+										?>
+										<option  value="<?php echo $ser['ftgs_qcs_id'] ?> - <?php echo $ser['sname'];  ?>" ><?php echo $ser['sname'];  ?></option>
+										<?php }?>
+									</select> </div></td>
+								
+								<td colspan="3" ><input type="text"  placeholder="Enter 10 Digit Number" id="old_sup3_mno" name="sup3_mno" class="form-control full_width"   ></td>
+								
+								<td colspan="3"  ><input type="text" id="old_sup3_contactp" name="sup3_contactp" class="form-control full_width"   > </td>
+								
+								<td colspan="3"  ><input type="email" id="old_sup3_eid" name="sup3_eid" class="form-control full_width"   > </td>
+								
+							</tr> 
+							
 
 				</tbody>
                		
@@ -392,296 +408,7 @@ document.getElementById('e').value = new Date().toISOString().substring(0, 10);
  } ?>
 	
 	
-	 <!-- pr view modal -->
-  
-  <div class="modal fade displaycontent" id="pr_view_Modal">
-
-<div class="modal-dialog" role="document" style="width:980px;">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color:#3482AE">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title"style="color:#FFFFFF; font-family:'exo';text-transform: uppercase;">View PR</h4>
-      </div>
-      <div class="modal-body">
-     <section class="module pt-10" id="contact" >
-          <div class="container" style="width: auto;">
-          <div class="container" style="width: auto;">
-            <br>
-			
-  <form method="post" id="" action="" >
-            <div class="row">
-			
-			  <div class="form-group col-md-6">
-				<label class="col-sm-1 pull-left control-label">1</label>
-                  <label class="col-sm-5 pull-left control-label">PR No </label>
-	<div class="input-group  col-sm-6">
 	
-	<input type="Text" name="pr_plant" class="form-control" style="background-color:#E6F2FF;" readonly value="<?php echo $row->pr_id; ?>" required>     
-					  
-	   </div>
-				</div>
-		
-		 
-			  <div class="form-group col-sm-6">
-			  
-			  <label class="col-sm-1 pull-left control-label">2</label>
-			   <label class="col-sm-5 pull-left control-label">PR Owner nm</label>
-				<div class="input-group  col-sm-6">
-				<input type="Text" name="pr_owner_name" class="form-control" style="background-color:#E6F2FF;" readonly value="<?php echo $row->pr_owner_name; ?>" required>  
-						
-                </div>
-                </div>
-		
-			  <div class="form-group col-sm-6">
-			  
-			  <label class="col-sm-1 pull-left control-label">3</label>
-			   <label class="col-sm-5 pull-left control-label">Plant</label>
-				<div class="input-group  col-sm-6">
-				<input type="Text" name="pr_plant" class="form-control" style="background-color:#E6F2FF;" readonly value="<?php echo $row->plant_code; ?>" required>  
-						
-                </div>
-                </div>
-				
-				
-				
-				
-				
-				  <div class="form-group col-sm-6">
-			  
-			  <label class="col-sm-1 pull-left control-label">4</label>
-			   <label class="col-sm-5 pull-left control-label">PR Type</label>
-				<div class="input-group  col-sm-6">
-			<?php $pt_name= $this->method_call->fetch_prtype_nm($row->pr_type); ?>
-						   <input type="Text" name="pr_dept" class=" form-control" id="pr_dept" style="background-color:#E6F2FF;" readonly value="<?php print_r($pt_name['pt_name']); ?>"  required>
-                </div>
-                </div>
-		
-		<div class="form-group col-sm-6">
-			  
-			  <label class="col-sm-1 pull-left control-label">5</label>
-			   <label class="col-sm-5 pull-left control-label">Department</label>
-				<div class="input-group  col-sm-6">
-				<?php $dept_nm= $this->method_call->fetch_dept_nm($row->dept_id); ?>
-						   <input type="Text" name="pr_dept" class=" form-control" id="pr_dept" style="background-color:#E6F2FF;"  readonly value="<?php print_r($dept_nm['dept_name']); ?>"  required>
-						
-                </div>
-                </div>
-					
-	  <div class="form-group col-sm-6">
-			  
-			  <label class="col-sm-1 pull-left control-label">6</label>
-			   <label class="col-sm-5 pull-left control-label">PR Date</label>
-				<div class="input-group  col-sm-6">
-			  <input type="Text" name="pr_dept" class=" form-control" id="pr_dept" style="background-color:#E6F2FF;" readonly value="<?php echo $row->pr_date; ?>"  required>
-                </div>
-                </div>
-				
-				
-		   <div class="form-group col-sm-7">
-			  
-			  <label class="col-sm-1 pull-left control-label">7</label>
-			   <label class="col-sm-4 pull-left control-label">Requirement Details</label>
-				<div class="input-group  col-sm-6 pull-right">
-
-                </div>
-			  </div>	
-
-
-	    <div class="form-group col-sm-12">
-			        <table id="exam" class="table table-bordered table-striped" style="font-size: 12px!important;">
-                <thead>
-               <tr style="background-color:#3482AE;color:#FFFFFF;width:100%;">
-                
-                  <th >Sr. No.</th>
-				   <th>Item Code</th>
-				   <th>Item Descriptions</th>
-				   <th>Req Qty.</th>
-				   <th>UOM</th>
-				   <th>Approx. Rate</th>
-				   <th>Approx. Total Amount</th>
-				   <th style="display:none;">ION No.</th>
-				   <th>Expected Delivery Period	</th>
-				   <th>Project Details</th>
-				   <th>Technical Details/Mfg Name</th>
-                  
-                </tr>
-                </thead>
-		
-                         <tbody>
-				
-	 
-
-				
-				  <?php $item= $this->method_call->list_items($pr_id);
-				  $final_rate=0;
- if($item!=null){
-	 	   				
-	$sr_no=1;			  
-foreach ($item->result() as $row3)  
-         {  ?>
-			<tr>
-			
-				 <td  ><?php echo $sr_no; ?> </td>
-				 <td  ><?php echo $row3->item_code; ?></td>  
-            <td>  <?php echo $row3->item_description; ?></td>  
-            <td> <?php echo $row3->req_qty; ?></td>  
-            <td> <?php echo $row3->uom; ?></td>  
-            <td> <?php echo $row3->approx_rate; ?></td>  
-            <td>  <?php echo $row3->approx_total_amt; ?></td>  
-            <td style="display:none;"> <?php echo $row3->ion_no; ?></td>  
-            <td>  <?php echo $row3->expected_delivery; ?> </td>  
-            <td> <?php echo $row3->project_detail; ?> </td>  
-            <td> <?php echo $row3->technical_detail; ?> </td>  
-                <?php
-
-				$approx_rate=$row3->approx_total_amt;
-					$final_rate=$final_rate+$approx_rate;
-				?>
-      </tr>
-	 
-		 <?php  $sr_no++; }
- } ?>
-                
-				</tbody>
-               		
-              </table>
-			
-			  </div>			  
-		
-		
-		
-		
-		  <div class="form-group col-sm-12">
-			  
-			  <label class="col-sm-2 pull-left control-label"></label>
-			   <label class="col-sm-5 pull-left control-label">Cumulative Total Amount of PR <?php echo $row->pr_id; ?> : <span class="fa fa-inr"> </span> <?php echo $final_rate; ?> </label>
-				<div class="input-group  col-sm-5 pull-right">
-
-                </div>
-			  </div>	 	 
-			  <div class="form-group col-sm-6">
-			  
-			  <label class="col-sm-1 pull-left control-label">8</label>
-			   <label class="col-sm-5 pull-left control-label">Delivery Location</label>
-				<div class="input-group  col-sm-6">
-				
-				
-				<?php echo $row->delivary_loc; ?>
-							
-						
-							
-                </div>
-                </div>
-				
-				
-				  <div class="form-group col-sm-6">
-			  
-			 <label class="col-sm-1 pull-left control-label">9</label>
-			   <label class="col-sm-5 pull-left control-label">Inspection Required At Supplier End</label>
-				<div class="input-group  col-sm-6">
-                                                
-			<?php echo $row->inspection_req;  ?>
-				
-				 </select>          
-               
-         
-                </div>
-                </div>
-				
-				
-				  <div class="form-group col-sm-6">
-			  
-			 <label class="col-sm-1 pull-left control-label">10</label>
-			   <label class="col-sm-5 pull-left control-label">Considered in Budget</label>
-				<div class="input-group  col-sm-6">
-             
-				<?php echo $row->budget_consider;  ?>
-
-         
-                </div>
-                </div>
-				
-				   <div class="form-group col-sm-6">
-			  
-			 <label class="col-sm-1 pull-left control-label">11</label>
-			   <label class="col-sm-5 pull-left control-label">Ion No</label>
-				<div class="input-group  col-sm-6">
-             
-				<?php echo $row->ion_no;  ?>
-
-         
-                </div>
-                </div>
-				
-				 <div class="form-group col-sm-6">
-			  
-			 <label class="col-sm-1 pull-left control-label">12</label>
-			   <label class="col-sm-5 pull-left control-label">Customer Cost Upfront</label>
-				<div class="input-group  col-sm-6">
-             
-				<?php echo $row->cust_cost_upfront;  ?>
-
-         
-                </div>
-                </div>
-				
-				
-				 <div class="form-group col-sm-6">
-			  
-			 <label class="col-sm-1 pull-left control-label">13</label>
-			   <label class="col-sm-5 pull-left control-label">Customer Cost Amortization</label>
-				<div class="input-group  col-sm-6">
-             
-				<?php echo $row->cust_cost_amortization;  ?>
-
-         
-                </div>
-                </div>
-				
-				
-			<div class="form-group col-sm-6">
-			  
-			 <label class="col-sm-1 pull-left control-label">14</label>
-			   <label class="col-sm-5 pull-left control-label">Own Investment</label>
-				<div class="input-group  col-sm-6">
-             
-				<?php echo $row->own_investment;  ?>
-
-         
-                </div>
-                </div>
-				
-				  <div class="form-group col-sm-6">
-			  
-			 <label class="col-sm-1 pull-left control-label">15</label>
-			   <label class="col-sm-5 pull-left control-label">Reason Of Procurement</label>
-				<div class="input-group  col-sm-6">
-                   <?php echo $row->procurement_res;  ?>
-
-         
-                </div>
-                </div>
-		
-			
- 
-		
-	</div>
-				
-				
-				
-				</div>
-		
-        </section>
-	  
-	 </div>
-    </div>
-  </div>
-  </div>
-  </div>
- 
-  <!-- end --->		  
               <!-- /.box-body -->
           
               <!-- /.box-footer -->
@@ -713,6 +440,64 @@ foreach ($item->result() as $row3)
    
    <script type="text/javascript">
 
+   function funSupData(ftgs_qcs_id){
+		alert(ftgs_qcs_id);
+		var supplier1 = ftgs_qcs_id.split('-')[0];
+		
+		$.ajax(
+        {
+            type: "post",
+            url: "<?php echo base_url(); ?>index.php/FTGS_PR/Ftgs_pr/selectSuplier1",
+            data:{'ftgs_qcs_id':supplier1},
+            dataType: 'JSON',
+            success:function(data)
+            {
+				
+				
+				$('[id="old_sup1_mno"]').val(data.ftgs_sup1_contact_no);
+				$('[id="old_sup1_contactp"]').val(data.ftgs_sup1_contact_person);
+				$('[id="old_sup1_eid"]').val(data.ftgs_sup1_eid);
+	        }
+        });
+	 }
+	 
+	function funSup2Data(ftgs_qcs_id){
+		var supplier2 = ftgs_qcs_id.split('-')[0];
+		
+    $.ajax(
+        {
+			type: "post",
+            url: "<?php echo base_url(); ?>index.php/FTGS_PR/Ftgs_pr/selectSuplier1",
+            data:{'ftgs_qcs_id':supplier2},
+            dataType: 'JSON',
+            success:function(data)
+            {
+				$('[id="old_sup2_mno"]').val(data.ftgs_sup1_contact_no);
+				$('[id="old_sup2_contactp"]').val(data.ftgs_sup1_contact_person);
+				$('[id="old_sup2_eid"]').val(data.ftgs_sup1_eid);
+            }
+        });
+	}
+       function funSup3Data(ftgs_qcs_id){
+		   var supplier3 = ftgs_qcs_id.split('-')[0];
+		
+          $.ajax(
+			{
+				type: "post",
+				url: "<?php echo base_url(); ?>index.php/FTGS_PR/Ftgs_pr/selectSuplier1",
+				data:{'ftgs_qcs_id':supplier3},
+				dataType: 'JSON',
+				success:function(data)
+				{
+					$('[id="old_sup3_mno"]').val(data.ftgs_sup1_contact_no);
+					$('[id="old_sup3_contactp"]').val(data.ftgs_sup1_contact_person);
+					$('[id="old_sup3_eid"]').val(data.ftgs_sup1_eid);
+	            }
+			});
+		  }
+        
+   
+   
 $(document).ready(function (){
    var table = $('#example6').DataTable({
 	   
@@ -838,6 +623,71 @@ $('#btn-submit').on('click',function(e){
 });
 </script>
 
+<script>
+//final supplier------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Final_Supplier") {
+        document.getElementById('new_final_nm').style.display = 'block';
+		document.getElementById('old_final_nm').style.display = 'none';
+       
+    } else if($(this).val() == "old_Final_Supplier") {
+		
+		document.getElementById('old_final_nm').style.display = 'block';
+		document.getElementById('new_final_nm').style.display = 'none';
+	}
+});
+function ClearFields() {
+	document.getElementById("old_sup1_nm").value = "";
+	document.getElementById("new_sup1_nm").value = "";
+     document.getElementById("old_sup1_mno").value = "";
+     document.getElementById("old_sup1_contactp").value = "";
+	 document.getElementById("old_sup1_eid").value = "";
+}
+
+//supplier 2 ----------------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Supplier2") {
+        document.getElementById('new_sup2nm').style.display = 'block';
+		document.getElementById('old_sup2nm').style.display = 'none';
+		
+    } else if($(this).val() == "old_Supplier2") {
+		
+       document.getElementById('old_sup2nm').style.display = 'block';
+		document.getElementById('new_sup2nm').style.display = 'none';
+		
+    }
+});
+function ClearSupplier2() {
+	document.getElementById("old_sup2_nm").value = "";
+	document.getElementById("txt_sup2_nm").value = "";
+     document.getElementById("old_sup2_mno").value = "";
+     document.getElementById("old_sup2_contactp").value = "";
+	 document.getElementById("old_sup2_eid").value = "";
+}
+
+//supplier 3 ----------------------------------08/03/2020
+$("form input:radio").change(function () {
+     if ($(this).val() == "new_Supplier3") {
+        document.getElementById('new_sup3_nm').style.display = 'block';
+		document.getElementById('old_sup3_nms').style.display = 'none';
+		
+    } else if($(this).val() == "old_Supplier3"){
+		
+       document.getElementById('old_sup3_nms').style.display = 'block';
+		document.getElementById('new_sup3_nm').style.display = 'none';
+		
+    }
+});
+function ClearSupplier3() {
+	document.getElementById("old_sup3_nm").value = "";
+	document.getElementById("txt_sup3_nm").value = "";
+     document.getElementById("old_sup3_mno").value = "";
+     document.getElementById("old_sup3_contactp").value = "";
+	 document.getElementById("old_sup3_eid").value = "";
+}
+</script>
+
+</script>
 
 
 

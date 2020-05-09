@@ -316,8 +316,10 @@ foreach ($view_item->result() as $rowitem)
          {  ?>
 		
 			<tr>
-				<td>  <?php echo $sr_no; ?></td>
-				<td> <input type ="text" class="form-control" name="qcsItemId"  value="<?php echo $rowitem->ftgs_qcs_item_id; ?>" id="qcsItemId[]">  </td>
+				
+				<td><a href="#" class="glyphicon glyphicon-edit" style="color:red;" data-toggle="modal" data-target="#edititemcode" onclick="itemCodeUpdate_data('<?php echo $rowitem->ftgs_qcs_item_id;?>','<?php echo $rowitem->ftgs_q_item_code;?>','<?php echo $rowitem->ftgs_final_amt1;?>','<?php echo $rowitem->ftgs_q_req_quantity;?>')" ><?php echo $rowitem->ftgs_qcs_item_id; ?></a></p></td>
+											
+				<td>  <?php echo $rowitem->ftgs_qcs_item_id; ?> </td>
 				<td>  <?php echo $rowitem->ftgs_q_item_code; ?></td>
 				<td>  <?php echo $rowitem->ftgs_q_itm_sts; ?></td>
 				<td>  <?php echo $rowitem->ftgs_q_req_quantity	; ?></td>	
@@ -327,10 +329,10 @@ foreach ($view_item->result() as $rowitem)
             <td> <?php echo $rowitem->ftgs_quoted_amt1; ?></td>  
             <td>  <?php echo $rowitem->ftgs_final_rate1; ?> </td>  
             <td> <?php echo $rowitem->ftgs_final_amt1; ?> </td>  
-			<td style = "display:none">  <input type ="text" class="form-control" name="finalamt"  value="<?php echo $rowitem->ftgs_final_amt1; ?>" id="finalamt"></td>  
+		
 			
-			<td>  <input type ="text" class="form-control" name="add10per"  onkeyup="add10Data(this.value);" id="add10per" placeholder="add 10 %"></td>  
-			<td>  <input type ="text" class="form-control" readonly name="txt_10_amt" id= "txt10op"></td>  
+			<td> <?php echo $rowitem->amt_per_add; ?> %</td>  
+			<td> <?php echo $rowitem->per_final_amt; ?></td>  
            
 		
 		
@@ -342,16 +344,8 @@ foreach ($view_item->result() as $rowitem)
 					$final_ammount1 = $rowitem->ftgs_final_amt1;
 					$total_final_ammount1 = $total_final_ammount1+$final_ammount1;
 					
-					$quoted_amount2 = $rowitem->ftgs_quoted_amt2;
-					$total_quoted_amount2 = $total_quoted_amount2+$quoted_amount2;
-					
-					$final_ammount2 = $rowitem->ftgs_final_amt2;
-					$total_final_ammount2 = $total_final_ammount2+$final_ammount2;
-					
-					$quoted_amount3 = $rowitem->ftgs_quoted_amt3;
-					$total_quoted_amount3 = $total_quoted_amount3+$quoted_amount3;
-					
-					$final_ammount3 = $rowitem->ftgs_final_amt3;
+				
+					$final_ammount3 = $rowitem->per_final_amt;
 					$total_final_ammount3 = $total_final_ammount3+$final_ammount3;
 					
 				?>
@@ -362,28 +356,8 @@ foreach ($view_item->result() as $rowitem)
  } ?>
                 
 				</tbody>
-				  <tfoot>
-        <tr>
-           <td class="right" colspan="6"></td>
-			<td class="right"><B><?php echo $final_rate; ?></b></td>
-			<td class="right" colspan="1"></td>
-			<td class="right "><B><?php echo $total_final_ammount1; ?></b></td>
-			<td class="right" colspan ="1"></td>
+				
 	
-			
-			<td class="right "><B><?php echo 'print amt'; ?></b></td>
-			
-
-        </tr>
-    </tfoot>
-
-		 </tbody>
-
-
-			
-				 
-	
-               		
               </table>
 
 				
@@ -952,7 +926,7 @@ foreach ($view_item->result() as $rowitem)
 						if($row4->ftgs_outside_budget == 'YES'){
 							?>
 							
-						<span style="color:#3482AE;">( <?php echo $row4->just_draft_outside_budget; ?> ) </span>
+						<span style="color:#3482AE;">( <?php echo $row4->ftgs_just_outside_budget; ?> ) </span>
 							
 						<?php
 						}
@@ -1295,6 +1269,8 @@ foreach ($view_item->result() as $rowitem)
 									<input class="form-control" type="hidden" name="txtTotalAmt" value=" <?php echo $final_rate; ?>"/>
 									<input class="form-control" type="hidden" name="txtqcsDate" value=" <?php echo $row4->ftgs_qcs_date; ?>"/>
 									<input class="form-control" type="hidden" name="txtEmpPlant" value=" <?php echo $row4->ftgs_plant_code; ?>"/>
+									<input class="form-control" type="hidden" name="txtAmtPer" value=" <?php echo $total_final_ammount3;; ?>"/>
+									
 									<!------Mail Details Code Start From here--->
 									
 									<div class="box-footer">
@@ -1306,17 +1282,31 @@ foreach ($view_item->result() as $rowitem)
 									</div>
 							
 							
-							<?php
-								 $autho_code=$this->method_call->getApproval3AuthoDetails();?>
-                                  <input type="text" value="<?php print_r($autho_code['autho_code']); ?>" name="txt_approval3_Autho" class="form-control"  required>	
+					
+									
+									<?php
+								$autho_code = $this->method_call->getApproval3AuthoDetails();
+							
+								if ($autho_code != null) {
+								foreach ($autho_code->result() as $row1) {
+										?>
+                            <input type="hidden" name="authoID" class="form-control" value="<?php echo $row1->auth_id;?>">
+							 <input type="hidden" name="authoMail" class="form-control" value="<?php echo $row1->emp_email;?>">
+                          
+                                <?php }
+                        }
+                        ?>
+						
+						
+						
 									<?php
 								$ftgsActionData = $this->method_call->ftgsApproval2Action($emp_code,$ftgs_qcs_id);
 							
 								if ($ftgsActionData != null) {
 								foreach ($ftgsActionData->result() as $row1) {
 										?>
-                            <input type="text" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
-                          
+                            <input type="hidden" name="Ftgs_action_id" class="form-control" value="<?php echo $row1->action_grid_id;?>">
+                             
                                 <?php }
                         }
                         ?>
@@ -1519,11 +1509,146 @@ foreach ($view_item->result() as $rowitem)
   		
   <!--end -->
   
-  
+  <div class="modal fade displaycontent" id="edititemcode">
+				<div class="modal-dialog" role="document" style="width: 630px;">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color:#3482AE">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title"style="color:#FFFFFF; font-family:'exo';text-transform: uppercase;">Edit Details</h4>
+						</div>
+						<div class="modal-body">
+							<section class="module pt-10" id="contact" >
+								<div class="container" style="width: auto;">
+									<form method="post" id="add_ftgs_pr" name="add_ftgs_pr" action="<?php echo site_url('FTGS_PR/Ftgs_pr/PerAddAgaintItem') ?>" enctype='multipart/form-data'>
+									<div class="row">
+										
+								 <table id="example6" class="table table">
+                <thead>
+
+				
+				
+                <tr style="background-color:#3482AE;color:#FFFFFF;">
+                				
+			<th>  Item ID </th>  
+		<th>  Item Code </th>  
+			<th>Qty</th>
+          <th>  Final Rates </th>  
+            <th> % Add</th>  
+			
+			<th>  Final Amt </th>
+			
+			 			
+           
+				  
+                </tr>  
+			
+				
+                </thead>
+						
+                <tbody>
+				
+				<tr>
+			<td><input type ="text" value=" <?php echo $rowitem->ftgs_qcs_item_id; ?> " class="form-control"  name="ftgs_qcs_item_id" id="ftgs_qcs_item_id"> </td>			
+		
+			<td><input type ="text" value=" <?php echo $rowitem->ftgs_q_item_code; ?> " class="form-control"  name="ftgs_q_item_code" id="ftgs_q_item_code"></td>
+			<td><input type ="text" value=" <?php echo $rowitem->ftgs_q_req_quantity; ?> " class="form-control"  name="ftgs_q_req_quantity" id="ftgs_q_req_quantity"></td>
+			
+			<td ><input type ="text" value=" <?php echo $rowitem->ftgs_final_amt1; ?> " class="form-control"  name="finalamt" id="finalamt"> </td>
+			
+		
+		
+			<td><input type ="text" class="form-control"  onkeyup="AddPerVal();" name="add10per" id="add10per">  </td>
+			<td><input type ="text" class="form-control" name="txt10op" id ="txt10op"> </td>
+	
+				</tr>
+				
+							
+				<!-- Items to be inserted here -->
+
+									
+			<!--	  <?php $view_item= $this->method_call->ftgs_view_qcs_items($ftgs_qcs_id);
+				  	$final_rate=0; 
+					$total_final_ammount1=0;
+					$total_quoted_amount2 = 0;
+					$total_final_ammount2=0;
+					$total_quoted_amount3 =0;
+					$total_final_ammount3=0;					
+
+ if($view_item!=null){
+	$sr_no=1;			  
+foreach ($view_item->result() as $rowitem)  
+         {  ?>
+		
+			<tr>
+				
+				<td><?php echo $rowitem->ftgs_q_item_code; ?></td>
+											
+			
+		``<td>  <?php echo $rowitem->ftgs_q_req_quantity; ?></td>	
+				
+          
+            <td>  <?php echo $rowitem->ftgs_final_rate1; ?> </td>  
+            <td> <?php echo $rowitem->ftgs_final_amt1; ?> </td> 
+	<td style="display:none;"><input type ="text" value=" <?php echo $rowitem->ftgs_qcs_item_id; ?> " class="form-control"  name="ftgs_qcs_item_id" id="ftgs_qcs_item_id"> </td>			
+			<td style="display:none;"><input type ="text" value=" <?php echo $rowitem->ftgs_final_amt1; ?> " class="form-control"  name="finalamt" id="finalamt"> </td>
+			<td><input type ="text" class="form-control"  onkeyup="AddPerVal();" name="add10per" id="add10per">  </td>
+			<td><input type ="text" class="form-control" name="txt10op" id ="txt10op"> </td>
+		
+           
+		
+		
+                <?php
+
+				$quoted_ammount1=$rowitem->ftgs_quoted_amt1;
+					$final_rate=$final_rate+$quoted_ammount1;
+					
+					$final_ammount1 = $rowitem->ftgs_final_amt1;
+					$total_final_ammount1 = $total_final_ammount1+$final_ammount1;
+					
+					$quoted_amount2 = $rowitem->ftgs_quoted_amt2;
+					$total_quoted_amount2 = $total_quoted_amount2+$quoted_amount2;
+					
+					$final_ammount2 = $rowitem->ftgs_final_amt2;
+					$total_final_ammount2 = $total_final_ammount2+$final_ammount2;
+					
+					$quoted_amount3 = $rowitem->ftgs_quoted_amt3;
+					$total_quoted_amount3 = $total_quoted_amount3+$quoted_amount3;
+					
+					$final_ammount3 = $rowitem->ftgs_final_amt3;
+					$total_final_ammount3 = $total_final_ammount3+$final_ammount3;
+					
+				?>
+      </tr>
+		
+	 
+		 <?php  $sr_no++; }
+ } ?>
+         -->       
+				</tbody>
+				
+               		
+              </table>
+
+										 <center>
+											<button type="submit"  name="save"  class="btn" style="width: 18%;background-color:#3482AE;color:white;box-shadow: 0 0 3px 1px rgba(0,0,0,.35);">Update</button>
+										</center> 
+									</div>
+								</form>
+								</div>
+                            </section>
+							</form>
+                        </div>
+                     </div>
+				</div>
+			</div>
   
         
 <?php } 
 }?>
+
+
 
 
 
@@ -1547,687 +1672,31 @@ foreach ($view_item->result() as $rowitem)
       format: 'yyyy-mm-dd'
     })
 
-function supplier1() {
-      var txtFirstNumberValue = document.getElementById('txt_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_quot_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_quot_amt1').value = setResult;
-      }
-}
-function finalSupplier1() {
 
-      var txtFirstNumberValue = document.getElementById('txt_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_final_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_amount1').value = setResult;
-      }
-}
-
-function supplier2() {
-      var txtFirstNumberValue = document.getElementById('txt_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_quot_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_quot_amt2').value = setResult;
-      }
-}
-function finalSupplier2() {
-      var txtFirstNumberValue = document.getElementById('txt_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_final_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_amount2').value = setResult;
-      }
-}
-function supplier3() {
-      var txtFirstNumberValue = document.getElementById('txt_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_quot_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_quot_amt3').value = setResult;
-      }
-}
-function finalSupplier3() {
-      var txtFirstNumberValue = document.getElementById('txt_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_final_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_amount3').value = setResult;
-      }
-}
-function custom_supplier1() {
-      var txtFirstNumberValue = document.getElementById('txt_custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_custom_quot_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_custom_quot_amt1').value = setResult;
-      }
-}
-function custom_final_supplier() {
-
-      var txtFirstNumberValue = document.getElementById('txt_custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_custom_final_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_custom_amount1').value = setResult;
-      }
-}
-
-function custom_supplier2() {
-      var txtFirstNumberValue = document.getElementById('txt_custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_custom_quot_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_custom_quot_amt2').value = setResult;
-      }
-}
-function custom_final_supplier2() {
-      var txtFirstNumberValue = document.getElementById('txt_custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_custom_final_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_custom_amount2').value = setResult;
-      }
-}
-function custom_supplier3() {
-      var txtFirstNumberValue = document.getElementById('txt_custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_custom_quot_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_custom_quot_amt3').value = setResult;
-      }
-}
-function custom_final_supplier3() {
-      var txtFirstNumberValue = document.getElementById('txt_custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('txt_custom_final_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('txt_custom_amount3').value = setResult;
-      }
-}
-
-
-  </script>
-  
-  
-  
+</script>
 <script>
-	function sendData(para,para2,para3,para4,para5,para6,para7,para8,para9,para10,para11,para12,para13,para14){
-//quot_reec		
-		 if(para == 'YES'){
-			 
-			  document.getElementById("draft_just_quot_reec").style.visibility='visible';
-			  
-		  }
-		  else if(para == 'NO'){
-			   
-			  document.getElementById("draft_just_quot_reec").style.visibility='hidden';
-			    
-		  }
-//outside_budget		  
-		  if(para2 == 'YES'){
-			 
-			  
-			   document.getElementById("just_draft_outside_budget").style.visibility='visible';
-		  }
+function AddPerVal() {
+      var txtFirstNumberValue = document.getElementById('finalamt').value;
+      var txtSecondNumberValue = document.getElementById('add10per').value;
+      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue) / 100;
+	  var r2 = parseFloat(txtFirstNumberValue) + result;
+       var setResult = result.toFixed(2);
+      if (!isNaN(result)) {
+         document.getElementById('txt10op').value = r2;
+      }
+}
 
-		  else if(para2 == 'NO'){
-			   
-			
-			    document.getElementById("just_draft_outside_budget").style.visibility='hidden';
-		  }
-//Order Value		  
-		  if(para3 == 'YES'){
-			   document.getElementById("just_draft_order_value").style.visibility='visible';
-		  }
-		  else if(para3 == 'NO'){
-			   document.getElementById("just_draft_order_value").style.visibility='hidden';
-		  }
-		  //non-proprietary item
-		  if(para4 == 'YES'){
-			   document.getElementById("draft_just_adv_nonprop").style.visibility='visible';
-		  }
-		  else if(para4 == 'NO'){
-			   document.getElementById("draft_just_adv_nonprop").style.visibility='hidden';
-		  }
-//advance prop   
-		   if(para5 == 'YES'){
-			   document.getElementById("draft_just_adv_prop").style.visibility='visible';
-		  }
-		  else if(para5 == 'NO'){
-			   document.getElementById("draft_just_adv_prop").style.visibility='hidden';
-		  }
-		  
-//draft_just_final_pay_grn
-		   if(para6 == 'YES'){
-			   document.getElementById("draft_just_final_pay_grn").style.visibility='visible';
-		  }
-		  else if(para6 == 'NO'){
-			   document.getElementById("draft_just_final_pay_grn").style.visibility='hidden';
-		  }
-		  
-//		  
-	 if(para7 == 'YES'){
-			   document.getElementById("draft_just_final_pay_post_grn").style.visibility='visible';
-		  }
-		  else if(para7 == 'NO'){
-			   document.getElementById("draft_just_final_pay_post_grn").style.visibility='hidden';
-		  }	
-
-//para8	
-		if(para8 == 'YES'){
-			   document.getElementById("draft_just_delivery_gate").style.visibility='visible';
-		  }
-		  else if(para8 == 'NO'){
-			   document.getElementById("draft_just_delivery_gate").style.visibility='hidden';
-		  }	
-		  
-//para9	
-
-			if(para9 == 'YES'){
-			   document.getElementById("draft_just_cost_reimb").style.visibility='visible';
-		  }
-		  else if(para9 == 'NO'){
-			   document.getElementById("draft_just_cost_reimb").style.visibility='hidden';
-		  }	
-//para10
-			
-			if(para10 == 'YES'){
-			   document.getElementById("draft_just_repl_cost_agreed").style.visibility='visible';
-		  }
-		  else if(para10 == 'NO'){
-			   document.getElementById("draft_just_repl_cost_agreed").style.visibility='hidden';
-		  }	
-
-//para11
-
-			
-			if(para11 == 'YES'){
-			   document.getElementById("draft_just_adva_pay_bg").style.visibility='visible';
-		  }
-		  else if(para11 == 'NO'){
-			   document.getElementById("draft_just_adva_pay_bg").style.visibility='hidden';
-		  }	
-
-//para12	
+</script>
 
 
-			if(para12 == 'YES'){
-			   document.getElementById("draft_just_advance_25").style.visibility='visible';
-		  }
-		  else if(para12 == 'NO'){
-			   document.getElementById("draft_just_advance_25").style.visibility='hidden';
-		  }	
+   <script>
+	function itemCodeUpdate_data(ftgs_qcs_item_id,ftgs_q_item_code,ftgs_final_amt1,ftgs_q_req_quantity) {
 
-//para13
-		if(para13 == 'YES'){
-			   document.getElementById("draft_just_paymt_trm_grn_90").style.visibility='visible';
-		  }
-		  else if(para13 == 'NO'){
-			   document.getElementById("draft_just_paymt_trm_grn_90").style.visibility='hidden';
-		  }	
-
-
-//para14	
-
-			if(para14 == 'YES'){
-			   document.getElementById("draft_just_imported_item").style.visibility='visible';
-		  }
-		  else if(para14 == 'NO'){
-			   document.getElementById("draft_just_imported_item").style.visibility='hidden';
-		  }	
-
-	  
-	  
-	}
-	</script>
+   document.getElementById("ftgs_qcs_item_id").value = ftgs_qcs_item_id;
+	document.getElementById("ftgs_q_item_code").value = ftgs_q_item_code;
+	document.getElementById("finalamt").value = ftgs_final_amt1;
+	document.getElementById("ftgs_q_req_quantity").value = ftgs_q_req_quantity;
 	
-	  <script>
-//3 .quot_reec	  
-	  function eventOfText(result,ftgs_offers_received){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_quot_reec").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_quot_reec").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-	 
-//outside budget	 
-	  	  function eventOfText_budget(result,ftgs_outside_budget){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("just_draft_outside_budget").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("just_draft_outside_budget").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-	  
-	  
- //order value 
- 
- 	  function eventOfText_orderv(result,ftgs_order_value){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("just_draft_order_value").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("just_draft_order_value").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-	
-
- //eventOfprop_item
- 
- 	  function eventOfprop_item(result,ftgs_non_properitery_item){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_adv_nonprop").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_adv_nonprop").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }	
-	  
- //properitery_item
- 
-  
- 	  function eventOf_prope_item(result,ftgs_properitery_item){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_adv_prop").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_adv_prop").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-	  
-	  
-	  
-	  //eventOfpost_grn_non
-	  function eventOfpost_grn_non(result,ftgs_post_grn_nonproprietary){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_final_pay_grn").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_final_pay_grn").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-	  
-//post_grn_proprietary
-function eventOfpost_grn_prop(result,ftgs_post_grn_proprietary){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_final_pay_post_grn").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_final_pay_post_grn").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-
-
-//eventOfpost_del_terms
-function eventOfpost_del_terms(result,delivery_terms){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_delivery_gate").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_delivery_gate").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-//cost_reimb_cust
-function eventOfpost_cost_rei(result,cost_reimb_cust){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_cost_reimb").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_cost_reimb").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }	
-
-//eventOf_repl_cost
-function eventOf_repl_cost(result,repl_cost_agreed){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_repl_cost_agreed").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_repl_cost_agreed").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }	
-//eventOf_advance_bg
-function eventOf_advance_bg(result,advance_bg){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_adva_pay_bg").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_adva_pay_bg").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }	
-//draft_just_advance_25
-function eventOf_advance_25(result,advance_25){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_advance_25").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_advance_25").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }	
-//eventOf_trm_grn_90
-function eventOf_trm_grn_90(result,paymt_trm_grn_90){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_paymt_trm_grn_90").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_paymt_trm_grn_90").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }
-
-//eventOf_imported_item
-function eventOf_imported_item(result,imported_item){
-		 
-		 
-		  if (result=='YES'){
-			  
-			  document.getElementById("draft_just_imported_item").style.visibility='visible';
-			 
-		  }else if(result=='NO'){
-			  
-			  document.getElementById("draft_just_imported_item").style.visibility='hidden';
-			  
-		  }
-		  
-			  
-	  }	  
-	  </script> 
-	  
-	  
-	  <script>
-
-function mul() {
-      var txtFirstNumberValue = document.getElementById('qty').value;
-      var txtSecondNumberValue = document.getElementById('quot_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('quot_amt1').value = setResult;
-      }
-}
-</script>
-
-
-<!--sup  final rate 1 -->
-<script>
-function mulfinal_amt() {
-      var txtFirstNumberValue = document.getElementById('qty').value;
-      var txtSecondNumberValue = document.getElementById('final_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('amount1').value = setResult;
-      }
-}
-</script>
-
-
-<!-- quoted 2 -->
-<script>
-
-function mul_quat2() {
-      var txtFirstNumberValue = document.getElementById('qty').value;
-      var txtSecondNumberValue = document.getElementById('quot_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);    
-      if (!isNaN(result)) {
-         document.getElementById('quot_amt2').value = setResult;
-      }
-}
-</script>
-
-
-<!--sup  final rate 2 -->
-<script>
-function mul_final_quat2() {
-      var txtFirstNumberValue = document.getElementById('qty').value;
-      var txtSecondNumberValue = document.getElementById('final_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('amount2').value = setResult;
-      }
-}
-</script>
-
-
-
-
-<!-- quoted 3 -->
-<script>
-
-function mul_quat3() {
-      var txtFirstNumberValue = document.getElementById('qty').value;
-      var txtSecondNumberValue = document.getElementById('quot_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('quot_amt3').value = setResult;
-      }
-}
-</script>
-
-
-<!--sup  final rate 3 -->
-<script>
-function mul_final_quat3() {
-      var txtFirstNumberValue = document.getElementById('qty').value;
-      var txtSecondNumberValue = document.getElementById('final_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('amount3').value = setResult;
-      }
-}
-</script>
-<script>
-
-function custom_mul() {
-      var txtFirstNumberValue = document.getElementById('custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('custom_quot_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('custom_quot_amt1').value = setResult;
-      }
-}
-</script>
-
-
-<!--sup  final rate 1 -->
-<script>
-function custom_mulfinal_amt() {
-      var txtFirstNumberValue = document.getElementById('custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('custom_final_rate1').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('custom_amount1').value = setResult;
-      }
-}
-</script>
-
-<!-- quoted 2 -->
-<script>
-
-function custom_mul_quat2() {
-      var txtFirstNumberValue = document.getElementById('custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('custom_quot_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('custom_quot_amt2').value = setResult;
-      }
-}
-</script>
-
-
-<!--sup  final rate 2 -->
-<script>
-function custom_mul_final_quat2() {
-      var txtFirstNumberValue = document.getElementById('custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('custom_final_rate2').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('custom_amount2').value = setResult;
-      }
-}
-</script>
-
-
-
-
-<!-- quoted 3 -->
-<script>
-
-function custom_mul_quat3() {
-      var txtFirstNumberValue = document.getElementById('custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('custom_quot_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('custom_quot_amt3').value = setResult;
-      }
-}
-</script>
-
-
-<!--sup  final rate 3 -->
-<script>
-function custom_mul_final_quat3() {
-      var txtFirstNumberValue = document.getElementById('custom_qty').value;
-      var txtSecondNumberValue = document.getElementById('custom_final_rate3').value;
-      var result = parseFloat(txtFirstNumberValue) * parseFloat(txtSecondNumberValue);
-      var setResult = result.toFixed(2);
-      if (!isNaN(result)) {
-         document.getElementById('custom_amount3').value = setResult;
-      }
-}
-</script>
-
-<script>
-var global;
-function pradnya(){
-	 global = document.getElementById('finalamt').value;
-}
-
-function add10Data(valTest){
-	alert(valTest);
-	pradnya();
-	alert(global);
-
-	
-	
-	 document.getElementById('txt10op').value = valTest;
 }
 </script>
 </body>

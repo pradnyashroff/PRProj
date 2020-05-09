@@ -1326,7 +1326,23 @@ return false;
 			}
 	}
 	
-	
+
+
+public function ftgs_view_pr_items($ftgs_qcs_id) {
+	$condition = "ftgs_qcs_master.ftgs_qcs_id =" . "'" . $ftgs_qcs_id . "'";
+
+$this->db->select('*');
+$this->db->from('ftgs_qcs_master');
+$this->db->where($condition);
+$this->db->JOIN('ftgs_pr_items','ftgs_qcs_master.ftgs_pr_id = ftgs_pr_items.ftgs_pr_id');
+$query = $this->db->get();
+
+if ($query->num_rows() >= 1) {
+return $query;
+} else {
+return false;
+}
+}	
 		//Fetch Item in ID Wise fetchQCSItemInID
 		
 		public function fetchQCSItemInID($ftgs_qcs_item_id) {
@@ -1421,7 +1437,7 @@ return false;
 
 //file upload
 function insertfiles($data){
-	$query = $this->db->insert('QCSfile_master', $data);
+	$query = $this->db->insert('qcsfile_master', $data);
            return $query;  
 
 }
@@ -1567,11 +1583,34 @@ function insertfiles($data){
 		
 		
 		
+			
+				//fetch Approved  QCS in sourcing user section 
+		 public function fetchApprovedQcsSourcingUser($emp_code)
+		{
+			$condition = "qm.ftgs_qcs_status=4 and qm.ftgs_qcs_emp_code =" . "'" . $emp_code . "'";
+			$this->db->select('*');
+			$this->db->from('ftgs_qcs_master qm');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			} 
+			else 
+			{
+				return false;
+			}
+				return $query->row();
+		}
 		
-				//fetch Approved QCS in sourcing user 
+		
+		
+		
+				//fetch Approved QCS in sourcing user  
 		 public function fetchApprovedQcsUser($emp_code)
 		{
 			$condition = "qm.ftgs_qcs_status=4 and qm.ftgs_pr_owner_empcode =" . "'" . $emp_code . "'";
+			//$condition = "qm.ftgs_qcs_status=4 and qm.ftgs_qcs_emp_code =" . "'" . $emp_code . "'";    //2020-04-28
 			$this->db->select('*');
 			$this->db->from('ftgs_qcs_master qm');
 			$this->db->where($condition);
@@ -1688,16 +1727,17 @@ function insertfiles($data){
 		
 		
 			//get auth level7 (100121)
-	
+			
+			
 			public function getApproval3AuthoDetails() 
 		{
-			$condition = "auth_level=7 and CURDATE() between auth_fromDate and auth_ToDate";
-			$this->db->select('auth_id');
-			$this->db->from('ftgs_reporting_grid');
+			$condition = "frg.auth_level=7 and frg.auth_id=em.emp_code and CURDATE() between auth_fromDate and auth_ToDate";
+			$this->db->select('frg.auth_id, em.emp_email');
+			$this->db->from('ftgs_reporting_grid frg,employee_master em');
 			$this->db->where($condition);
 			$query = $this->db->get();
 			if ($query->num_rows() >= 1) {
-				return $query->row()->auth_id;
+				return $query;
 			} else {
 				return false;
 			}
@@ -2174,7 +2214,7 @@ function insertfiles($data){
 		
 		
 		
-		//ION fetch data pendding table
+		//Asset fetch data pendding table
 		 public function AssetfetchpenddingDetails($emp_code)
 		{
 			$condition = "cm.ftgs_capex_id=ag.ftgs_capex_id and ag.emp_code=em.emp_code and ag.action=0 and ag.level_of=14 and ag.action_autho =" . "'" . $emp_code . "'";
@@ -2287,6 +2327,254 @@ return false;
 				return false;
 			}	
 		}
+		
+		
+				//Reject cpx user tbl
+				
+		 public function UserRejectedCpxTblData($emp_code)
+		{
+			$condition = "cm.ftgs_capex_status = 2 and cm.ftgs_capex_owner_code =" . "'" . $emp_code . "'";
+			$this->db->select('*');
+			$this->db->from('ftgs_capex_master cm');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			} 
+			else 
+			{
+				return false;
+			}
+				return $query->row();
+		}
+		
+		
 			
+		//PO fetch data pendding table
+		 public function POfetchpenddingDetails($emp_code)
+		{
+			$condition = "cm.ftgs_capex_id=ag.ftgs_capex_id and ag.emp_code=em.emp_code and ag.action=0 and ag.level_of=15 and ag.action_autho =" . "'" . $emp_code . "'";
+			$this->db->select('cm.ftgs_capex_id,cm.ftgs_qcs_id,cm.ftgs_pr_id,cm.ftgs_capex_date,cm.ftgs_cap_sel_supplier,cm.ftgs_cap_recommender,cm.ftgs_radio_val,ag.action,cm.ftgs_capex_status');
+			$this->db->from('ftgs_capex_master cm,ftgs_action_grid ag,employee_master em');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			} 
+			else 
+			{
+				return false;
+			}
+				return $query->row();
+		}
+		
+		
+		//get auth level15 (sumit )
+	
+			public function getCaxapp4AuthoDetails() 
+		{
+			$condition = "frg.auth_level=15  and frg.auth_id=em.emp_code and CURDATE() between auth_fromDate and auth_ToDate";
+			$this->db->select('frg.auth_id , em.emp_email');
+			$this->db->from('ftgs_reporting_grid frg,employee_master em');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) {
+				return $query;
+			} else {
+				return false;
+			}
+		}
+		
+		
+				//fetch Capex Approval4(100840) Autho level
+		public function ftgscpx3IDAction($emp_code,$ftgs_capex_id) 
+		{
+			$sql = "SELECT action_grid_id FROM ftgs_action_grid WHERE action_autho=".$emp_code." and ftgs_capex_id=".$ftgs_capex_id." and action=0 and level_of=15 ORDER BY action_grid_id DESC LIMIT 0, 1" ;
+			$query = $this->db->query($sql);
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			} 
+			else 
+			{
+				return false;
+			}	
+		}
+		
+		
+				
+		//PO fetch data pendding table
+		 public function POp4fetchpenddingDetails($emp_code)
+		{
+			$condition = "cm.ftgs_capex_id=ag.ftgs_capex_id and ag.emp_code=em.emp_code and ag.action=0 and ag.level_of=16 and ag.action_autho =" . "'" . $emp_code . "'";
+			$this->db->select('cm.ftgs_capex_id,cm.ftgs_qcs_id,cm.ftgs_pr_id,cm.ftgs_capex_date,cm.ftgs_cap_sel_supplier,cm.ftgs_cap_recommender,cm.ftgs_radio_val,ag.action,cm.ftgs_capex_status');
+			$this->db->from('ftgs_capex_master cm,ftgs_action_grid ag,employee_master em');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			} 
+			else 
+			{
+				return false;
+			}
+				return $query->row();
+		}
+		
+		
+				//fetch Capex Approval4(100171) Autho level
+		public function ftgscpx4IDAction($emp_code,$ftgs_capex_id) 
+		{
+			$sql = "SELECT action_grid_id FROM ftgs_action_grid WHERE action_autho=".$emp_code." and ftgs_capex_id=".$ftgs_capex_id." and action=0 and level_of=16 ORDER BY action_grid_id DESC LIMIT 0, 1" ;
+			$query = $this->db->query($sql);
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			} 
+			else 
+			{
+				return false;
+			}	
+		}
+		
+				//fetch email User
+		 public function fetchUserMailDetailscpxid($ftgs_capex_id) {
+        $condition = "em.emp_code=fpm.ftgs_capex_owner_code and ftgs_capex_id =" . "'" . $ftgs_capex_id . "'";
+        $this->db->select('em.emp_email');
+        $this->db->from('ftgs_capex_master fpm,employee_master em');
+        $this->db->where($condition);
+        $query = $this->db->get();
+        if ($query->num_rows() >= 1) {
+            return $query->row()->emp_email;
+        } else {
+            return false;
+        }
+    }
+	
+	
+	//Pending cpx user tbl
+				
+		 public function UserApprovedCpxTblData($emp_code)
+		{
+			$condition = "cm.ftgs_capex_status = 3 and cm.ftgs_capex_owner_code =" . "'" . $emp_code . "'";
+			$this->db->select('*');
+			$this->db->from('ftgs_capex_master cm');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if ($query->num_rows() >= 1) 
+			{
+				return $query;
+			} 
+			else 
+			{
+				return false;
+			}
+				return $query->row();
+		}
+		
+		
+		//Approved QCS in 100258 login 
+			 public function qcsapp2fetchFTGSapprovalTbl($emp_code) {
+        $condition = "pm.ftgs_pr_id=ag.ftgs_pr_id and ag.action=1 and (ag.level_of=5 OR ag.level_of=7 OR ag.level_of=8)and ag.emp_code=em.emp_code and ag.action_autho =" . "'" . $emp_code . "'";
+		$this->db->select('ag.ftgs_qcs_id,pm.ftgs_pr_id,pm.ftgs_pr_date,pm.ftgs_pr_owner_name,pm.ftgs_delivary_loc,pm.ftgs_procurement_res,ag.action,pm.ftgs_pr_status');
+		$this->db->from('ftgs_pr_master pm,ftgs_action_grid ag,employee_master em');
+        $this->db->where($condition);
+        $query = $this->db->get();
+        if ($query->num_rows() >= 1) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+		
+
+	//update percentege value
+		 public function PerAddAgaintItem($data, $editId) 
+		 {
+			$this->db->where('ftgs_qcs_item_id', $editId);
+			$this->db->update('ftgs_qcs_item',$data);
+        }	
+
+
+
+
+		 //query one for supplier one
+     public function supplierOne(){
+    $arrReturn1 = array();//Declare the array to be passed
+    $this->db->select('ftgs_qcs_id,ftgs_sup1_nm as sname');
+    $this->db->from('ftgs_qcs_master');
+    $this->db->group_by('ftgs_sup1_nm'); 
+    $qu11 = $this->db->get();
+    $result1 =  $qu11->result_array(); 
+    if(!empty($result1)){
+       $arrReturn1 = $result1;
+    }
+    
+    //query one for supplier two
+    $arrReturn2 = array();//Declare the array to be passed
+    $this->db->select('ftgs_qcs_id,ftgs_sup2_nm as sname');
+    $this->db->from('ftgs_qcs_master');
+    $this->db->group_by('ftgs_sup2_nm'); 
+    $qu12 = $this->db->get();
+    $result2 =  $qu12->result_array(); 
+    if(!empty($result2)){
+       $arrReturn2 = $result2;
+    }
+    
+    
+    
+    
+    //query one for supplier three
+    $arrReturn3 = array();//Declare the array to be passed
+    $this->db->select('ftgs_qcs_id,ftgs_sup3_nm as sname');
+    $this->db->from('ftgs_qcs_master');
+    $this->db->group_by('ftgs_sup3_nm'); 
+    $qu13 = $this->db->get();
+    $result3 =  $qu13->result_array(); 
+    if(!empty($result3)){
+       $arrReturn3 = $result3;
+    }
+    $ftgs_qcs_id = array_merge($arrReturn1, $arrReturn2,$arrReturn3);
+    
+    return $ftgs_qcs_id;
+ }
+ 
+ 
+   public function selectSuplier1($ftgs_qcs_id) {
+	   
+         $condition = "ftgs_qcs_id =" . "'" . $ftgs_qcs_id . "'";
+        $this->db->select('ftgs_sup1_contact_no,ftgs_sup1_contact_person,ftgs_sup1_eid');
+        $this->db->from('ftgs_qcs_master');
+        $this->db->where($condition);
+        $query = $this->db->get();
+        return $query->row();
+
+}		
+
+
+
+		
+				// pr qcs detail fetch for create capex inner join
+				public function prDetails($ftgs_qcs_id) {
+					$condition = "ftgs_qcs_master.ftgs_qcs_id =" . "'" . $ftgs_qcs_id . "' ";
+
+				$this->db->select('*');
+				$this->db->from('ftgs_qcs_master');
+				$this->db->where($condition);
+			
+				$this->db->join('ftgs_pr_master ', 'ftgs_pr_master.ftgs_pr_id = ftgs_qcs_master.ftgs_pr_id'); 
+				
+
+				$query = $this->db->get();
+
+				if ($query->num_rows() >= 1) {
+				return $query;
+				} else {
+				return false;
+				}
+				}
 	}	
 ?>

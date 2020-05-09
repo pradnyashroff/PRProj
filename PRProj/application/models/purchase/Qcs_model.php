@@ -1547,7 +1547,7 @@ return false;
 				//count pending ftgs pr sourcing level 5
 		public function pendingFtgsPRLevel5($emp_code) 
 		{
-			$condition = "(level_of=5 || level_of=6 ||level_of=7||level_of=8 ||level_of=9)AND action=0 and action_autho =" . "'" . $emp_code . "'";
+			$condition = "(level_of=5 || level_of=6 ||level_of=7||level_of=8 ||level_of=9 ||level_of=15||level_of=16)AND action=0 and action_autho =" . "'" . $emp_code . "'";
 			$this->db->select('*');
 			$this->db->from('ftgs_action_grid');
 			$this->db->where($condition);
@@ -1595,6 +1595,61 @@ return false;
 				return false;
 			}
 		}
+		
+		
+		
+		
+		 //query one for supplier one
+     public function supplierOne(){
+    $arrReturn1 = array();//Declare the array to be passed
+    $this->db->select('qcs_id,sup1_nm as sname');
+    $this->db->from('qcs_master');
+    $this->db->group_by('sup1_nm'); 
+    $qu11 = $this->db->get();
+    $result1 =  $qu11->result_array(); 
+    if(!empty($result1)){
+       $arrReturn1 = $result1;
+    }
+    
+    //query one for supplier two
+    $arrReturn2 = array();//Declare the array to be passed
+    $this->db->select('qcs_id,sup2_nm as sname');
+    $this->db->from('qcs_master');
+    $this->db->group_by('sup2_nm'); 
+    $qu12 = $this->db->get();
+    $result2 =  $qu12->result_array(); 
+    if(!empty($result2)){
+       $arrReturn2 = $result2;
+    }
+    
+    
+    
+    
+    //query one for supplier three
+    $arrReturn3 = array();//Declare the array to be passed
+    $this->db->select('qcs_id,sup3_nm as sname');
+    $this->db->from('qcs_master');
+    $this->db->group_by('sup3_nm'); 
+    $qu13 = $this->db->get();
+    $result3 =  $qu13->result_array(); 
+    if(!empty($result3)){
+       $arrReturn3 = $result3;
+    }
+    $qcs_id = array_merge($arrReturn1, $arrReturn2,$arrReturn3);
+    
+    return $qcs_id;
+ }
+ 
+ 
+   public function selectSuplier1($qcs_id) {
+         $condition = "qcs_id =" . "'" . $qcs_id . "'";
+        $this->db->select('sup1_contact_no,sup1_contact_person,sup1_eid');
+        $this->db->from('qcs_master');
+        $this->db->where($condition);
+        $query = $this->db->get();
+        return $query->row();
+
+}
 		
 		
 }

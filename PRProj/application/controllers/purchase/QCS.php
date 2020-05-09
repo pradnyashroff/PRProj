@@ -626,6 +626,49 @@ public function insert_qcs($pr_id)
 	date_default_timezone_set('Asia/Kolkata');
  //$date=date('d-m-Y  h:i');
  $date=date('Y-m-d H:i:s');
+ 
+ 
+  
+//Supplier1................. 08/03/2020
+$sup1_nm = $this->input->post('sup1_nm');
+$sup1_name = $this->input->post('sup1_name');
+if($sup1_nm=="")
+{
+	$paraSup1=$sup1_name;
+}
+elseif($sup1_name==""){
+	$split = explode("-",$sup1_nm);
+	$paraSup1=$split[1];
+}
+
+
+//Supplier2....................08/03/2020
+$sup2_nm = $this->input->post('sup2_nm');
+$sup2_name = $this->input->post('sup2_name');
+if($sup2_nm==" ")
+{
+	$paraSup2=$sup2_name;
+}
+elseif($sup2_name==""){
+	$split = explode("-",$sup2_nm);
+	$paraSup2=$split[1];
+}
+
+//Supplier 3................08/03/2020
+$sup3_nm = $this->input->post('sup3_nm');
+$sup3_name = $this->input->post('sup3_name');
+
+if($sup3_nm=="")
+{
+	$paraSup3=$sup3_name;
+}
+elseif($sup3_name==""){
+	$split = explode("-",$sup3_nm);
+	$paraSup3=$split[1];
+}
+
+
+
    $data = array(
    'pr_id' => $this->input->post('pr_id'),
    'qcs_date' => $date,
@@ -637,17 +680,17 @@ public function insert_qcs($pr_id)
 	'qcs_owner' => $this->input->post('qcs_owner'),
 	'plant_code' => $this->input->post('pr_plant'),
 	
-	 'sup1_nm' => $this->input->post('sup1_nm'),
+	 'sup1_nm' => $paraSup1,
 	'sup1_contact_no' => $this->input->post('sup1_mno'),
 	'sup1_contact_person' => $this->input->post('sup1_contactp'),
 	'sup1_eid' => $this->input->post('sup1_eid'),
 	
-	'sup2_nm' => $this->input->post('sup2_nm'),
+	'sup2_nm' => $paraSup2,
 	'sup2_contact_no' => $this->input->post('sup2_mno'),
 	'sup2_contact_person' => $this->input->post('sup2_contactp'),
 	'sup2_eid' => $this->input->post('sup2_eid'),
 	
-	'sup3_nm' => $this->input->post('sup3_nm'),
+	'sup3_nm' => $paraSup3,
 	'sup3_contact_no' => $this->input->post('sup3_mno'),
 	'sup3_contact_person' => $this->input->post('sup3_contactp'),
 	'sup3_eid' => $this->input->post('sup3_eid'),
@@ -1422,26 +1465,61 @@ $data['message'] = 'Data Updated Successfully';
    
       public function draft_step1()
    {
-	   date_default_timezone_set('Asia/Kolkata');
+	    date_default_timezone_set('Asia/Kolkata');
         //$date=date('d-m-Y');
         
  $date=date('Y-m-d H:i:s');
  $draft_q_no=$this->input->post('draft_q_no');
  
+//Supplier1................. 21/03/2020
+$sup1_name = $this->input->post('draft_sup1_nm');
+$sup1_nm = $this->input->post('draft_sup1_name');
+if($sup1_nm=="")
+{
+	$paraSup1=$sup1_name;
+}
+elseif($sup1_name==""){
+	$split = explode("-",$sup1_nm);
+	$paraSup1=$split[1];
+}
+ //Supplier2................. 21/03/2020
+$sup2_name = $this->input->post('draft_sup2_nm');
+$sup2_nm = $this->input->post('draft_sup2_name');
+if($sup2_nm=="")
+{
+	$paraSup2=$sup2_name;
+}
+elseif($sup2_name==""){
+	$split = explode("-",$sup2_nm);
+	$paraSup2=$split[1];
+}
+//Supplier3................. 21/03/2020
+$sup3_name = $this->input->post('draft_sup3_nm');
+$sup3_nm = $this->input->post('draft_sup3_name');
+if($sup3_nm=="")
+{
+	$paraSup3=$sup3_name;
+}
+elseif($sup3_name==""){
+	$split = explode("-",$sup3_nm);
+	$paraSup3=$split[1];
+}
+ 
+	
 	  $step1_update = array(
 	'qcs_id' =>  $draft_q_no,
 
-	 'sup1_nm' => $this->input->post('draft_sup1_nm'),
+	 'sup1_nm' => $paraSup1,
 	 'sup1_contact_no' => $this->input->post('draft_sup1_mno'),
 	'sup1_contact_person' => $this->input->post('draft_sup1_contactp'),
 	'sup1_eid' => $this->input->post('draft_sup1_eid'),
 	
-	'sup2_nm' => $this->input->post('draft_sup2_nm'),
+	'sup2_nm' => $paraSup2,
 	'sup2_contact_no' => $this->input->post('draft_sup2_mno'),
 	'sup2_contact_person' => $this->input->post('draft_sup2_contactp'),
 	'sup2_eid' => $this->input->post('draft_sup2_eid'),
 	
-	'sup3_nm' => $this->input->post('draft_sup3_nm'),
+	'sup3_nm' => $paraSup3,
 	'sup3_contact_no' => $this->input->post('draft_sup3_mno'),
 	'sup3_contact_person' => $this->input->post('draft_sup3_contactp'),
 	'sup3_eid' => $this->input->post('draft_sup3_eid'),
@@ -4525,5 +4603,37 @@ function approved_list_by_mdo($emp_code){
 				$data['approved_noti'] = $this->qcs_model->approveFtgsPR($emp_code);
 				return $data['approved_noti'];
 			}
+			
+			
+			
+			  function supplierList() {
+      
+         $this->load->database();
+        $this->load->model('purchase/qcs_model');
+        $data['qcs_id'] = $this->qcs_model->supplierOne();
+          
+   //print_r($data);
+   return  $data['qcs_id'];
+	
+        
+    }
+    
+    function selectSuplier1(){
+		$this->load->helper('url');
+        $this->load->database();
+		$qcs_id = $this->input->post('qcs_id');
+		$this->load->model('purchase/qcs_model');
+		$data = $this->qcs_model->selectSuplier1($qcs_id);
+        echo json_encode($data);
+		
+}
+
+
+   public function viewQCSDraftPrint($qcs_id)//Print draft qcs view 09/03/2020
+   {
+       $data['qcs_id'] = $qcs_id;
+        $this->load->helper('url');
+		$this->load->view('QCS/viewQCSDraftPrint',$data);
+   }
 
 }//eof 
